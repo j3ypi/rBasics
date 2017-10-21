@@ -1,0 +1,477 @@
+---
+title: "Wiederholung"
+output: 
+  learnr::tutorial:
+    progressive: TRUE
+    allow_skip: TRUE
+    theme: "flatly"
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(ggpubr)
+library(checkr)
+knitr::opts_chunk$set(echo = FALSE)
+
+load("C:/users/j3ypi/Desktop/R Package/rBasics/data/df.RData")
+load("C:/users/j3ypi/Desktop/R Package/rBasics/data/indo.RData")
+load("C:/users/j3ypi/Desktop/R Package/rBasics/data/big5.RData")
+
+#data("big5.RData", package = "rBasics")
+#data("indo.RData", package = "rBasics")
+#data("df.RData", package = "rBasics")
+```
+
+## Der Datensatz
+
+Spätestens jetzt starte deine Karriere als R Programmierer oder Programmierin. Zunächst bekommst du die Möglichkeit dir den Datensatz anzuschauen. Als erste Aufgabe gibt es verschiedene Fragen zu Datentypen. Ein besonderer Fokus wird dabei auf boolean'sche Aussagen geleget, da diesen eine erhebliche Relevanz in der Programmierung zukommt und man erst einmal ein bisschen Zeit braucht um die Logik dahinter vollständig zu verstehen. 
+
+Der Datensatz besteht aus 11 Spalten. Neben soziodemographischen Informationen wie Geschlecht, Alter und Familienstand, gibt es 8 Spalten, die verschiedene Dimensionen der Lebenszufriedenheit erfassen. Diese setzen sich aus verschiedenen Faktoren zusammen, die im Datensatz nicht enthalten sind. 
+
+Geschlecht:
+
+* Weiblich = 1
+* Männlich = 2
+
+Familienstand:
+
+* Ledig = 1
+* Verheiratet = 2
+
+```{r q11, exercise=TRUE, exercise.eval=TRUE}
+indo
+```
+
+## Deskriptive Statistik
+
+Du kannst die Fragen herausfinden in dem du in diesem Code-Chunk die notwendigen Befehle eintippst.
+
+```{r q12, exercise=TRUE}
+
+```
+
+```{r q12-hint-1}
+dim(...)
+```
+
+```{r q12-hint-2}
+indo$Alter
+```
+
+```{r q13}
+quiz(
+  question("Wie viele Beobachtungen sind enthalten?",
+    answer("11"),
+    answer("200", correct = TRUE),
+    answer("10"),
+    answer("159"), allow_retry = T
+  ),
+  question("Wie hoch ist das Durschnittsalter ungefähr?",
+    answer("19"),
+    answer("23"),
+    answer("25"),
+    answer("22", correct = TRUE), allow_retry = T
+  ), caption = ""
+)
+```
+
+## Datentypen
+
+Nun Folgen ein paar Fragen zu Datentypen:
+
+```{r q21}
+quiz(
+  question("Welchen Datentyp hat das Alter?",
+    answer("Character / String"),
+    answer("Numeric / Integer", correct = TRUE),
+    answer("Logic / Boolean"), allow_retry = T
+  ),
+  question("Welchen Datentyp hat 'R ist cool'?",
+    answer("Character / String", correct = TRUE),
+    answer("Numeric / Integer"),
+    answer("Logic / Boolean"), allow_retry = T
+    ) , caption = ""
+)
+
+quiz(
+  question("Was ergibt die Aussage 5 < 4?",
+    answer("TRUE"),
+    answer("FALSE", correct = TRUE), allow_retry = T
+  ),
+  question("Was ergibt die Aussage 3 = 2 | 4 > 3?",
+    answer("TRUE", correct = TRUE),
+    answer("FALSE"), allow_retry = T
+  ) , caption = ""
+)
+
+quiz(
+  question("Was ergibt die Aussage 6 < 7 & 7 > 6?",
+    answer("TRUE", correct = TRUE),
+    answer("FALSE"), allow_retry = T
+  ),
+  question("Was ergibt die Aussage 3 < 1 | 10 = 9 | 6 > 8",
+    answer("TRUE"),
+    answer("FALSE", correct = TRUE), allow_retry = T
+  ), caption = ""
+)
+```
+
+## Dplyr
+
+Wähle nur die Spalten Geschlecht, Alter und Familie aus. Der Name des Datensatzes ist **indo**.
+
+```{r q41, exercise=TRUE}
+
+```
+
+```{r q41-hint}
+select(indo, ...)
+```
+
+```{r q41-solution}
+select(indo, Geschlecht, Alter, Familie)
+```
+
+```{r q41-check}
+select(indo, Geschlecht, Alter, Familie)
+```
+
+Gib den Datensatz in aufsteigender Reihenfolge von Selbsttranszendenz aus. 
+
+```{r q42, exercise=TRUE}
+
+```
+
+```{r q42-hint}
+arrange(indo, ...)
+```
+
+```{r q42-solution}
+arrange(indo, Selbstranszendenz)
+```
+
+```{r q42-check}
+arrange(indo, Selbstranszendenz)
+```
+
+Gib nur die männlichen Probanden aus.
+
+```{r q43, exercise=TRUE}
+
+```
+
+```{r q43-hint}
+filter(indo, ...)
+```
+
+```{r q43-solution}
+filter(indo, Geschlecht == 2)
+```
+
+```{r q43-check}
+filter(indo, Geschlecht == 2)
+```
+
+Gib nur jene Probanden mit einer Sinnkrise von über 3.5 aus.
+
+```{r q44, exercise=TRUE}
+
+```
+
+```{r q44-hint}
+filter(indo, ...)
+```
+
+```{r q44-solution}
+filter(indo, Sinnkrise > 3.5)
+```
+
+```{r q44-check}
+filter(indo, Sinnkrise > 3.5)
+```
+
+
+Gib nur jene Probanden, die älter als 25 und eine Selbstranszendenz von über 4 haben aus. 
+
+```{r q45, exercise=TRUE}
+
+```
+
+```{r q45-hint}
+filter(indo, ...)
+```
+
+```{r q45-solution}
+filter(indo, Alter > 25 & Selbsttranszendenz > 4)
+```
+
+```{r q45-check}
+filter(indo, Alter > 25 & Selbsttranszendenz > 4)
+```
+
+Ermittle das Durschschnittsalter der weiblichen Probanden und nenne das Ergebnis Mittelwert.
+
+```{r q46, exercise=TRUE}
+
+```
+
+```{r q46-hint}
+indo %>%
+  filter(...) %>%
+  summarise(...)
+```
+
+```{r q46-solution}
+indo %>%
+  filter(Geschlecht == 1) %>%
+  summarise(Mittelwert = mean(Alter))
+```
+
+```{r q46-check}
+indo %>%
+  filter(Geschlecht == 1) %>%
+  summarise(Mittelwert = mean(Alter))
+```
+
+Ermittle das Durschnitssalter beider Geschlechter in einem Befehl mit group_by und nenne das Ergebnis Mittelwert.
+
+```{r q47, exercise=TRUE}
+
+```
+
+```{r q47-hint}
+indo %>%
+  group_by(...) %>%
+  summarise(...)
+```
+
+```{r q47-solution}
+indo %>% 
+  group_by(Geschlecht) %>%
+  summarise(Mittelwert = mean(Alter))
+```
+
+```{r q47-check}
+indo %>% 
+  group_by(Geschlecht) %>%
+  summarise(Mittelwert = mean(Alter))
+```
+
+Berechne die mittlere Ausprägung der Hauptdimensionen Selbsttranszendenz, Selbstverwirklichung, Ordnung und Wir_Wohlgefuehl pro Person und füge eine neue Spalte mit dem Namen **Mittelwert** hinzu.
+
+```{r q48, exercise=TRUE}
+
+```
+
+```{r q48-hint}
+indo %>%
+  mutate(...)
+```
+
+```{r q48-solution}
+indo %>%
+  mutate(Mittelwert = rowMeans(.[ , c(4, 7, 8, 9)]))
+```
+
+```{r q48-check}
+indo %>%
+  mutate(Mittelwert = rowMeans(.[ , c(4, 7, 8, 9)]))
+```
+
+Gib in absteigender Reihenfolge von Alter die Spalten Alter, Sinnkrise und Sinnerfuellung von jenen Versuchspersonen aus, die weiblich sind und einen Selbsttranzendenz Wert von unter 3 haben. 
+
+```{r q49, exercise=TRUE}
+
+```
+
+```{r q49-hint-1}
+indo %>%
+  filter(...) %>%
+  select(...) %>%
+  arrange(...)
+```
+
+```{r q49-hint-2}
+arrange(desc(...))
+```
+
+```{r q49-solution}
+indo %>%
+  filter(Geschlecht == 1 & Selbsttranszendenz < 3) %>%
+  select(Alter, Sinnkrise, Sinnerfuellung) %>%
+  arrange(desc(Alter))
+``` 
+
+```{r q49-check}
+indo %>%
+  filter(Geschlecht == 1 & Selbsttranszendenz < 3) %>%
+  select(Alter, Sinnkrise, Sinnerfuellung) %>%
+  arrange(desc(Alter))
+```
+
+Berechne den Mittelwert namens Esoterik von Selbsttranzendenz für beide Famileienstanede der männlichen Probanden.
+
+```{r q410, exercise=TRUE}
+
+```
+
+```{r q410-hint}
+indo %>%
+  filter(...) %>%
+  group_by(...) %>%
+  summarise(...)
+```
+
+```{r q410-solution}
+indo %>%
+  filter(Geschlecht == 2) %>%
+  group_by(Familie) %>%
+  summarise(Esoterik = mean(Selbsttranszendenz))
+```
+
+```{r q410-check}
+indo %>%
+  filter(Geschlecht == 2) %>%
+  group_by(Familie) %>%
+  summarise(Esoterik = mean(Selbsttranszendenz))
+```
+
+Füge eine neue Spalte mit booleschen Werten mit dem Namen Gluecklich, in dem du prüfst, ob die Ausprägung von Sinnverfuellung größer als die der Sinnkrise ist und ersetze TRUE durch Ja und FALSE durch Nein. Gebe als Ergebnis nur das Alter und die Spalte Gluecklich aus. 
+
+```{r q411, exercise=TRUE}
+
+```
+
+```{r q411-hint}
+indo %>%
+  mutate(...) %>%
+  mutate(replace(...), 
+         replace(...)) %>%
+  select(...)
+```
+
+```{r q411-solution}
+indo %>%
+  mutate(Gluecklich = Sinnerfuellung > Sinnkrise) %>%
+  mutate(Gluecklich = replace(Gluecklich, Gluecklich == TRUE, "Ja"),
+         Gluecklich = replace(Gluecklich, Gluecklich == FALSE, "Nein")) %>%
+  select(Alter, Gluecklich) %>%
+```
+
+```{r q411-check}
+indo %>%
+  mutate(Gluecklich = Sinnerfuellung > Sinnkrise) %>%
+  mutate(Gluecklich = replace(Gluecklich, Gluecklich == TRUE, "Ja"),
+         Gluecklich = replace(Gluecklich, Gluecklich == FALSE, "Nein")) %>%
+  select(Alter, Gluecklich) %>%
+```
+
+## Visualisierung
+
+### Säulendiagramm
+Wähle die Spalten Geschlecht, Sinnerfuellung und Sinnkrise aus. Füge Sinnerfuellung und Sinnkrise in einer Spalte zusammen und bennene den Key mit **Zustand** und die value mit **Auspraegung**. Speichere das Ergebnis in einem neuen Data.frame mit dem Namen **df**. Achte darauf den tibble in einen Data.frame umzuwandeln.
+
+So sollte der Datensatz aussehen:
+```{r q51, exercise=TRUE, exercise.eval=TRUE}
+df
+```
+
+Nun bist du an der Reihe.
+
+```{r q52, exercise=TRUE}
+
+```
+
+```{r q52-hint-1}
+select(Geschlecht, ...)
+```
+
+```{r q52-hint-2}
+gather(Zustand, ...)
+```
+
+```{r q52-hint-3}
+as.data.frame()
+```
+
+```{r q52-solution}
+df <- indo %>%
+  select(Geschlecht, Sinnerfuellung, Sinnkrise) %>%
+  gather(Zustand, Auspraegung, Sinnerfuellung:Sinnkrise) %>%
+  as.data.frame()
+```
+
+```{r q52-check}
+df <- indo %>%
+  select(Geschlecht, Sinnerfuellung, Sinnkrise) %>%
+  gather(Zustand, Auspraegung, Sinnerfuellung:Sinnkrise) %>%
+  as.data.frame()
+```
+
+Nun verwenden wir diesen Datensatz zum Erstellen eines Säulendiagramms mit zwei Spalten für jedes Geschlecht. Eine Säule ist Sinnerfuellung und eine Säule ist Sinnkrise.
+
+```{r q53, exercise=TRUE}
+
+```
+
+```{r q53-hint-1}
+ggbarplot(data = ...,
+          x = ...)
+```
+
+```{r q53-hint-2}
+position_dodge()
+```
+
+```{r q53-solution}
+ggbarplot(data = df, 
+          x = "Geschlecht",
+          y = "Auspraegung", 
+          fill = "Zustand", 
+          position = position_dodge())
+```
+
+```{r q53-check}
+ggbarplot(data = df, 
+          x = "Geschlecht",
+          y = "Auspraegung", 
+          fill = "Zustand", 
+          position = position_dodge())
+```
+
+### Scatterplot
+
+Stelle den Zusammenhang von Sinnkrise und Sinnerfuellung graphisch dar. Zeichne dabei die Sinnkrise auf die x-Achse. Füge außerdem eine Regressionslinie mit Konfidenzintervall hinzu. 
+
+```{r q54, exercise=TRUE}
+
+```
+
+```{r q54-hint-1}
+ggscatter(data = ...,
+          x = ...)
+```
+
+```{r q54-hint-2}
+ggscatter(...,
+          add = ...,
+          conf.int = ...)
+```
+  
+```{r q54-solution}  
+ggscatter(data = indo, 
+          x = "Sinnkrise", 
+          y = "Sinnerfuellung", 
+          add = "reg.line", 
+          conf.int = T)
+```
+  
+```{r q54-check}  
+ggscatter(data = indo, 
+          x = "Sinnkrise", 
+          y = "Sinnerfuellung", 
+          add = "reg.line", 
+          conf.int = T)
+```

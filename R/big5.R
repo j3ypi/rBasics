@@ -1,0 +1,18 @@
+#' BIG 5 Persoenlichkeitstest
+#'
+#' Der Datensatz enthaelt jeweils 10 Items zu jeder Dimension der BIG 5.
+#'
+#' @format A data frame with 19719 rows and 54 variables:
+#' \describe{
+#'   \item{age}{Alter in Jahren}
+#'   \item{gender}{Geschlecht, 1 = weiblich, 2 = maennlich}
+#'   \item{hand}{haendigkeit}
+#'   \item{country}{Geburtsland}
+#'   \item{E1}{Item1 zu Extraversion}
+#'   \item{N1}{Item1 zu Neurotizismus}
+#'   \item{A1}{Item1 zu Vertraeglichkeit}
+#'   \item{C1}{Item1 zu Gewissenhaftigkeit}
+#'   \item{O1}{Item1 zu Offenheit}
+#' }
+#' @source \url{}
+"big5"

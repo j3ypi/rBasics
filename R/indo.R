@@ -1,0 +1,13 @@
+#' Indonesischer Datensatz ueber Lebenszufriedeneheit
+#'
+#' Befragung indonesischer Probanden nach Auspraegung von Sinnerfuellung
+#' und Sinnkrise in Form von 5 Dimensionen.
+#' @format A data frame with 200 rows and 11 variables:
+#' \describe{
+#'   \item{Geschlecht}{1 = weiblich, 2 = maennlich}
+#'   \item{Alter}{Alter in Jahren}
+#'   \item{Familie}{Familienstand, 1 = ledig, 2 = verheiratet}
+#'   
+#' }
+#' @source \url{Research}
+"indo"
