@@ -14,5 +14,5 @@
 #'   \item{C1}{Item1 zu Gewissenhaftigkeit}
 #'   \item{O1}{Item1 zu Offenheit}
 #' }
-#' @source \url{}
+#' @source \url{Research}
 "big5"
