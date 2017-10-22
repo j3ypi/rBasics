@@ -23,9 +23,9 @@ data(df, package = "rBasics")
 
 ## Der Datensatz
 
-Spätestens jetzt starte deine Karriere als R Programmierer oder Programmierin. Zunächst bekommst du die Möglichkeit dir den Datensatz anzuschauen. Als erste Aufgabe gibt es verschiedene Fragen zu Datentypen. Ein besonderer Fokus wird dabei auf boolean'sche Aussagen geleget, da diesen eine erhebliche Relevanz in der Programmierung zukommt und man erst einmal ein bisschen Zeit braucht um die Logik dahinter vollständig zu verstehen. 
+Spätestens jetzt startet Deine Karriere als R Programmierer oder Programmiererin. Zunächst bekommst du die Möglichkeit Dir den Datensatz anzuschauen. Als erste Aufgabe gibt es verschiedene Fragen zu Datentypen. Ein besonderer Fokus wird dabei auf logische Aussagen gelegt, da diesen eine erhebliche Relevanz in der Programmierung zukommt und man erst einmal ein bisschen Zeit braucht um das Prinzip dahinter vollständig zu verstehen. 
 
-Der Datensatz besteht aus 11 Spalten. Neben soziodemographischen Informationen wie Geschlecht, Alter und Familienstand, gibt es 8 Spalten, die verschiedene Dimensionen der Lebenszufriedenheit erfassen. Diese setzen sich aus verschiedenen Faktoren zusammen, die im Datensatz nicht enthalten sind. 
+Der Datensatz besteht aus 11 Spalten. Neben soziodemografischen Informationen wie Geschlecht, Alter und Familienstand, gibt es 8 Spalten, die verschiedene Dimensionen der Lebenszufriedenheit indonesischer Probanden erfassen. Diese setzen sich aus verschiedenen Faktoren zusammen, die im Datensatz nicht enthalten sind. 
 
 Geschlecht:
 
@@ -43,7 +43,7 @@ indo
 
 ## Deskriptive Statistik
 
-Du kannst die Fragen herausfinden in dem du in diesem Code-Chunk die notwendigen Befehle eintippst.
+Du kannst die Fragen herausfinden, in dem du in diesem Code-Chunk die notwendigen Befehle eintippst.
 
 ```{r q12, exercise=TRUE}
 
@@ -187,7 +187,7 @@ filter(indo, ...)
 filter(indo, Alter > 25 & Selbsttranszendenz > 4)
 ```
 
-Ermittle das Durschschnittsalter der weiblichen Probanden und nenne das Ergebnis Mittelwert.
+Ermittle das Durchschnittsalter der weiblichen Probanden und nenne das Ergebnis **Mittelwert**.
 
 ```{r q46, exercise=TRUE}
 
@@ -205,7 +205,7 @@ indo %>%
   summarise(Mittelwert = mean(Alter))
 ```
 
-Ermittle das Durschnitssalter beider Geschlechter in einem Befehl mit group_by und nenne das Ergebnis Mittelwert.
+Ermittle das Durchschnittsalter beider Geschlechter in einem Befehl mit group_by und nenne das Ergebnis Mittelwert.
 
 ```{r q47, exercise=TRUE}
 
@@ -239,7 +239,7 @@ indo %>%
   mutate(Mittelwert = rowMeans(.[ , c(4, 7, 8, 9)]))
 ```
 
-Gib in absteigender Reihenfolge von Alter die Spalten Alter, Sinnkrise und Sinnerfuellung von jenen Versuchspersonen aus, die weiblich sind und einen Selbsttranzendenz Wert von unter 3 haben. 
+Gib in absteigender Reihenfolge von Alter die Spalten Alter, Sinnkrise und Sinnerfuellung von jenen Versuchspersonen aus, die weiblich sind und einen Selbsttranzendenz Wert von unter 3 haben. desc() ordnet nach absteigender Abfolge an. 
 
 ```{r q49, exercise=TRUE}
 
@@ -263,7 +263,7 @@ indo %>%
   arrange(desc(Alter))
 ``` 
 
-Berechne den Mittelwert namens Esoterik von Selbsttranzendenz für beide Famileienstanede der männlichen Probanden.
+Berechne den Mittelwert namens **Esoterik** von Selbsttranzendenz für beide Famileienstanede der männlichen Probanden.
 
 ```{r q410, exercise=TRUE}
 
@@ -283,7 +283,7 @@ indo %>%
   summarise(Esoterik = mean(Selbsttranszendenz))
 ```
 
-Füge eine neue Spalte mit booleschen Werten mit dem Namen Gluecklich, in dem du prüfst, ob die Ausprägung von Sinnverfuellung größer als die der Sinnkrise ist und ersetze TRUE durch Ja und FALSE durch Nein. Gebe als Ergebnis nur das Alter und die Spalte Gluecklich aus. 
+Füge eine neue Spalte mit logischen Werten mit dem Namen Gluecklich, in dem du prüfst, ob die Ausprägung von Sinnverfuellung größer als die der Sinnkrise ist und ersetze TRUE durch Ja und FALSE durch Nein. Gebe als Ergebnis nur das Alter und die Spalte Gluecklich aus. 
 
 ```{r q411, exercise=TRUE}
 
@@ -302,13 +302,13 @@ indo %>%
   mutate(Gluecklich = Sinnerfuellung > Sinnkrise) %>%
   mutate(Gluecklich = replace(Gluecklich, Gluecklich == TRUE, "Ja"),
          Gluecklich = replace(Gluecklich, Gluecklich == FALSE, "Nein")) %>%
-  select(Alter, Gluecklich) %>%
+  select(Alter, Gluecklich) 
 ```
 
 ## Visualisierung
 
 ### Säulendiagramm
-Wähle die Spalten Geschlecht, Sinnerfuellung und Sinnkrise aus. Füge Sinnerfuellung und Sinnkrise in einer Spalte zusammen und bennene den Key mit **Zustand** und die value mit **Auspraegung**. Speichere das Ergebnis in einem neuen Data.frame mit dem Namen **df**. Achte darauf den tibble in einen Data.frame umzuwandeln.
+Wähle die Spalten Geschlecht, Sinnerfuellung und Sinnkrise aus. Füge Sinnerfuellung und Sinnkrise in einer Spalte zusammen und benenne den Key mit **Zustand** und die Value mit **Auspraegung**. Achte darauf den tibble in einen Data.frame umzuwandeln.
 
 So sollte der Datensatz aussehen:
 ```{r q51, exercise=TRUE, exercise.eval=TRUE}
@@ -334,7 +334,7 @@ as.data.frame()
 ```
 
 ```{r q52-solution}
-df <- indo %>%
+indo %>%
   select(Geschlecht, Sinnerfuellung, Sinnkrise) %>%
   gather(Zustand, Auspraegung, Sinnerfuellung:Sinnkrise) %>%
   as.data.frame()
