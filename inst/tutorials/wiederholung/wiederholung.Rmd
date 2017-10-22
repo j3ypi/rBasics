@@ -10,25 +10,13 @@ runtime: shiny_prerendered
 ---
 
 ```{r setup, include=FALSE}
-
-#library(learnr)
-#library(tidyverse)
-#library(ggpubr)
-#library(checkr)
-#library(tidyr)
 loadNamespace("learnr")
 loadNamespace("tidyverse")
 loadNamespace("ggpubr")
-loadNamespace("checkr")
 loadNamespace("tidyr")
-#requireNamespace("learnr", quietly = T)
-#requireNamespace("tidyverse", quietly = T)
-#requireNamespace("ggpubr", quietly = T)
-#requireNamespace("checkr", quietly = T)
-#requireNamespace("tidyr", quietly = T)
 knitr::opts_chunk$set(echo = FALSE)
 
-data(big5, package = "rBasics")
+data(bigFive, package = "rBasics")
 data(indo, package = "rBasics")
 data(df, package = "rBasics")
 ```
@@ -143,10 +131,6 @@ select(indo, ...)
 select(indo, Geschlecht, Alter, Familie)
 ```
 
-```{r q41-check}
-select(indo, Geschlecht, Alter, Familie)
-```
-
 Gib den Datensatz in aufsteigender Reihenfolge von Selbsttranszendenz aus. 
 
 ```{r q42, exercise=TRUE}
@@ -158,10 +142,6 @@ arrange(indo, ...)
 ```
 
 ```{r q42-solution}
-arrange(indo, Selbstranszendenz)
-```
-
-```{r q42-check}
 arrange(indo, Selbstranszendenz)
 ```
 
@@ -179,10 +159,6 @@ filter(indo, ...)
 filter(indo, Geschlecht == 2)
 ```
 
-```{r q43-check}
-filter(indo, Geschlecht == 2)
-```
-
 Gib nur jene Probanden mit einer Sinnkrise von über 3.5 aus.
 
 ```{r q44, exercise=TRUE}
@@ -197,11 +173,6 @@ filter(indo, ...)
 filter(indo, Sinnkrise > 3.5)
 ```
 
-```{r q44-check}
-filter(indo, Sinnkrise > 3.5)
-```
-
-
 Gib nur jene Probanden, die älter als 25 und eine Selbstranszendenz von über 4 haben aus. 
 
 ```{r q45, exercise=TRUE}
@@ -213,10 +184,6 @@ filter(indo, ...)
 ```
 
 ```{r q45-solution}
-filter(indo, Alter > 25 & Selbsttranszendenz > 4)
-```
-
-```{r q45-check}
 filter(indo, Alter > 25 & Selbsttranszendenz > 4)
 ```
 
@@ -233,12 +200,6 @@ indo %>%
 ```
 
 ```{r q46-solution}
-indo %>%
-  filter(Geschlecht == 1) %>%
-  summarise(Mittelwert = mean(Alter))
-```
-
-```{r q46-check}
 indo %>%
   filter(Geschlecht == 1) %>%
   summarise(Mittelwert = mean(Alter))
@@ -262,12 +223,6 @@ indo %>%
   summarise(Mittelwert = mean(Alter))
 ```
 
-```{r q47-check}
-indo %>% 
-  group_by(Geschlecht) %>%
-  summarise(Mittelwert = mean(Alter))
-```
-
 Berechne die mittlere Ausprägung der Hauptdimensionen Selbsttranszendenz, Selbstverwirklichung, Ordnung und Wir_Wohlgefuehl pro Person und füge eine neue Spalte mit dem Namen **Mittelwert** hinzu.
 
 ```{r q48, exercise=TRUE}
@@ -280,11 +235,6 @@ indo %>%
 ```
 
 ```{r q48-solution}
-indo %>%
-  mutate(Mittelwert = rowMeans(.[ , c(4, 7, 8, 9)]))
-```
-
-```{r q48-check}
 indo %>%
   mutate(Mittelwert = rowMeans(.[ , c(4, 7, 8, 9)]))
 ```
@@ -313,13 +263,6 @@ indo %>%
   arrange(desc(Alter))
 ``` 
 
-```{r q49-check}
-indo %>%
-  filter(Geschlecht == 1 & Selbsttranszendenz < 3) %>%
-  select(Alter, Sinnkrise, Sinnerfuellung) %>%
-  arrange(desc(Alter))
-```
-
 Berechne den Mittelwert namens Esoterik von Selbsttranzendenz für beide Famileienstanede der männlichen Probanden.
 
 ```{r q410, exercise=TRUE}
@@ -334,13 +277,6 @@ indo %>%
 ```
 
 ```{r q410-solution}
-indo %>%
-  filter(Geschlecht == 2) %>%
-  group_by(Familie) %>%
-  summarise(Esoterik = mean(Selbsttranszendenz))
-```
-
-```{r q410-check}
 indo %>%
   filter(Geschlecht == 2) %>%
   group_by(Familie) %>%
@@ -362,14 +298,6 @@ indo %>%
 ```
 
 ```{r q411-solution}
-indo %>%
-  mutate(Gluecklich = Sinnerfuellung > Sinnkrise) %>%
-  mutate(Gluecklich = replace(Gluecklich, Gluecklich == TRUE, "Ja"),
-         Gluecklich = replace(Gluecklich, Gluecklich == FALSE, "Nein")) %>%
-  select(Alter, Gluecklich) %>%
-```
-
-```{r q411-check}
 indo %>%
   mutate(Gluecklich = Sinnerfuellung > Sinnkrise) %>%
   mutate(Gluecklich = replace(Gluecklich, Gluecklich == TRUE, "Ja"),
@@ -412,13 +340,6 @@ df <- indo %>%
   as.data.frame()
 ```
 
-```{r q52-check}
-df <- indo %>%
-  select(Geschlecht, Sinnerfuellung, Sinnkrise) %>%
-  gather(Zustand, Auspraegung, Sinnerfuellung:Sinnkrise) %>%
-  as.data.frame()
-```
-
 Nun verwenden wir diesen Datensatz zum Erstellen eines Säulendiagramms mit zwei Spalten für jedes Geschlecht. Eine Säule ist Sinnerfuellung und eine Säule ist Sinnkrise.
 
 ```{r q53, exercise=TRUE}
@@ -435,14 +356,6 @@ position_dodge()
 ```
 
 ```{r q53-solution}
-ggbarplot(data = df, 
-          x = "Geschlecht",
-          y = "Auspraegung", 
-          fill = "Zustand", 
-          position = position_dodge())
-```
-
-```{r q53-check}
 ggbarplot(data = df, 
           x = "Geschlecht",
           y = "Auspraegung", 
@@ -470,14 +383,6 @@ ggscatter(...,
 ```
   
 ```{r q54-solution}  
-ggscatter(data = indo, 
-          x = "Sinnkrise", 
-          y = "Sinnerfuellung", 
-          add = "reg.line", 
-          conf.int = T)
-```
-  
-```{r q54-check}  
 ggscatter(data = indo, 
           x = "Sinnkrise", 
           y = "Sinnerfuellung", 

@@ -15,4 +15,4 @@
 #'   \item{O1}{Item1 zu Offenheit}
 #' }
 #' @source \url{Research}
-"big5"
+"bigFive"
