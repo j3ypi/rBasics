@@ -9,19 +9,15 @@ runtime: shiny_prerendered
 ---
 
 ```{r setup, include=FALSE}
-library(learnr)
-library(tidyverse)
-library(ggpubr)
-library(checkr)
+requireNamespace("learnr")
+requireNamespace("tidyverse")
+requireNamespace("ggpubr")
+requireNamespace("checkr")
 knitr::opts_chunk$set(echo = FALSE)
 
-load("C:/users/j3ypi/Desktop/R Package/rBasics/data/df.RData")
-load("C:/users/j3ypi/Desktop/R Package/rBasics/data/indo.RData")
-load("C:/users/j3ypi/Desktop/R Package/rBasics/data/big5.RData")
-
-#data("big5.RData", package = "rBasics")
-#data("indo.RData", package = "rBasics")
-#data("df.RData", package = "rBasics")
+data("big5", package = "rBasics")
+data("indo", package = "rBasics")
+data("df", package = "rBasics")
 ```
 
 ## Der Datensatz
