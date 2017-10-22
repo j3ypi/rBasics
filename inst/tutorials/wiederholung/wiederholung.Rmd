@@ -2,6 +2,7 @@
 title: "Wiederholung"
 output: 
   learnr::tutorial:
+    tutorial_id: 1.0.1.0
     progressive: TRUE
     allow_skip: TRUE
     theme: "flatly"
@@ -9,10 +10,22 @@ runtime: shiny_prerendered
 ---
 
 ```{r setup, include=FALSE}
-requireNamespace("learnr", quietly = T)
-requireNamespace("tidyverse", quietly = T)
-requireNamespace("ggpubr", quietly = T)
-requireNamespace("checkr", quietly = T)
+
+library(learnr)
+library(tidyverse)
+library(ggpubr)
+library(checkr)
+library(tidyr)
+#loadNamespace("learnr")
+#loadNamespace("tidyverse")
+#loadNamespace("ggpubr")
+#loadNamespace("checkr")
+#loadNamespace("tidyr")
+#requireNamespace("learnr", quietly = T)
+#requireNamespace("tidyverse", quietly = T)
+#requireNamespace("ggpubr", quietly = T)
+#requireNamespace("checkr", quietly = T)
+#requireNamespace("tidyr", quietly = T)
 knitr::opts_chunk$set(echo = FALSE)
 
 data(big5, package = "rBasics")
