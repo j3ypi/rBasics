@@ -9,15 +9,15 @@ runtime: shiny_prerendered
 ---
 
 ```{r setup, include=FALSE}
-requireNamespace("learnr")
-requireNamespace("tidyverse")
-requireNamespace("ggpubr")
-requireNamespace("checkr")
+requireNamespace("learnr", quietly = T)
+requireNamespace("tidyverse", quietly = T)
+requireNamespace("ggpubr", quietly = T)
+requireNamespace("checkr", quietly = T)
 knitr::opts_chunk$set(echo = FALSE)
 
-data("big5", package = "rBasics")
-data("indo", package = "rBasics")
-data("df", package = "rBasics")
+data(big5, package = "rBasics")
+data(indo, package = "rBasics")
+data(df, package = "rBasics")
 ```
 
 ## Der Datensatz

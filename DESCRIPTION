@@ -4,7 +4,7 @@ Version: 1.0.1
 Authors@R: person("Jan Philipp", "Nolte", email = "jan.nolte@umit.at", role = c("aut", "cre"))
 Description: In diesem Package sind zwei Datensätze und eine Übung zum Erlernen der Basics in R enthalten. Dabei ist der Inhalt auf die Probleme abgestimmt, mit denen Psychologen konfrontiert werden.
 Depends: R (>= 3.4.2)
-License: GPL-3
+License: GPL-2
 Encoding: UTF-8
 LazyData: true
 Imports:
