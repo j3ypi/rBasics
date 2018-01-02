@@ -2,7 +2,7 @@
 title: "Wiederholung"
 output: 
   learnr::tutorial:
-    tutorial_id: 1.0.1.0
+    tutorial_id: 1.0.1.1
     progressive: TRUE
     allow_skip: TRUE
     theme: "flatly"
@@ -13,7 +13,9 @@ runtime: shiny_prerendered
 loadNamespace("learnr")
 loadNamespace("tidyverse")
 loadNamespace("ggpubr")
-loadNamespace("tidyr")
+# library(learnr)
+# library(tidyverse)
+# library(ggpubr)
 knitr::opts_chunk$set(echo = FALSE)
 
 data(bigFive, package = "rBasics")
@@ -131,20 +133,6 @@ select(indo, ...)
 select(indo, Geschlecht, Alter, Familie)
 ```
 
-Gib den Datensatz in aufsteigender Reihenfolge von Selbsttranszendenz aus. 
-
-```{r q42, exercise=TRUE}
-
-```
-
-```{r q42-hint}
-arrange(indo, ...)
-```
-
-```{r q42-solution}
-arrange(indo, Selbstranszendenz)
-```
-
 Gib nur die männlichen Probanden aus.
 
 ```{r q43, exercise=TRUE}
@@ -239,28 +227,22 @@ indo %>%
   mutate(Mittelwert = rowMeans(.[ , c(4, 7, 8, 9)]))
 ```
 
-Gib in absteigender Reihenfolge von Alter die Spalten Alter, Sinnkrise und Sinnerfuellung von jenen Versuchspersonen aus, die weiblich sind und einen Selbsttranzendenz Wert von unter 3 haben. desc() ordnet nach absteigender Abfolge an. 
+Gib die Spalten Alter, Sinnkrise und Sinnerfuellung von jenen Versuchspersonen aus, die weiblich sind und einen Selbsttranzendenz Wert von unter 3 haben. 
 
 ```{r q49, exercise=TRUE}
 
 ```
 
-```{r q49-hint-1}
+```{r q49-hint}
 indo %>%
   filter(...) %>%
   select(...) %>%
-  arrange(...)
-```
-
-```{r q49-hint-2}
-arrange(desc(...))
 ```
 
 ```{r q49-solution}
 indo %>%
   filter(Geschlecht == 1 & Selbsttranszendenz < 3) %>%
-  select(Alter, Sinnkrise, Sinnerfuellung) %>%
-  arrange(desc(Alter))
+  select(Alter, Sinnkrise, Sinnerfuellung) 
 ``` 
 
 Berechne den Mittelwert namens **Esoterik** von Selbsttranzendenz für beide Famileienstanede der männlichen Probanden.
@@ -308,7 +290,7 @@ indo %>%
 ## Visualisierung
 
 ### Säulendiagramm
-Wähle die Spalten Geschlecht, Sinnerfuellung und Sinnkrise aus. Füge Sinnerfuellung und Sinnkrise in einer Spalte zusammen und benenne den Key mit **Zustand** und die Value mit **Auspraegung**. Achte darauf den tibble in einen Data.frame umzuwandeln.
+Wähle die Spalten Geschlecht, Sinnerfuellung und Sinnkrise aus. Füge Sinnerfuellung und Sinnkrise in einer Spalte zusammen und benenne den Key mit **Zustand** und die Value mit **Auspraegung**.
 
 So sollte der Datensatz aussehen:
 ```{r q51, exercise=TRUE, exercise.eval=TRUE}
@@ -329,15 +311,10 @@ select(Geschlecht, ...)
 gather(Zustand, ...)
 ```
 
-```{r q52-hint-3}
-as.data.frame()
-```
-
 ```{r q52-solution}
 indo %>%
   select(Geschlecht, Sinnerfuellung, Sinnkrise) %>%
-  gather(Zustand, Auspraegung, Sinnerfuellung:Sinnkrise) %>%
-  as.data.frame()
+  gather(Zustand, Auspraegung, Sinnerfuellung:Sinnkrise) 
 ```
 
 Nun verwenden wir diesen Datensatz zum Erstellen eines Säulendiagramms mit zwei Spalten für jedes Geschlecht. Eine Säule ist Sinnerfuellung und eine Säule ist Sinnkrise.
@@ -346,21 +323,16 @@ Nun verwenden wir diesen Datensatz zum Erstellen eines Säulendiagramms mit zwei
 
 ```
 
-```{r q53-hint-1}
+```{r q53-hint}
 ggbarplot(data = ...,
           x = ...)
-```
-
-```{r q53-hint-2}
-position_dodge()
 ```
 
 ```{r q53-solution}
 ggbarplot(data = df, 
           x = "Geschlecht",
           y = "Auspraegung", 
-          fill = "Zustand", 
-          position = position_dodge())
+          fill = "Zustand")
 ```
 
 ### Scatterplot
