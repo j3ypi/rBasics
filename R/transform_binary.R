@@ -5,7 +5,7 @@
 #' Fehlende Werte werden als falsch beantwortet gewertet.
 #' @param df Datensatz als data.frame / tibble.
 #' @param answers Antwortvektor als Vektor / einzeiliger tibble.
-#' @return answer Ergebnismatrix als tibble.
+#' @return Ergebnismatrix als data.frame.
 #' @examples
 #' ########################
 #' # Identische Datentypen
@@ -25,13 +25,14 @@
 #' )
 #' antwortvec <- tibble(3, "Apfel", 4)
 #' transform_binary(soscisurvey, antwortvec)
+#' @export
 transform_binary <- function(df, answers){
 
   cols <- dim(df)[2]
   rows <- dim(df)[1]
   type <- class(answers)
 
-  ma <- as.tibble(
+  ma <- as.data.frame(
     matrix(rep(NA, cols * rows), ncol = cols)
   )
 
@@ -55,7 +56,7 @@ transform_binary <- function(df, answers){
 
   trueFalse <- df == ma
 
-  answer <- as.tibble(
+  answer <- as.data.frame(
     matrix(ifelse(trueFalse == TRUE, 1, 0), ncol = cols)
   )
 
