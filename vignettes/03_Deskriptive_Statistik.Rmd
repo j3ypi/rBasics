@@ -1,0 +1,141 @@
+---
+title: "Deskriptive Statistik"
+subtitle: "R für empirische Wissenschaften v1.0.3"
+author: "Jan Philipp Nolte"
+date: ''
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '3'
+  pdf_document:
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+  word_document:
+    toc: yes
+    toc_depth: '3'
+header-includes: 
+      - \usepackage[ngerman]{babel}
+      - \usepackage{tocloft}
+      - \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} 
+linkcolor: blue
+fontsize: 12pt
+documentclass: article
+---
+
+```{r setup, echo = FALSE}
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(here))
+suppressPackageStartupMessages(library(rio))
+suppressPackageStartupMessages(library(skimr))
+
+data(big_five, tipp_wm, tipp_wm_wide, indonesisch, repeated, package = "rBasics")
+
+tipp_wm <- tipp_wm %>% 
+  mutate(Phase = if_else(Art == "Gruppenphase", "Gruppe", "KO"),
+         Punkte = case_when(Tipp == Ergebnis ~ 3,
+                            Tipp_Richtung == Wahre_Richtung ~ 1,
+                            TRUE ~ 0))
+
+big_five <- big_five %>% 
+  mutate(Offenheit = rowMeans(select(., O1:O10))) %>% 
+  select(Alter:Gewissenhaftigkeit, Offenheit)
+```
+
+\newpage
+
+# Einführung
+Deskriptive Statistiken sind wichtig für einen ersten Überblick über die Daten und werden fast immer in Papern oder in Abschlussarbeiten verlangt. Auch wird der Umgang mit fehlenden Werten in diesem Kapitel beschrieben. 
+
+# Deskriptive Statistik
+Wir nehmen wieder den Datensatz aus dem letzten Kapitel mit den fünf Persönlichkeitsfaktoren. Das `skimr` Package enthält die Funktion `skim()`, die wir wie gewohnt in einer Pipe ausführen können. Zuerst laden wir das Package.
+```{r, eval=FALSE}
+library(skimr)
+```
+
+Der Funktion muss kein weiteres Argument übergeben werden, weil alle Spalten analysiert werden. Es werden Informationen über Zeilen- und Spaltenzahl, Anzahl an fehlenden Werten, übliche deskriptive Maße sowie ein Histogram über die Verteilung der jeweiligen Werte ausgegeben. Für einen ersten Überblick optimal. Da der Output im Internet und im PDF nicht richtig abgebildet werden kann, wird der Output hier ausgespart. Aber probiere es selbst einmal. 
+```{r, eval=FALSE}
+big_five %>% 
+  skim()
+```
+
+Natürlich können wir auch hier mit `group_by()` den Datensatz in die jeweiligen Untergruppen unterteilen.
+```{r, eval=FALSE}
+big_five %>% 
+  group_by(Geschlecht) %>% 
+  skim()
+```
+
+Schauen wir uns den Output einmal genauer an. Was ist denn da mit dem Alter los? Maximales Alter ist 1995? Da hat wohl jemand sein Geburtsjahr und nicht sein Alter in Jahren angegeben. Schauen wir mal, ob mehrere unrealistische Alter angegeben wurden.
+```{r}
+big_five %>% 
+  filter(Alter > 150) 
+```
+
+Wie man sieht, haben nur zwei Personen das Eintragen falsch verstanden. Ändern wir das mit der bereits gelernten `if_else()` Funktion kurz ab. Für alle Personen, die ein Alter größer als 150 eingetragen haben, wird 2018 minus das angegebene Geburtsjahr gerechnet und für die Restlichen nur das richtig eingetragene Alter zurückgegeben. 
+```{r}
+big_five <- big_five %>% 
+  mutate(Alter = if_else(Alter > 150, 2018 - Alter, Alter)) 
+```
+
+Wir merken sofort, wie eng die Datenvorbereitung mit der deskriptiven Statistik verknüpft ist. In der Regel merkt man erst beim Erkunden des Datensatzes, was noch alles verändert werden muss, damit man die geplanten Rechnung durchführen kann. 
+
+Es gibt natürlich auch eine Funktion aus dem `tidyverse` für die deskriptive Statistik. Möchten wir die Anzahl der Personen, den Mittelwert des Alters, deren Standardabweichung und Standardfehler ausgegeben haben, benutzen wir `summarise()`
+```{r}
+big_five %>% 
+  summarise(N = n(), 
+            Mittelwert = mean(Alter),
+            SD = sd(Alter),
+            SE = SD / sqrt(N))
+```
+
+mit `n()` für die Anzahl, `mean()` für den Mittelwert, `sd()` für die Standardabweichung und `sqrt()` für die Quadratwurzel. Für die selben Statistiken pro Geschlecht, benutzen wir wieder `group_by()`.
+```{r}
+big_five %>% 
+  group_by(Geschlecht) %>% 
+  summarise(N = n(), 
+            Mittelwert = mean(Alter),
+            SD = sd(Alter),
+            SE = SD / sqrt(N))
+```
+
+Nun kommen wir zur alles entscheidenen Frage. Wer hat denn nun die Tipprunde gewonnen? Zur schöneren Ausgabe benutzen wir die bereits kennengelernte `arrange()` Funktion. 
+```{r}
+tipp_wm %>% 
+  group_by(Person) %>% 
+  summarise(Gesamtpunktzahl = sum(Punkte)) %>% 
+  arrange(desc(Gesamtpunktzahl))
+```
+
+Alice hat gewonnen! Juhu! 
+
+## Umgang mit fehlenden Werten
+Was aber nun, wenn nicht alle Werte vorhanden sind? Im Datensatz zur Tipp WM haben manche Tipper teilweise vergessen, ihren Tipp abzugeben. Solche fehlenden Werte nennt man NAs (not available). NAs können zu Fehlermeldungen führen. Es gibt verschiedene Möglichkeiten mit NAs umzugehen. Welche man verwendet, hängt stark vom Kontext ab. 
+
+Möchte man zum Beispiel nur den Mittelwert einer Variable berechnen, kann man bei der Funktion `mean()` das Argument `na.rm` auf `TRUE` setzen.
+```{r}
+tipp_wm %>% 
+  summarise(Mittelwert = mean(Punkte, na.rm = TRUE))
+```
+
+Alternativ kann man mit `na.omit()` auch sämtliche NAs im ganzen Datensatz entfernen. Aber Vorsicht, es werden alle Zeilen entfernt, in denen auch nur ein einziger Wert fehlt. Angenommen man möchte sich zwei untersuchte Variablen genauer anschauen und in den beiden Spalten selbst fehlen kaum Werte. Es kann aber gut sein, dass Du ausserdem eine sozio-demographische Spalte (zum Beispiel Alter) erhoben hast. In dieser Spalte fehlen nun einige Werte. Für die Untersuchung Deiner beiden Variablen spielt diese Spalte aber gar keine Rolle. Die Funktion würde trotzdem alle Variablen entfernen. Im Datensatz `tipp_wm_wide` würden von 64 Zeilen lediglich 47 übrig bleiben.
+```{r}
+tipp_wm_wide %>% 
+  na.omit() 
+```
+
+Sei Dir dessen also bewusst. Die meisten induktiven Verfahren regeln NAs allerdings von selbst.
+
+## Weitere Funktionen
+Andere nicht explizit besprochene Funktionen können nach dem selben Schema wie beispielsweise `mean()` und `sd()` verwendet werden.
+
+* `quantile()`
+* `var()`
+* `median()`
+* `min()`
+* `max()`
+
+
+
+

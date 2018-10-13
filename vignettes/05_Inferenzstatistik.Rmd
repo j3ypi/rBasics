@@ -1,0 +1,571 @@
+---
+title: "Inferenzstatistik"
+subtitle: "R für empirische Wissenschaften v1.0.3"
+author: "Jan Philipp Nolte"
+date: ''
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '3'
+  pdf_document:
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+  word_document:
+    toc: yes
+    toc_depth: '3'
+header-includes:
+- \usepackage[ngerman]{babel}
+- \usepackage{tocloft}
+- \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+linkcolor: blue
+fontsize: 12pt
+documentclass: article
+---
+
+```{r setup, echo = FALSE}
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(here))
+suppressPackageStartupMessages(library(rio))
+suppressPackageStartupMessages(library(ggpubr))
+suppressPackageStartupMessages(library(pwr))
+suppressPackageStartupMessages(library(broom))
+suppressPackageStartupMessages(library(car))
+suppressPackageStartupMessages(library(sjstats))
+suppressPackageStartupMessages(library(lmerTest))
+suppressPackageStartupMessages(library(rBasics))
+suppressPackageStartupMessages(library(psych))
+suppressPackageStartupMessages(library(effsize))
+
+data(big_five, tipp_wm, tipp_wm_wide, indonesisch, repeated, package = "rBasics")
+
+big_five <- big_five %>% 
+  mutate(Offenheit = rowMeans(select(., O1:O10))) %>% 
+  select(Alter:Gewissenhaftigkeit, Offenheit)
+
+repeated <- repeated %>% 
+  mutate_at(vars(gruppe, zeitpunkt), as.factor)
+
+scree_plot <- function(fa) {
+  
+  eigenvalues <- eigen(cor(fa, use = "pairwise.complete.obs"), symmetric = TRUE)$values
+  
+  helpdf <- data.frame(values = eigenvalues, 
+                       dimension = seq_along(eigenvalues))
+  
+  ggplot(helpdf, aes(x = dimension, y = values)) + 
+    geom_point(shape = 19, size = 3) + 
+    geom_line(size = 0.6) + 
+    geom_hline(aes(yintercept = 1), size = 0.8, linetype = "longdash") +
+    labs(x = "Dimensionen", y = "Eigenvalues") +
+    scale_x_continuous(breaks = seq_len(6)) + 
+    theme_pubr() 
+  
+}
+```
+
+\newpage
+
+# Einführung
+Viele inferenzstatistische Verfahren sind direkt in R integriert. Ein paar Verfahren müssen wir jedoch mit externen Packages rechnen. Leider ist weder in `Base R` noch in den Packages eine wirklich konsistente, Pipe-freundliche Syntax gegeben. Außerdem sind die Outputs unbearbeitet nicht übersichtlich lesbar. Im Folgenden schauen wir uns diverse statistische Verfahren an und lassen uns die Ergebnisse in schöner Form mit Funktionen des `broom` (engl. für Besen) Packages wiedergeben. Aber dazu später mehr. Das Ziel dieses Kapitel ist das Vorstellen der Funktionen mit ihren Argumenten. Es dient mehr als Komprehendium zum Nachschlagen, allerdings sollte man den grundlegenden Workflow verstanden und sich vor allem den Exkurs zu [Dollar-Operatoren][Exkurs: Dollar-Operator] angeschaut haben. Bevor wir in die Inferenzstatistik eintauchen, schauen wir uns zuerst die Stichprobenplanung und Power-Berechnung an.
+
+# Stichprobenplanung und Power
+Sowohl für die Stichprobenplanung als auch für die Power-Berechenung benötigen wir das Package `pwr`.
+```{r, eval=FALSE}
+library(pwr)
+```
+
+Möchten wir nun zum Beispiel die optimale Stichprobengröße für eine ANOVA mit zwei Gruppen `k`, einer erwarteten Effektstärke `f` von .3, einem $\alpha$-Niveau von 5\% bei einer Power von 0.8 erhalten, benutzen wir `pwr.anova.test()` und setzen ein.
+```{r}
+pwr.anova.test(k = 2,  
+               f = 0.3, 
+               sig.level = 0.05,
+               power = 0.8)
+```
+
+Für andere Verfahren gibt es nach dem gleichen Schema entsprechende Funktionen (beispielsweise `pwr.t.test()`). Wenn man Post-Hoc die Power ausrechnen möchte, verwendet man die selbe Funktion. Anstelle des power Arguments schreiben wir aber diesmal die beobachtete Stichprobengrösse `n` als Argument in die Funktion. Beachte, dass `f` auch hier die erwartete und nicht die beobachtete Effektstärke ist!
+```{r}
+pwr.anova.test(k = 2,  
+               n = 30, 
+               f = 0.3, 
+               sig.level = 0.05)
+```
+
+Falls die Stichprobenplanung für den gewünschten Test nicht in `pwr` implementiert ist, sei an dieser Stelle auf [g*Power](http://gpower.hhu.de/) verwiesen.
+
+# Exkurs: Dollar-Operator
+Während der Inferenzstatistik lässt es sich leider nicht vermeiden, ab und an das Dollarzeichen zu verwenden, um eine Spalte des Datensatzes auszuwählen. Warum geht es hier nicht einfach zuvor mit `select()`? Schauen wir uns mal genauer an, was die beiden Befehle jeweils zurück geben.
+```{r}
+tipp_wm %>% 
+  select(Person)
+```
+
+Während `select()` einen tibble mit der ausgewählten Spalte zurückgibt, erhält man durch den Dollar-Operator einen Vektor. Was genau Vektoren ausmachen, ist an dieser Stelle nicht weiter wichtig und wird deshalb unter Extras erläutert. Um die Spalte ausgeben zu lassen, hat man immer das selbe Schema: `datensatzName$spaltenName`. Wollen wir aus dem Datensatz `tipp_wm` die Spalte Person herausziehen, schreiben wir einfach
+```{r,eval=FALSE}
+tipp_wm$Person
+```
+
+```{r,echo=FALSE}
+head(tipp_wm$Person, 10)
+```
+
+# Voraussetzungen prüfen
+Um zu entscheiden, welchen Test wir verwenden dürfen, müssen wir erst die Voraussetzungen prüfen.
+
+## Normalverteilung
+Am besten prüft man die Normalverteilung rein graphisch mit Q-Q Plots.
+
+### Q-Q Plot
+Dafür verwenden wir erneut das Package `ggpubr` (siehe Kapitel Visualisierungen).
+```{r , eval=FALSE}
+library(ggpubr)
+```
+
+Als erstes Argument übergeben wir den Namen des Datensatzes. In Anführungszeichen schreiben wir als zweites Argument die zu überprüfende Spalte.
+```{r,echo=TRUE, out.width='60%', fig.width=6, fig.height=4,fig.align='center'}
+ggqqplot(big_five, "Extraversion")
+```
+
+### Shapiro-Wilks Test
+Alternativ kann auch der Shapiro-Wilks test verwendet werden. Hier verwenden wir zum ersten mal die Dollar-Syntax. Der Funktion übergeben wir die Spalte `Extraversion` aus dem Datensatz `big_five`.
+```{r}
+shapiro.test(big_five$Extraversion)
+```
+
+Nun sieht der p-Wert etwas seltsam aus. Bei SPSS und Stata wird unter .001 nur noch <.001 angezeigt. Bei R hingegen wird bis 2e-16, also $2 \times 10^-16$ (0.0000000000000002) differenziert. 
+
+### Kolgomorov-Smirnov Test
+Die zu überprüfende Spalte wird genau wie beim Shapiro Wilks Test übergeben. Zusätzlich muss noch `rnorm` in Anführungszeichen zum Testen auf Normalverteilung übergeben werden.
+```{r, eval=FALSE}
+ks.test(big_five$Extraversion, "rnorm")
+```
+
+```{r, echo=FALSE}
+suppressWarnings(ks.test(big_five$Extraversion, "rnorm"))
+```
+
+## Varianzhomogenität
+Auch beim Testen der Varianzhomogenität gibt es drei bekannte Verfahren. Ab hier werden wir versuchen ein konsistentes Schema zum Testen zu entwickeln.
+
+### F-Test
+Zuerst rufen wir den F-Test mit `var.test()` auf. Angenommen wir möchten Extraversion zwischen den Geschlechtern auf Varianzhomogenität prüfen. Getrennt werden die Variable durch eine sogenannte Tilde (~). Diese Schreibweise ist zwingend notwendig, wenn man als zweite Spalte eine kategorisierende Spalte wie Geschlecht (zwei Ausprägungsgrade) der Funktion übergibt. Um schön formatierte Ergebnisse zu erhalten, rufen wir zuletzt `tidy()` auf, welches eine Funktion aus dem bereits erwähnten `broom` Package ist, auf das wir ständig zurückgreifen werden. Zuerst müssen wir also das Package laden. Da wir wieder die Pipe verwenden, müssen wir selbstverständlich auch das `tidyverse` wieder laden.
+```{r, eval=FALSE}
+library(broom)
+library(tidyverse)
+```
+
+Nun können wir den F-Test rechnen.
+```{r}
+var.test(Extraversion ~ Geschlecht, data = big_five) %>% 
+  tidy()
+```
+
+Die Spalte `statistic` enthält die jeweilige Teststatistik -- in dem Fall den F-Wert. Man kann den F-Test mit `alternative` für einseitig oder zweiseitige Tests und mit `conf.level` das $\alpha$ Niveau anpassen. Nun wollen wir die Varianzhomogenität zwischen `Extraversion` und `Neurotizismus` überprüfen. Exemplarisch seien hier die veränderbaren zusätzlichen Argumente mit aufgelistet. Dies ist allerdings für Dich nur notwendig, wenn Du die Argumente verändern möchtest. Weil die zweite Variable keine kategorisierende ist, müssen wir wieder auf die Dollar-Syntax zurückgreifen (`datenName$spaltenName`)
+```{r}
+var.test(big_five$Extraversion, big_five$Neurotizismus,
+         alternative = "two.sided",
+         conf.level = 0.95) %>% 
+  tidy()
+```
+
+### Bartletts Test
+Der Bartletts Test funktioniert wie der F-Test. Nur können hier keine zusätzlichen Argumente übergeben werden. 
+```{r}
+bartlett.test(big_five$Extraversion ~ big_five$Geschlecht) %>% 
+  tidy()
+```
+
+### Levene Test
+Für den Levene Test benötigen wir mit `car` ein externes Packages.
+```{r, eval=FALSE}
+library(car)
+```
+
+Die Funktion ist leider nicht konsistent benannt, da der Funktionsname von keinem Punkt getrennt und zusätzlich das zweite Wort (Test) groß geschrieben wird. Also Achtung vor Tippfehlern! Ansonsten funktioniert hier alles wie gewohnt. 
+```{r}
+leveneTest(big_five$Extraversion, big_five$Geschlecht) %>% 
+  tidy()
+```
+
+# Testen
+Sind alle Voraussetzungen geprüft, geht es ans Testen. 
+
+## Mittelwertsvergleich
+Zwischen abhängigen und unabhängigen t-Tests sowie zwischen t-Test und Welch-Test besteht in R kaum ein syntaktischer Unterschied.
+
+### t-Test
+Schauen wir uns zuerst die grundlegende Funktion `t.test()` an. Dabei ändert sich nichts im Vergleich zu den vorherigen Tests auf Varianzhomogenität. Auch hier haben wir die Unterteilung durch die Tilde (`~`), wenn die zweite Spalte kategorisierend ist und die Dollar-Syntax bei zwei intervallskalierten Variablen. 
+```{r}
+t.test(Extraversion ~ Geschlecht, data = big_five,
+       paired = FALSE,
+       var.equal = TRUE) %>% 
+  tidy()
+```
+
+Die Argumente `alternative` und `conf.level` können auch hier geändert werden. Entscheidend für einen abhängigen oder unabhängigen t-Test ist jedoch das `paired` Argument. Setze es auf `TRUE` für abhängige und auf `FALSE` für unabhängige Stichproben. Das Argument `var.equal` besagt, dass wir von Varianzhomogenität ausgehen (also einen t-test machen).
+```{r}
+t.test(big_five$Extraversion, big_five$Neurotizismus,
+       alternative = "two.sided", 
+       conf.level = 0.95, 
+       paired = FALSE,
+       var.equal = TRUE) %>% 
+  tidy()
+```
+
+### Welch-Test
+Bei heterogenen Varianzen muss man zum Verwenden des nicht-parametrischen Welch-Tests lediglich das `var.equal` Argument auf `FALSE` setzen.  
+```{r}
+t.test(big_five$Extraversion, big_five$Neurotizismus,
+       alternative = "two.sided", 
+       conf.level = 0.95, 
+       paired = FALSE,
+       var.equal = FALSE) %>% 
+  tidy()
+```
+In der `method` Spalte im Output steht nun auch `Welch`.
+
+### Cohens'd
+Für die Effektstärke nach Cohen laden wir das Package `effsize`. 
+```{r, eval=FALSE}
+library(effsize)
+```
+
+Auch hier kommt die Dollar-Syntax zum Einsatz.
+```{r}
+cohen.d(big_five$Extraversion, big_five$Neurotizismus) 
+```
+In Klammern hinter der Effekstärke steht sogar direkt eine Einordnung über die Größe.
+
+## Regressionsanalysen
+Auch bei Regressionsanalysen ändert sich nicht viel. Wichtig ist ab jetzt nur, dass die abhängige Variable auf der linken Seite der Tilde (`~`) steht und die unabhängigen Variablen auf der rechten Seite. Der Befehl heißt `lm()`, was für linear model steht.
+
+### Einfache Lineare Regression
+Eine einfache lineare Regression erhalten wir noch nach genau dem selben Schema wie zuvor.
+```{r}
+lm(Extraversion ~ Neurotizismus, data = big_five) %>% 
+  tidy()
+```
+
+### Multiple Lineare Regression
+Möchten wir jetzt mehrere unabhängige Variablen auf Einfluss prüfen, müssen wir diese nur mit einem Plus zeichen hinzufügen. 
+```{r}
+lm(Extraversion ~ Neurotizismus + Geschlecht, data = big_five) %>% 
+  tidy()
+```
+
+Wenn wir eine Interaktion zwischen Neurotizismus und Geschlecht erwarten würden, müsste man nur das Plus durch ein Multiplikationszeichen ersetzen.
+```{r}
+lm(Extraversion ~ Neurotizismus * Geschlecht, data = big_five) %>% 
+  tidy()
+```
+
+Denke daran, dass $e-1$ für $\times 10^{-1}$ steht. Der p-Wert zur Interaktion wäre also $0.214$.
+
+### Informationskriterien und $R^2$
+Natürlich interessiert uns nicht nur der p-Wert sondern auch die Effektstärke $R^2$
+und die Informationskriterien (AIC, BIC). Anstelle von `tidy()` schreiben wir dafür einfach `glance()`.
+```{r}
+lm(Extraversion ~ Neurotizismus * Geschlecht, data = big_five) %>% 
+  glance()
+```
+
+### Logistische Regression
+Für eine logistische Regression ändert sich der Befehl zu `glm()` (für Generalized linear model). Der Rest bleibt gleich. Zum exemplarischen rechnen, müssen wir erstn das Geschlecht numerisch kodieren.
+```{r}
+big_five_new <- big_five %>% 
+  mutate(Geschlecht = if_else(Geschlecht == "m", 1, 0))
+```
+
+Nun können wir wie gewohnt das Modell aufstellen.
+```{r}
+glm(Geschlecht ~ Neurotizismus, data = big_five_new) %>% 
+  tidy()
+```
+
+### Hierarchische Regression
+Eine hierarchische Regression ist nichts anderes als das Vergleichen verschiedener linearer Modelle unter Hinzufügen von Variablen. Wir werden für eine größere übersichtlichkeit die Modelle diesmal in Variablen speichern. Beachte, dass wir hier kein `tidy()` aufrufen, da wir die Informationskriterien der linearen Modelle später mit `glance()` vergleichen wollen.
+```{r}
+model1 <- lm(Extraversion ~ Neurotizismus, data = big_five) 
+model2 <- lm(Extraversion ~ Neurotizismus + Geschlecht, data = big_five)
+model3 <- lm(Extraversion ~ Neurotizismus + Geschlecht + Offenheit, data = big_five) 
+```
+
+Um die Modelle nun zu vergleichen, rufen wir drei mal `glance()` auf. Die Ergebnisse binden wir zeilenweise zusammen. Wie genau `rbind()` funktioniert, wird im Kapitel `Extras` erklärt.
+```{r}
+rbind(
+  glance(model1),
+  glance(model2),
+  glance(model3)
+)
+```
+
+## p-Wert Korrektur
+Für eine p-Wert Korrektur können wir schlichtweg eine neue Spalte an den Ergebnisoutput mit `mutate()` hängen. Die korrigierten p-Werte erhalten wir dabei durch `p.adjust()`. Die verschiedenen Korrekturverfahren sind beispielsweise Holm, Benjamini-Hochberg oder Bonferroni. Exemplarisch gehen wir von Interaktionen von allen unabhängigen Variablen aus, um mehr p-Werte zum Vergleichen zu erhalten.
+```{r}
+lm(Extraversion ~ Neurotizismus * Geschlecht * Offenheit, data = big_five) %>% 
+  tidy() %>% 
+  mutate(p_adjusted = p.adjust(p.value, method = "BH"))
+```
+
+## Exkurs: Faktoren
+Für Varianzanalysen müssen wir einen bisher nicht erwähnten neuen Datentyp einführen - den Faktor. Faktoren sind nichts anderes als Characters mit festgelegten Ausprägungsgraden. Wir schauen uns an dieser Stelle nur an, wie man Faktoren erstellen kann. Dabei greifen wir auf Funktionen aus dem Kapitel der Datenvorbereitung zu. Der Datensatz für die Varianzanalysen hat die Variablen `iq`, `kreativitaet`, `zeitpunkt`, `gruppe` und `person_id`. 
+```{r, echo=FALSE}
+repeated
+```
+
+Möchten wir nun aus der Gruppenspalte einen Faktor machen, geht dies mit `as.factor()`.
+```{r, eval=FALSE}
+repeated %>% 
+  mutate(gruppe = as.factor(gruppe))
+```
+
+Angenommen Du möchtest alle Spalten mit Charactern in Faktoren umformatieren, geht das mit `mutate_if()`.
+```{r, eval=FALSE}
+repeated %>% 
+  mutate_if(is.character, as.factor)
+```
+
+Für mehrere Spalten verwendet man wie gewohnt `mutate_at()`.
+```{r, eval=FALSE}
+repeated %>% 
+  mutate_at(vars(zeitpunkt, gruppe), as.factor)
+```
+
+Mehr müssen wir auch gar nicht über Faktoren wissen. Ohne Faktoren können wir jedoch weder Kontraste einstellen noch den Tukey Post-Hoc Test berechnen. Also am besten immer die unabhängigen Variablen bei Varianzanalysen in Faktoren umwandeln. 
+
+## Varianzanalysen 
+Vor jeder Varianzanalyse ohne Messwiederholung laden wir die drei Packages `car`, `sjstats` und `broom`. 
+```{r, eval=FALSE}
+library(car)
+library(sjstats)
+library(broom)
+```
+
+Außerdem müssen wir die Kontraste diagonal einstellen, da wir ansonsten verzerrte Ergebnisse erhalten können. Dafür einfach den folgenden Befehl kopieren und in der Form ausführen.
+```{r}
+options(contrasts = c("contr.sum", "poly.sum"))
+```
+
+### ANOVA
+Die erste Zeile verändert sich syntaktisch nicht im Verlgeich zu Regressionmodellen. Nur der Befehl ändert sich zu `aov()`. In der zweiten Zeile rufen wir aus dem `car` Package die `Anova()` Funktion auf (beachte das großgeschriebene A), wordurch wir den Typ der Quadratsummen kontrollieren können. SPSS gibt zum Beispiel standardmäßig Typ 3 aus, R hingegen normaler Weise Typ 1. Als letzts rufen wir aus dem `sjstats` Package die Funktion `anova_stats()` auf, um unter anderem direkt zusätzlich die Varianzerklärungen $\eta^2$ zu erhalten.
+```{r}
+aov(iq ~ zeitpunkt + gruppe, data = repeated) %>% 
+  Anova(type = 3) %>% 
+  anova_stats() 
+```
+
+#### Kontraste einstellen
+Schauen wir zuerst wie die Kontraste für die Gruppenspalte aussieht. Innerhalb von `constrasts()` übergeben wir die gewünschte Spalte mit gewohnter Dollar-Syntax.
+```{r}
+contrasts(repeated$gruppe)
+```
+
+Möchtest Du nun die Kontraste anpassen, kannst Du dies manuell machen. Hierfür verwenden wir erneut `rbind()`. Dabei wird zeilenweise unsere Matrix erstellt. 
+```{r}
+contrasts(repeated$gruppe) <- rbind(c(-1, -1, -1, -1, -1),
+                                    c(0, 0, 0, 0, 1),
+                                    c(0, 0, 0, 1, 0),
+                                    c(0, 0, 1, 0, 0),
+                                    c(0, 1, 0, 0, 0),
+                                    c(1, 0, 0, 0, 0))
+```
+
+#### Messwiederholung
+Zur ANOVA mit Messwiederholung laden wir das Package `lmerTest`.
+```{r, eval=FALSE}
+library(lmerTest)
+```
+
+Der Befehl zum Erstellen des Modell ändert sich zu `lmer()`. Ansonsten ist der einzige Unterschied das Kontrollieren der zufälligen Effekte -- hier die zufällig schwankenden IQ-Ausprägungen zwischen den Personen. Wir kontrollieren dies mit `(1|person_id)`. Der Rest bleibt gleich.
+```{r}
+lmer(iq ~ zeitpunkt + gruppe + (1|person_id), data = repeated) %>% 
+  Anova(type = 3) %>% 
+  tidy()
+```
+
+Für die Effektstärke greifen wir erneut auf das `sjstats` Package zurück. Diesmal rufen wir die Funktion `r2()` auf.
+```{r}
+lmer(iq ~ zeitpunkt + gruppe + (1|person_id), data = repeated) %>% 
+  r2()
+```
+
+### MANOVA
+Zum Rechnen multivariater Varianzanalysen wählen wir zuerst die abhängigen Variablen aus und konvertieren sie zu einer Matrix. Was es genau mit Matrizen auf sich hat, wird im Kapitel Extras erklärt.
+```{r}
+AV <- repeated %>% 
+  select(iq, kreativitaet) %>% 
+  as.matrix()
+```
+
+Für MANOVAs benötigen wir wieder die `lm()` Funktion. Das hängt damit zusammen, dass unter jeder ANOVA eine Regression steckt und `aov()` nur eine spezielle Art ist, den `lm()` Befehel auszuführen. MANOVAs funktionieren nicht mit `aov()`! 
+Außerdem ändert sich `Anova()` zu `Manova()` und wir können den Output nicht mit `tidy()` aufräumen.
+```{r}
+lm(AV ~ gruppe + zeitpunkt, data = repeated) %>% 
+  Manova(type = 3) 
+```
+
+Dabei steht `Pr(>F)` für den p-Wert. Für Vergleiche innerhalb der jeweiligen abhängigen Variable, benutze `summary.aov()`.
+```{r}
+lm(AV ~ gruppe + zeitpunkt, data = repeated) %>% 
+  summary.aov() 
+```
+
+### Kruskal-Wallis Test
+Beim nicht-parametrischen Kruskall-Willis Test verändert sich syntaktisch nichts im Vergleich zu Regressionsmodellen und Varianzanalysen.
+```{r}
+kruskal.test(iq ~ gruppe, data = repeated) %>% 
+  tidy()
+```
+
+## Post-Hoc Tests
+Im folgenden seien zwei mögliche Post-Hoc Vergleiche vorgestellt. 
+
+### TukeyHSD
+Für den Test von Tukey auf Honest Significant Differences (HSD) ändert sich nicht viel in Vergleich zur ANOVA. Nur wird nach der ANOVA die Funktion `TukeyHSD()` aufgerufen und dann der Output ins aufgeräumte Format gebracht.
+```{r, eval=FALSE}
+aov(iq ~ zeitpunkt * gruppe, data = repeated) %>% 
+  TukeyHSD() %>%  
+  tidy()
+```
+
+### Post-Hoc-t-Tests
+Hier müssen wir erneut auf den Dollar Operator zurückgreifen. Als zusätzliches Argument kann man mit `p.adjust.method()` die Korrekturmethode festlegen.
+```{r}
+pairwise.t.test(repeated$iq, repeated$gruppe, 
+                p.adjust.method =  "none") 
+```
+
+## Korrelationskoeffizienten
+Es gibt einen Unterschied, ob man die Korrelation zwischen zwei Variablen berechnen möchte (mit p-Wert) oder eine Korrealtionstabelle mit allen Korrelation erhalten möchte. 
+
+### Produkt-Moment Korrelation nach Pearson
+Die Standardeinstellung für `cor.test` ist die Produkt-Moment Korrelation nach Pearson. Die Argumente `method`, `alternative` und `conf.level` sind also optional. 
+```{r}
+cor.test(big_five$Extraversion, big_five$Neurotizismus, 
+         method = "pearson",
+         alternative = "two.sided",
+         conf.level = .95) %>% 
+  tidy()
+```
+
+### Rangkorrelation nach Spearman
+Für die Rangkorrelation nach Spearman muss man lediglich das `method` Argument entsprechend anpassen (natürlich müssen die Variablen eigentlich ordinal sein). 
+```{r}
+cor.test(big_five$Extraversion, big_five$Neurotizismus, 
+         method = "spearman",
+         alternative = "two.sided",
+         conf.level = .95) %>% 
+  tidy()
+```
+
+### Korrelationstabellen
+Nun kann es schon mal vorkommen, dass man mehr als zwei Variablen miteinander in einer Korrelationstabelle untersuchen möchte. Zuerst wählen wir im `repeated` Datensatz alle numerischen Spalten aus.
+```{r}
+repeated_num <- repeated %>%
+  select_if(is.numeric)
+```
+
+Dann verwenden wir die Funktion `cor()`.
+```{r}
+cor(repeated_num) 
+```
+
+## Kontingenztafeln
+Eine Kontigenztafel erstellt man einfach mit `table()`. Möchten wir zum Beispiel wissen, welches der Geschlechter häufiger eine starke Ausprägung von Extraversion mit über 3.5 haben, schreiben wir einfach
+```{r}
+table(big_five$Geschlecht, big_five$Extraversion > 3.5)
+```
+
+```{r, echo=FALSE}
+tbl <- table(big_five$Geschlecht, big_five$Extraversion > 3.5)
+```
+
+Schauen wir uns nun an, wie man Kontigenztafeln analysiert. Angenommen wir haben vorherige Kontingenztafel als `tbl` gespeichert.
+
+### Fisher-exact Test 
+Für den Fisher-Exact Test für $2\times2$ Kontigenztafeln, müssen wir nun lediglich unsere Kontingenztafel `tbl` der Funktion `fisher.test()` übergeben. Auch hier bereinigen wir den Output mit `tidy()`.
+```{r}
+fisher.test(tbl) %>% 
+  tidy()
+```
+Die Spalte `estimate` im Output ist in dem Fall die Odds ratio.
+
+### Mcnemars $\chi^2$ Test
+Das gleiche Spiel für den Mcenamr Test. Hier sparen wir uns `tidy()`, weil der Output ohnehin bereits schön aufgeräumt aussieht.
+```{r}
+mcnemar.test(tbl) 
+```
+
+### Pearsons $\chi^2$ Test
+Und auch beim asymptotischen $\chi^2$-Test nach Pearson läuft es nach dem selben Schema ab.
+```{r}
+chisq.test(tbl)
+```
+
+# Explorative Faktorenanalyse
+Kommen wir nun zum letzten Thema - der explorativen Faktorenanalyse. Dabei betrachten wir zwei Verfahren: die Principal Component Analysis (PCA) und die Maximum Likelihood Faktorenanalyse (EFA). Zuerst wählen wir alle numerischen Spalten aus dem `big_five` Datensatz aus (alle anderen sind unbrauchbar).
+```{r}
+num_data <- big_five %>% 
+  select_if(is.numeric)
+```
+
+## Naive Hauptkomponentenanalyse
+Für die naive Hauptkomponentenanalyse (PCA) muss man keine Annahmen über die Faktorenanzahl treffen. Das einzige Argument, was man der Funktion `princomp()` übergeben muss, ist der Datensatz.
+```{r}
+fit <- princomp(num_data)
+```
+
+Die Ladungen der Faktoren auf die Komponenten erhalten wir mit `loadings()`.
+```{r}
+loadings(fit)
+```
+
+## Maximum Likelihood Faktorenanalyse
+Bei einer EFA muss man die Faktorenanzahl und die Rotationsart festlegen. Bei 5 erwarteten Faktoren und einer orthogonalen Rotation erhält man die Faktorenanalyse mit `factanal()` wie folgt
+```{r}
+fac <- factanal(num_data, factors = 2, rotation = "varimax")
+```
+
+Möchte man im Output übersichtlich nur Werte mit 2 Nachkommastellen in absteigender Form mit Werten größer 0.3, benutzt man `print()`.
+```{r}
+fac %>% 
+  print(digits = 2, cutoff = 0.3, sort = TRUE)
+```
+
+Möchte man mit den Ergebnisse weiterrechen, kann man auch hier wieder `tidy()` verwenden.
+```{r}
+fac %>% 
+  tidy() 
+```
+
+Das Kaiser-Maier-Olkin Kriterium erhält mit man mit der `KMO()` Funktion aus dem `psych` Package.
+```{r}
+KMO(num_data)
+```
+
+## Scree Plot
+Den Scree Plot erhalten wir nach Laden von `rBasics` mit `scree_plot()`. Dabei gibt die Funktion einen ggplot zurück. 
+```{r, echo=TRUE, out.width='60%', fig.height= 4, fig.width=6, fig.align='center'}
+scree_plot(num_data)
+```
+
+```{r, echo=FALSE}
+plot <- scree_plot(num_data)
+```
+
+Wir erinnern uns, alle Graphen aus dem Package `ggpubr` (siehe Kapitel Visualisierungen) basieren auf `ggplot2`. Das heißt, wir können den Graphen ganz normal mit `ggpar()` anpassen. Angenommen wir hätten den Graphen als `plot` gespeichert, könnten wir die Parameter einfach anpassen mit
+```{r,echo=TRUE, out.width='60%', fig.height= 4, fig.width=6, fig.align='center'}
+ggpar(plot, 
+      font.x = 14, 
+      font.y = 14, 
+      font.tickslab = 14,
+      ylim = c(0.4, 1.6))
+```
+
+
+
+
+
+
+

@@ -1,0 +1,316 @@
+---
+title: "Extras"
+subtitle: "R für empirische Wissenschaften v1.0.3"
+author: "Jan Philipp Nolte"
+date: ''
+output:
+  pdf_document:
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+  word_document:
+    toc: yes
+    toc_depth: '3'
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '3'
+header-includes:
+    - \usepackage[ngerman]{babel}
+    - \usepackage{tocloft}
+    - \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+linkcolor: blue
+fontsize: 12pt
+documentclass: article
+---
+
+```{r setup, echo = FALSE}
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(rio))
+suppressPackageStartupMessages(library(here))
+suppressPackageStartupMessages(library(broom))
+suppressPackageStartupMessages(library(rBasics))
+
+data(big_five, tipp_wm, tipp_wm_wide, indonesisch, repeated, package = "rBasics")
+
+repeated <- tibble(
+  iq = rnorm(90, 100, 15),
+  kreativitaet = rnorm(90, 50, 17),
+  zeitpunkt = rep(c("t1", "t2", "t3"), each = 30),
+  gruppe = rep(c("A", "B", "C", "D", "E", "F"), 15),
+  person_id = rep(seq_len(45), 2)
+)
+
+big_five <- big_five %>% 
+  mutate(Offenheit = rowMeans(select(., O1:O10))) %>% 
+  select(Alter:Gewissenhaftigkeit, Offenheit)
+
+model1 <- big_five %>% 
+  lm(Extraversion ~ Neurotizismus, data = .) 
+
+model2 <- big_five %>% 
+  lm(Extraversion ~ Neurotizismus + Geschlecht, data = .)
+
+model3 <- big_five %>% 
+  lm(Extraversion ~ Neurotizismus + Geschlecht + Offenheit, data = .) 
+```
+
+\newpage
+
+# Einführung
+In den letzten fünf Kapiteln hast Du bereits alles dringend Nötige zum Verarbeiten von Daten kennengelernt. Allerdings wurden einige Konzepte bisher aus didaktischen Gründen ohne Erklärung verwendet. Hier werden diese Konzepte sowie andere für das Verständnis von R wichtigen Dinge genauer betrachtet. Außerdem werden mit [funktionalem Programmieren][Funktionales Programmieren] forgeschrittene Konzepte vorgestellt. Zum Schluss wird noch eine Funktion erklärt, die eine Ergenismatrix zu einer binären Antwortmatrix formatiert. Also wenn man zum Beispiel in einem Online Fragebogen Aufgaben abfragt, die eine richtige Lösung haben, sind diese im rohen Datensatz in einem unbrauchbaren Format. Wenn in Aufgabe 1 die Zahl 42 herauskommt und 3 Personen den Fragebogen beantwortet haben, mit 42, 34 und 5, enthält der Rohdatensatz keinerlei Information darüber, dass nur die erste Person richtig geantwortet hat. Die Funktion zur Transformation würde daraus 1, 0, 0 machen. Ein Beispiel wird später gegeben. 
+
+# Verschiedene Datenstrukturen
+Wie bei den bereits kennengelernten Datentypen gibt es auch verschiedene Strukturen, die jeweils andere Eigenschaften haben. In den vorherigen Kapiteln ist oft das Wort tibble gefallen. Wenn Du bereits die eine oder andere Erfahrung mit R gemacht hast, kennst du wahrscheinlich eher data.frames. Was diese Datenstruktur ausmacht und wie man verschiedene Datenstrukturen innerhalb von R direkt erstellen kann (ohne einlesen eines bereits bestehenden Datensatzes), wird im folgenden erklärt. 
+
+## tibble und data.frame
+Die vielleicht nützlichste Datenstruktur für den Wissenschaftler ist der tibble. Warum? Weil, obwohl innerhalb einer Spalte der selbe Datentyp benutzt werden muss, verschiedene Datentypen in verschiedenen Spalten sein dürfen. Man sollte nach Möglichkeit immer tibbles anstelle der veralteten data.frames benutzen, allerdings gibt es einige wenige alte Funktionen, die mit tibbles nicht kompatibel sind. Wie man Datenstrukturen umformt, sehen wir später. Die genauen Unterschiede und Vorteile von tibbles können [hier](https://blog.rstudio.com/2016/03/24/tibble-1-0-0/) nachgelesen werden. 
+
+Einen tibble kann man mit der gleichnamigen Funktion (nach laden des `tidyverse `) erstellen. 
+```{r}
+tibble(
+  a = 1:3,
+  b = 4:6
+)
+```
+
+## Vektor
+Ein Vektor ist eine eindimensionale Datenstruktur, die nur einen Datentypen enthalten darf. Also entweder Numeric, Character oder Logical. Jede Spalte in einem Datensatz ist nichts anderes als ein Vektor. Vektoren können auf verschiedene Art und Weise erstellt werden. 
+
+Einen leeren Vektor mit einer bestimmten Anzahl an Elementen kann man mit `vector()` erstellen.
+```{r}
+vector("numeric", 4)
+```
+
+Man kann mehrere Werte mit `c()` (combine) kombinieren. 
+```{r}
+c(1, 2, 3, 4)
+```
+
+Bereits kennengelernt haben wir den Doppelpunkt. Werte von 1 bis 4 erhalten wir also durch
+```{r}
+1:4
+```
+
+Auch mit `seq()` erreichen wir das selbe Ergebnis. Vorteil hierbei ist der, dass man die Abstände zwischen den Zahlen verändern kann. 
+```{r}
+seq(from = 1, to = 4, by = 1)
+```
+
+Außerdem gibt es nützliche `seq`-Funktionen für häufige Anwengungsfälle, wie `seq_len()` für eben genau das vorherige Beispiel.
+```{r}
+seq_len(4)
+```
+
+Und `seq_along()` für eine Sequenz von 1 bis zur Länge des Vektors, was häufig beim Loopen hilfreich ist. 
+```{r}
+seq_along(c("a", "b", "c"))
+```
+
+### Eckige Klammern
+Wenn man auf Elemente innerhalb eines Vektor zugreifen möchte, kann man dies mit eckigen Klammern. Das dritte Element des Vektors `vec` 
+```{r}
+vec <- c(1, 2, 3, 4)
+```
+
+erhält man mit 
+```{r}
+vec[3]
+```
+
+Eckigen Klammern können auch bei tibbles verwendet werden. Wählen wir zuerst erneut die Personenspalte aus.
+```{r}
+tipp_wm[ ,"Person"]
+```
+
+Was ändert sich im Vegleich zu Vektoren? Innerhalb der eckigen Klammer befindet sich nun ein Komma. Links vom Komma kann man 1 bis alle **Zeilen** auswählen, rechts vom Komma die gewünschten **Spalten**. Wenn man es frei lässt, werden alle ausgewählt. Man kann alternativ auch numerisch auswählen.
+```{r}
+tipp_wm[ ,2]
+```
+
+Aber man könnte genauso gut mehrere Spalten auswählen. Spalten 1 bis 3 beispielweise mit
+```{r}
+tipp_wm[ ,1:3]
+```
+
+oder Spalten 2 und 4 mit
+```{r}
+tipp_wm[ ,c(2, 4)]
+```
+
+Bei großen Datensätzen kann man die gewünschte Spaltennummer beispielsweise mit `str_which()` herausfinden.
+```{r}
+str_which(names(tipp_wm), "Person")
+```
+
+Eine gewünschte Anzahl an Zeilen kann man nach dem gleichen Schema wie mit den Spalten auswählen. Möchte man zum Beispiel die ersten 20 Zeilen der Spalten 1 und 5 ausgegeben haben:
+```{r}
+tipp_wm[1:20, c(1, 5)]
+```
+
+## Matrix
+Zwei zumsammengebundene Vektoren ergeben nicht zwingend einen tibble. Wenn die beiden Vektoren den selben Datentyp haben, kann man auch eine Matrix daraus machen. In der wissenschaftlichen Praxis wird das allerdings nur selten benötigt. Wir haben das lediglich bei der MANOVA verwendet. Wir schauen uns trotzdem drei verschiende Möglichkeiten an eine Matrix zu erstellen. Der Funktion `matrix()` übergibt man als erstes Argument alle gewünschten Werte. Mit `ncol` respektive `nrow` kann man dann die Anzahl der Spalten beziehungsweise Zeilen festlegen.
+```{r}
+matrix <- matrix(1:8, ncol = 2)
+```
+
+```{r, echo=FALSE}
+matrix
+```
+
+Alternativ kann man auch zwei Vekoren mit `cbind()` (column bind) Spaltenweise aneinander hängen.
+```{r}
+cbind(1:4, 
+      5:8)
+```
+
+Nach dem gleichen Prinzip kann `rbind()` (row bind) für zeilenweises Verbinden verwendet werden. 
+```{r}
+rbind(c("a", "b", "c"), 
+      c("d", "e", "f"))
+```
+
+Wie wir bereits beim Modellvergleich im Rahmen der hierarchischen Regression beobachtet haben, können mit `cbind()` und `rbind()` auch tibbles der gleichen Grösse aneinander gehängt werden. Der Zugriff auf Zeilen und Spalten innerhalb der Matrix funktioniert nur mit eckigen Klammern. Der Dollar-Operator funktioniert hier nicht, weil eine Matrix keine Spaltennamen hat. Auf die Ausführung von drei dimensionalen Matrizen -- den Arrays -- sei an dieser Stelle verzichtet. 
+
+## Liste
+Die allgemeinste Datenstruktur ist die Liste. In einer Liste kann man alles verstauen -- egal ob Vektoren, Matrizen oder tibbles.
+```{r}
+liste <- list(vec, matrix, big_five)
+```
+
+```{r, echo=FALSE}
+liste
+```
+
+Eine leere Liste der Länge 5 erstellt man mit 
+```{r}
+vector("list", 5)
+```
+
+Auf die Listenelemente erhält man mit doppelten eckigen Klammern Zugriff. Das zweite Listenelement (hier die Matrix) erhält man mit
+```{r}
+liste[[2]]
+```
+
+Weitergehend kann man direkt auf Element der Matrix im zweiten Listenelement zugreifen. Möchte man beispielsweise den Wert in der dritten Zeile und zweiten Spalte der Matrix ausgegeben haben, schreibt man
+```{r}
+liste[[2]][3, 2]
+```
+
+Listen sind extrem wichtig beim funktionalen Programmieren und nützlich beim Importieren mehrerer Datensätzen auf einmal. 
+
+## Umwandlungen von Datenstrukturen
+Datenstrukturen können grundsätzlich nur ineinander umgewandelt werden, wenn sämtliche notwendigen Eigenschaften erfüllt sind. Ein tibble, welcher in 2 Spalten verschiedene Datentypen beinhaltet, kann zum Beispiel **nicht** zu einer Matrix konvertiert werden. Beziehungsweise geht das schon, allerdings werden dann alle Werte zu einem Datentyp konvertiert.
+```{r eval = FALSE}
+as.matrix()
+as.data_frame()
+as.tibble()
+as.numeric()
+as.character()
+```
+
+# Funktionales Programmieren
+
+Die Möglichkeiten des funktionalen Programmierens werden nur exemplarisch angeschnitten, um eine Idee von den fortgeschrittenen Konzepten zu erhalten.
+
+## Funktionen erstellen
+Manchmal bietet es sich an, eigene Funktionen zu schreiben. Dabei schreibt man das Argument, was der Funktion weitergegeben werden soll, in die Klammern von `function()`. Erst einmal gespeichert, kann man die Funktion beliebig oft anwenden. Sie verhält sich dabei genau wie sämtliche anderen Funktionen in R, wie z.B. `mean(x)`. Angenommen man möchte eine Spalten logarithmieren, die Nullen beinhaltet. Um sinnvolle Werte zu erhalten, sollte man die gesamte Skala anheben - beispielsweise um 2. Unsere erste eigene Funktion `log_add_2()` (willkürlich gewählter Name) nimmt eine Zahl `x`, addiert sie mit 2 und logarithmiert diesen Wert anschließend.
+```{r}
+log_add_2 <- function(x) {
+  log(x + 2)
+}
+```
+
+Nun können wir die Funktion wie gewohnt anwenden.
+```{r}
+log_add_2(0)
+```
+
+### Non-standard evaluation
+Funktionen aus dem `tidyverse` stellen dabei eine Ausnahme dar. An dieser Stelle wird es leider sehr schnell komplex und kryptisch. Es sei nur erwähnt, damit bei Versuchen mit `tidyverse` Funktionen eigene Funktionen zu schreiben, kein Frust aufkommt. Haben wir zum Beispiel die einfache Aufgabe den Mittelwert und die Standardabweichung einer Variable in einem Datensatz zu berechnen, müssen wir so genannte quosures (`enquo()`) und doppelte Bang (`!!`) Operatoren benutzen, um die Aufgabe in Form einer Funktion zu automatisieren. 
+```{r}
+mean_var <- function(data, variable){
+  variable <- enquo(variable)
+  
+  data %>% 
+    summarise(Mittelwert = mean(!!variable),
+              SD = sd(!!variable))
+}
+```
+
+Dafür könnte man diese Funktion schön in einer Pipe verwenden.
+```{r}
+indonesisch %>% 
+  mean_var(Alter)
+```
+
+## Mappen 
+Der Kern von funktionalem Programmieren ist Automatisierung. Erinnern wir uns zurück an die Inferenzstatistik. Genauer gesagt an das Berechnen der Informationskriterien der Modelle der hierarchischen Regression mithilfe von `glance()`. Wir haben dort drei mal den Befehl ausführen müssen. Für jedes der drei Modelle einmal. Aber was, wenn wir 10 Prädiktoren sukzessive hinzufügen wollen würden? 10 mal Copy & Paste? Eine fehleranfällige und mühsame Vorgehensweise. Mit `map()` aus dem `purrr` Package (enhalten im `tidyverse`) kann man mit 3 Zeilen Code das selbe erreichen. Zuerst speichern wir dafür die drei Modelle in einer Liste.
+```{r}
+modelle <- list(model1, model2, model3)
+```
+
+Nun greifen wir in gewohnter `tidyverse` Manier auf die Liste zu. Die Funktion `map()` wendet nun auf jedes Listenelement die Funktion `glance()` an. Nicht vergessen `broom` vorher zu laden.
+```{r}
+modelle %>% 
+  map(glance)
+```
+Wenn wir nun wie in unserer Copy & Paste Lösung einen tibble und keine Liste zurück haben wollen, ändern wir `map()` einfach zu `map_df()`.
+```{r}
+modelle %>% 
+  map_df(glance)
+```
+
+Alternativ könnte man natürlich auch die apply-Familie aus `base R` oder klassische for oder while Schleifen verwenden. 
+
+## Nesten
+Wirklich mächtig wird `map()` allerdings erst in Kombination mit `nest()`. Zu Beginn ist es durchaus abstrakt und gewöhnungsbedürftig. Aber durch das Nesten kann man gruppenweise mappen. Nehmen wir uns das Beispiel unseres `repeated` Datensatzes. Es gibt 6 verschiedene Gruppen - A bis F. Was, wenn wir nun innerhalb jeder dieser Gruppen einen F-Test zum Vergleich der Varianzen von `iq` und `kreativitaet` machen möchten? Normaler Weise müsste man sechs mal filtern und anschließend die Funktion F-Test aufrufen. Mit `nest()` benötigt man bloss 4 Zeilen Code.
+```{r}
+repeated %>% 
+  nest(-gruppe) %>% 
+  mutate(f_tests = map(data, ~ var.test(.$iq, .$kreativitaet)),
+         ergebnisse = map(f_tests, tidy)) %>% 
+  unnest(ergebnisse)
+```
+
+Auf die selbe Art könnte man auch mehrere hundert Regressionen ohne auch nur eine zusätzliche Zeile Code rechnen. 
+
+# Transformation einer Ergebnismatrix
+Angenommen wir machen eine Online Umfrage mit einem kleinem Mathetest bestehend aus drei Aufgaben. Die richtigen Antworten sind 3, 2 und 4. Es nehmen vier Personen Teil. Unser Datensatz `survey` würde in etwas so aussehen
+```{r, echo=FALSE}
+survey <- tibble(
+  I1 = c(3, 2, 3, 1),
+  I2 = c(2, 2, 2, 1),
+  I3 = c(4, 1, 4, 4)
+) 
+
+survey
+```
+
+Das bringt uns allerdings herzlich wenig zur Auswertung. Was wir möchten, sind die Informationen pro Item und Person, ob die Aufgabe korrekt gelöst wurde. Mit der Funktion `transform_binary()` des `rBasics` Packages, kann man anhand eines Antwortvektors, der die richtigen Antworten enthält, die Matrix transformieren. 
+```{r}
+antwortvec <- c(3, 2, 4)
+
+transform_binary(survey, antwortvec)
+```
+
+Falls sowohl Zahlen, als auch Characters als richtige Antworten in Frage kommen, kann man der Funktion ebenfalls einen einzeiligen tibble übergeben. Wenn wir also die Umfrage in der Form haben
+```{r, echo=FALSE}
+survey <- tibble(
+  I1 = c(3, 2, 3, 1),
+  I2 = c("Apfel", "Banane", "Erdbeere", "Apfel"),
+  I3 = c(4, 1, 4, 4)
+) 
+survey
+```
+
+die richtigen Antworten 3, Apfel und 4 sind
+```{r}
+antwortvec <- tibble(3, "Apfel", 4)
+```
+
+erhält man mit dem gleichen Befehl das Ergebnis.
+```{r}
+transform_binary(survey, antwortvec)
+```
+

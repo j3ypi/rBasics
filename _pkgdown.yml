@@ -1,0 +1,71 @@
+url: https://github.com/j3ypi/rBasics
+
+authors:
+  Jan Philipp Nolte:
+    url: https://github.com/j3ypi
+
+reference:
+  - title: Datensätze
+    contents:
+    - starts_with("tipp")
+    - starts_with("big")
+    - starts_with("indo")
+    - starts_with("rep")
+  - title: Funktionen
+    contents:
+    - starts_with("trans")
+    - starts_with("gg")
+    - starts_with("scree")
+
+navbar:
+  structure:
+    left:
+    - home
+    - news
+    - articles
+    - pdfs
+    - reference
+    right: github
+  components:
+    home:
+      icon: fa-home fa-lg
+      href: index.html
+    reference:
+      text: Funktionen
+      href: reference/index.html
+    articles:
+      text: Tutorials
+      menu:
+      - text: Setup
+        href: articles/01_Setup.html
+      - text: Datenvorbereitung
+        href: articles/02_Datenvorbereitung.html
+      - text: Deskriptive Statistik
+        href: articles/03_Deskriptive_Statistik.html
+      - text: Visualisierungen
+        href: articles/04_Visualisierungen.html
+      - text: Inferenzstatistik
+        href: articles/05_Inferenzstatistik.html
+      - text: Extras
+        href: articles/06_Extras.html
+    pdfs:
+      text: PDFs
+      menu:
+      - text: Setup
+        href: pdfs/01_Setup.pdf
+      - text: Datenvorbereitung
+        href: pdfs/02_Datenvorbereitung.pdf
+      - text: Deskriptive Statistik
+        href: pdfs/03_Deskriptive_Statistik.pdf
+      - text: Visualisierungen
+        href: pdfs/04_Visualisierungen.pdf
+      - text: Inferenzstatistik
+        href: pdfs/05_Inferenzstatistik.pdf
+      - text: Extras
+        href: pdfs/06_Extras.pdf
+    news:
+      text: News
+      href: news/index.html
+    github:
+      icon: fa-github fa-lg
+      href: https://github.com/j3ypi/rBasics

@@ -12,7 +12,7 @@ transform_binary(df, answers)
 \item{answers}{Antwortvektor als Vektor / einzeiliger tibble.}
 }
 \value{
-answer Ergebnismatrix als tibble.
+Ergebnismatrix als tibble
 }
 \description{
 Erstellt eine binaere Ergebnismatrix, in der die richtigen Antworten mit einer 1 und die falschen mit einer 0 markiert sind.
@@ -20,9 +20,10 @@ Falls die richtigen Antworten sowohl Numerics als auch Characters beinhalten, ka
 Fehlende Werte werden als falsch beantwortet gewertet.
 }
 \examples{
+NOT RUN:
 ########################
 # Identische Datentypen
-soscisurvey <- tibble(
+soscisurvey <- data.frame(
  I1 = c(3, 2, 3, 1),
  I2 = c(2, 2, 2, 1),
  I3 = c(4, 1, 4, 4)
@@ -31,11 +32,12 @@ antwortvec <- c(3, 2, 4)
 transform_binary(soscisurvey, antwortvec)
 ########################
 # Verschiedene Datentypen
-soscisurvey <- tibble(
+soscisurvey <- data.frame(
  I1 = c(3, 2, 3, 1),
  I2 = c("Apfel", "Banane", "Erdbeere", "Apfel"),
  I3 = c(4, 1, NA, 4)
 )
-antwortvec <- tibble(3, "Apfel", 4)
+antwortvec <- data.frame(3, "Apfel", 4)
 transform_binary(soscisurvey, antwortvec)
+END NOT RUN:
 }

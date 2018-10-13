@@ -1,0 +1,14 @@
+pandoc: 1.19.2.1
+pkgdown: 1.1.0
+pkgdown_sha: ~
+articles:
+  01_Setup: 01_Setup.html
+  02_Datenvorbereitung: 02_Datenvorbereitung.html
+  03_Deskriptive_Statistik: 03_Deskriptive_Statistik.html
+  04_Visualisierungen: 04_Visualisierungen.html
+  05_Inferenzstatistik: 05_Inferenzstatistik.html
+  06_Extras: 06_Extras.html
+urls:
+  reference: https://github.com/j3ypi/rBasics/reference
+  article: https://github.com/j3ypi/rBasics/articles
+
