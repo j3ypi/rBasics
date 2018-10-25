@@ -20,7 +20,7 @@ Falls die richtigen Antworten sowohl Numerics als auch Characters beinhalten, ka
 Fehlende Werte werden als falsch beantwortet gewertet.
 }
 \examples{
-NOT RUN:
+\dontrun{
 ########################
 # Identische Datentypen
 soscisurvey <- data.frame(
@@ -39,5 +39,5 @@ soscisurvey <- data.frame(
 )
 antwortvec <- data.frame(3, "Apfel", 4)
 transform_binary(soscisurvey, antwortvec)
-END NOT RUN:
+}
 }

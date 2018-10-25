@@ -1,6 +1,6 @@
 ---
 title: "Extras"
-subtitle: "R für empirische Wissenschaften v1.0.3"
+subtitle: "R für empirische Wissenschaften v1.0.2"
 author: "Jan Philipp Nolte"
 date: ''
 output:
@@ -61,7 +61,7 @@ model3 <- big_five %>%
 In den letzten fünf Kapiteln hast Du bereits alles dringend Nötige zum Verarbeiten von Daten kennengelernt. Allerdings wurden einige Konzepte bisher aus didaktischen Gründen ohne Erklärung verwendet. Hier werden diese Konzepte sowie andere für das Verständnis von R wichtigen Dinge genauer betrachtet. Außerdem werden mit [funktionalem Programmieren][Funktionales Programmieren] forgeschrittene Konzepte vorgestellt. Zum Schluss wird noch eine Funktion erklärt, die eine Ergenismatrix zu einer binären Antwortmatrix formatiert. Also wenn man zum Beispiel in einem Online Fragebogen Aufgaben abfragt, die eine richtige Lösung haben, sind diese im rohen Datensatz in einem unbrauchbaren Format. Wenn in Aufgabe 1 die Zahl 42 herauskommt und 3 Personen den Fragebogen beantwortet haben, mit 42, 34 und 5, enthält der Rohdatensatz keinerlei Information darüber, dass nur die erste Person richtig geantwortet hat. Die Funktion zur Transformation würde daraus 1, 0, 0 machen. Ein Beispiel wird später gegeben. 
 
 # Verschiedene Datenstrukturen
-Wie bei den bereits kennengelernten Datentypen gibt es auch verschiedene Strukturen, die jeweils andere Eigenschaften haben. In den vorherigen Kapiteln ist oft das Wort tibble gefallen. Wenn Du bereits die eine oder andere Erfahrung mit R gemacht hast, kennst du wahrscheinlich eher data.frames. Was diese Datenstruktur ausmacht und wie man verschiedene Datenstrukturen innerhalb von R direkt erstellen kann (ohne einlesen eines bereits bestehenden Datensatzes), wird im folgenden erklärt. 
+Wie bei den bereits kennengelernten Datentypen gibt es auch verschiedene Strukturen, die jeweils andere Eigenschaften haben. In den vorherigen Kapiteln ist oft das Wort tibble gefallen. Wenn Du bereits die eine oder andere Erfahrung mit R gemacht hast, kennst Du wahrscheinlich eher data.frames. Was diese Datenstruktur ausmacht und wie man verschiedene Datenstrukturen innerhalb von R direkt erstellen kann (ohne Einlesen eines bereits bestehenden Datensatzes), wird im Folgenden erklärt. 
 
 ## tibble und data.frame
 Die vielleicht nützlichste Datenstruktur für den Wissenschaftler ist der tibble. Warum? Weil, obwohl innerhalb einer Spalte der selbe Datentyp benutzt werden muss, verschiedene Datentypen in verschiedenen Spalten sein dürfen. Man sollte nach Möglichkeit immer tibbles anstelle der veralteten data.frames benutzen, allerdings gibt es einige wenige alte Funktionen, die mit tibbles nicht kompatibel sind. Wie man Datenstrukturen umformt, sehen wir später. Die genauen Unterschiede und Vorteile von tibbles können [hier](https://blog.rstudio.com/2016/03/24/tibble-1-0-0/) nachgelesen werden. 
@@ -108,7 +108,7 @@ seq_along(c("a", "b", "c"))
 ```
 
 ### Eckige Klammern
-Wenn man auf Elemente innerhalb eines Vektor zugreifen möchte, kann man dies mit eckigen Klammern. Das dritte Element des Vektors `vec` 
+Wenn man auf Elemente innerhalb eines Vektor zugreifen möchte, erzielt man dies mit eckigen Klammern. Das dritte Element des Vektors `vec` 
 ```{r}
 vec <- c(1, 2, 3, 4)
 ```
@@ -149,7 +149,7 @@ tipp_wm[1:20, c(1, 5)]
 ```
 
 ## Matrix
-Zwei zumsammengebundene Vektoren ergeben nicht zwingend einen tibble. Wenn die beiden Vektoren den selben Datentyp haben, kann man auch eine Matrix daraus machen. In der wissenschaftlichen Praxis wird das allerdings nur selten benötigt. Wir haben das lediglich bei der MANOVA verwendet. Wir schauen uns trotzdem drei verschiende Möglichkeiten an eine Matrix zu erstellen. Der Funktion `matrix()` übergibt man als erstes Argument alle gewünschten Werte. Mit `ncol` respektive `nrow` kann man dann die Anzahl der Spalten beziehungsweise Zeilen festlegen.
+Zwei zumsammengebundene Vektoren ergeben nicht zwingend einen tibble. Wenn die beiden Vektoren den selben Datentyp haben, kann man auch eine Matrix daraus machen. In der wissenschaftlichen Praxis wird das allerdings nur selten benötigt. Wir haben das lediglich bei der MANOVA verwendet. Wir schauen uns trotzdem drei verschiedene Möglichkeiten an, eine Matrix zu erstellen. Der Funktion `matrix()` übergibt man als erstes Argument alle gewünschten Werte. Mit `ncol` respektive `nrow` kann man dann die Anzahl der Spalten beziehungsweise Zeilen festlegen.
 ```{r}
 matrix <- matrix(1:8, ncol = 2)
 ```
@@ -158,7 +158,7 @@ matrix <- matrix(1:8, ncol = 2)
 matrix
 ```
 
-Alternativ kann man auch zwei Vekoren mit `cbind()` (column bind) Spaltenweise aneinander hängen.
+Alternativ kann man auch zwei Vektoren mit `cbind()` (column bind) Spaltenweise aneinander hängen.
 ```{r}
 cbind(1:4, 
       5:8)
@@ -192,7 +192,7 @@ Auf die Listenelemente erhält man mit doppelten eckigen Klammern Zugriff. Das z
 liste[[2]]
 ```
 
-Weitergehend kann man direkt auf Element der Matrix im zweiten Listenelement zugreifen. Möchte man beispielsweise den Wert in der dritten Zeile und zweiten Spalte der Matrix ausgegeben haben, schreibt man
+Weitergehend kann man direkt auf Elemente der Matrix im zweiten Listenelement zugreifen. Möchte man beispielsweise den Wert in der dritten Zeile und zweiten Spalte der Matrix ausgegeben haben, schreibt man
 ```{r}
 liste[[2]][3, 2]
 ```
@@ -214,7 +214,7 @@ as.character()
 Die Möglichkeiten des funktionalen Programmierens werden nur exemplarisch angeschnitten, um eine Idee von den fortgeschrittenen Konzepten zu erhalten.
 
 ## Funktionen erstellen
-Manchmal bietet es sich an, eigene Funktionen zu schreiben. Dabei schreibt man das Argument, was der Funktion weitergegeben werden soll, in die Klammern von `function()`. Erst einmal gespeichert, kann man die Funktion beliebig oft anwenden. Sie verhält sich dabei genau wie sämtliche anderen Funktionen in R, wie z.B. `mean(x)`. Angenommen man möchte eine Spalten logarithmieren, die Nullen beinhaltet. Um sinnvolle Werte zu erhalten, sollte man die gesamte Skala anheben - beispielsweise um 2. Unsere erste eigene Funktion `log_add_2()` (willkürlich gewählter Name) nimmt eine Zahl `x`, addiert sie mit 2 und logarithmiert diesen Wert anschließend.
+Manchmal bietet es sich an, eigene Funktionen zu schreiben. Dabei schreibt man das Argument, was der Funktion weitergegeben werden soll, in die Klammern von `function()`. Erst einmal gespeichert, kann man die Funktion beliebig oft anwenden. Sie verhält sich dabei genau wie sämtliche anderen Funktionen in R, wie z.B. `mean(x)`. Angenommen, man möchte eine Spalte logarithmieren, die Nullen beinhaltet: Um sinnvolle Werte zu erhalten, sollte man die gesamte Skala anheben -- beispielsweise um 2. Unsere erste eigene Funktion `log_add_2()` (willkürlich gewählter Name) nimmt eine Zahl `x`, addiert sie mit 2 und logarithmiert diesen Wert anschließend.
 ```{r}
 log_add_2 <- function(x) {
   log(x + 2)
@@ -227,7 +227,7 @@ log_add_2(0)
 ```
 
 ### Non-standard evaluation
-Funktionen aus dem `tidyverse` stellen dabei eine Ausnahme dar. An dieser Stelle wird es leider sehr schnell komplex und kryptisch. Es sei nur erwähnt, damit bei Versuchen mit `tidyverse` Funktionen eigene Funktionen zu schreiben, kein Frust aufkommt. Haben wir zum Beispiel die einfache Aufgabe den Mittelwert und die Standardabweichung einer Variable in einem Datensatz zu berechnen, müssen wir so genannte quosures (`enquo()`) und doppelte Bang (`!!`) Operatoren benutzen, um die Aufgabe in Form einer Funktion zu automatisieren. 
+Funktionen aus dem `tidyverse` stellen dabei eine Ausnahme dar. An dieser Stelle wird es leider sehr schnell komplex und kryptisch. Es sei nur erwähnt, damit bei Versuchen mit `tidyverse` Funktionen eigene Funktionen zu schreiben, kein Frust aufkommt. Haben wir zum Beispiel die einfache Aufgabe, den Mittelwert und die Standardabweichung einer Variablen in einem Datensatz zu berechnen, müssen wir so genannte quosures (`enquo()`) und doppelte Bang (`!!`) Operatoren benutzen, um die Aufgabe in Form einer Funktion zu automatisieren. 
 ```{r}
 mean_var <- function(data, variable){
   variable <- enquo(variable)
@@ -245,7 +245,7 @@ indonesisch %>%
 ```
 
 ## Mappen 
-Der Kern von funktionalem Programmieren ist Automatisierung. Erinnern wir uns zurück an die Inferenzstatistik. Genauer gesagt an das Berechnen der Informationskriterien der Modelle der hierarchischen Regression mithilfe von `glance()`. Wir haben dort drei mal den Befehl ausführen müssen. Für jedes der drei Modelle einmal. Aber was, wenn wir 10 Prädiktoren sukzessive hinzufügen wollen würden? 10 mal Copy & Paste? Eine fehleranfällige und mühsame Vorgehensweise. Mit `map()` aus dem `purrr` Package (enhalten im `tidyverse`) kann man mit 3 Zeilen Code das selbe erreichen. Zuerst speichern wir dafür die drei Modelle in einer Liste.
+Der Kern von funktionalem Programmieren ist Automatisierung. Erinnern wir uns zurück an die Inferenzstatistik. Genauer gesagt an das Berechnen der Informationskriterien der Modelle der hierarchischen Regression mithilfe von `glance()`. Wir haben dort 3 mal den Befehl ausführen müssen. Für jedes der 3 Modelle einmal. Aber was, wenn wir 10 Prädiktoren sukzessive hinzufügen wollen würden? 10 mal Copy & Paste? Eine fehleranfällige und mühsame Vorgehensweise. Mit `map()` aus dem `purrr` Package (enhalten im `tidyverse`) kann man mit 3 Zeilen Code das selbe erreichen. Zuerst speichern wir dafür die 3 Modelle in einer Liste.
 ```{r}
 modelle <- list(model1, model2, model3)
 ```
@@ -264,7 +264,7 @@ modelle %>%
 Alternativ könnte man natürlich auch die apply-Familie aus `base R` oder klassische for oder while Schleifen verwenden. 
 
 ## Nesten
-Wirklich mächtig wird `map()` allerdings erst in Kombination mit `nest()`. Zu Beginn ist es durchaus abstrakt und gewöhnungsbedürftig. Aber durch das Nesten kann man gruppenweise mappen. Nehmen wir uns das Beispiel unseres `repeated` Datensatzes. Es gibt 6 verschiedene Gruppen - A bis F. Was, wenn wir nun innerhalb jeder dieser Gruppen einen F-Test zum Vergleich der Varianzen von `iq` und `kreativitaet` machen möchten? Normaler Weise müsste man sechs mal filtern und anschließend die Funktion F-Test aufrufen. Mit `nest()` benötigt man bloss 4 Zeilen Code.
+Wirklich mächtig wird `map()` allerdings erst in Kombination mit `nest()`. Zu Beginn ist es durchaus abstrakt und gewöhnungsbedürftig. Aber durch das Nesten kann man gruppenweise mappen. Nehmen wir uns das Beispiel unseres `repeated` Datensatzes. Es gibt 6 verschiedene Gruppen - A bis F. Was, wenn wir nun innerhalb jeder dieser Gruppen einen F-Test zum Vergleich der Varianzen von `iq` und `kreativitaet` machen möchten? Normalerweise müsste man 6 mal filtern und anschließend die Funktion F-Test aufrufen. Mit `nest()` benötigt man bloss 4 Zeilen Code.
 ```{r}
 repeated %>% 
   nest(-gruppe) %>% 
@@ -276,7 +276,7 @@ repeated %>%
 Auf die selbe Art könnte man auch mehrere hundert Regressionen ohne auch nur eine zusätzliche Zeile Code rechnen. 
 
 # Transformation einer Ergebnismatrix
-Angenommen wir machen eine Online Umfrage mit einem kleinem Mathetest bestehend aus drei Aufgaben. Die richtigen Antworten sind 3, 2 und 4. Es nehmen vier Personen Teil. Unser Datensatz `survey` würde in etwas so aussehen
+Angenommen wir machen eine Online-Umfrage mit einem kleinen Mathetest bestehend aus 3 Aufgaben. Die richtigen Antworten sind 3, 2 und 4. Es nehmen 4 Personen teil. Unser Datensatz `survey` würde in etwas so aussehen
 ```{r, echo=FALSE}
 survey <- tibble(
   I1 = c(3, 2, 3, 1),
@@ -294,7 +294,7 @@ antwortvec <- c(3, 2, 4)
 transform_binary(survey, antwortvec)
 ```
 
-Falls sowohl Zahlen, als auch Characters als richtige Antworten in Frage kommen, kann man der Funktion ebenfalls einen einzeiligen tibble übergeben. Wenn wir also die Umfrage in der Form haben
+Falls sowohl Zahlen als auch Characters als richtige Antworten in Frage kommen, kann man der Funktion ebenfalls einen einzeiligen tibble übergeben. Wenn wir also die Umfrage in der Form haben
 ```{r, echo=FALSE}
 survey <- tibble(
   I1 = c(3, 2, 3, 1),
@@ -304,7 +304,7 @@ survey <- tibble(
 survey
 ```
 
-die richtigen Antworten 3, Apfel und 4 sind
+und die richtigen Antworten 3, Apfel und 4 sind
 ```{r}
 antwortvec <- tibble(3, "Apfel", 4)
 ```

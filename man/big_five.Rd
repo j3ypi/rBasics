@@ -6,14 +6,14 @@
 \title{BIG 5 Persoenlichkeitstest}
 \format{Ein tible mit 200 Zeilen and 17 Spalten:
 \describe{
-  \item{Alter}{Alter in Jahren}
-  \item{Geschlecht}{Geschlecht}
+  \item{Alter}{Alter in Lebensjahren}
+  \item{Geschlecht}{f = weiblich, m = maennlich}
   \item{Herkunft}{Herkunftsland}
-  \item{Extraversion}{Auspraegung von Extraversion}
-  \item{Neurotizismus}{Auspraegung von Neurotizismus}
-  \item{Vertraeglichkeit}{Auspraegung von Vertraeglichkeit}
-  \item{Gewissenhaftigkeit}{Auspraegung von Gewissenhaftigkeit}
-  \item{O1-O10}{Item 1-10 zu Offenheit}
+  \item{Extraversion}{Durchschnittliche Auspraegung von Extraversion}
+  \item{Neurotizismus}{Durchschnittliche Auspraegung von Neurotizismus}
+  \item{Vertraeglichkeit}{Durchschnittliche Auspraegung von Vertraeglichkeit}
+  \item{Gewissenhaftigkeit}{Durchschnittliche Auspraegung von Gewissenhaftigkeit}
+  \item{O1-O10}{Item 1-10 zur Auspraegung von Offenheit}
 }}
 \source{
 \url{Research}

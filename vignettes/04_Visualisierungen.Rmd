@@ -1,6 +1,6 @@
 ---
 title: "Visualisierungen"
-subtitle: "R für empirische Wissenschaften v1.0.3"
+subtitle: "R für empirische Wissenschaften v1.0.2"
 author: "Jan Philipp Nolte"
 date: ''
 output:
@@ -79,7 +79,7 @@ plot <- ggbarplot(data = df,
                  y = "Gesamt")
 ```
 
-Diesen gespeicherten Graphen können wir nun wie bereits erwähnt, der Funktion `ggpar()` übergeben. Die Achsenbeschriftungen passen wir mit `xlab` respektive `ylab` an, die Größe der Schrift mit `font.x` und `font.y`, den Winkel der Personennamen mit `x.text.angle` und die Abstände auf der y-Achse mit `yticks.by`. Im Laufe dieses Kapitels werden wir noch andere Argumente für `ggpar()` kennenlernen. Für eine vollständige Liste, kannst Du einfach `?ggpar` ausführen. Gerade das Anpassen der Schriftgröße ist extrem wichtig beim Einfügen in Paper oder Abschlussarbeiten, da die Schriftgröße innerhalb des Graphen in der Regel nicht stark von der des Textes abweichen darf. 
+Diesen gespeicherten Graphen können wir nun, wie bereits erwähnt, der Funktion `ggpar()` übergeben. Die Achsenbeschriftungen passen wir mit `xlab` respektive `ylab` an, die Größe der Schrift mit `font.x` und `font.y`, den Winkel der Personennamen mit `x.text.angle` und die Abstände auf der y-Achse mit `yticks.by`. Im Laufe dieses Kapitels werden wir noch andere Argumente für `ggpar()` kennenlernen. Für eine vollständige Liste, kannst Du einfach `?ggpar` ausführen. Gerade das Anpassen der Schriftgröße ist extrem wichtig beim Einfügen in Paper oder Abschlussarbeiten, da die Schriftgröße innerhalb des Graphen in der Regel nicht stark von der des Textes abweichen darf. 
 ```{r, echo=TRUE, out.width='60%', fig.height= 4, fig.width=6, fig.align='center'}
 ggpar(p = plot, 
       xlab = "Personen", 
@@ -90,7 +90,7 @@ ggpar(p = plot,
       yticks.by = 10)
 ```
 
-Sieht schon schöner aus. Aber auch in der Funktion `ggparplot()` selber, können wir einige Anpassungen vornehmen. Wenn man die Reihenfolge verändern möchte, benutzt man `order` und für das Verändern der Säulenbreite `width`.
+Das sieht jetzt schon schöner aus. Aber auch in der Funktion `ggparplot()` selber, können wir einige Anpassungen vornehmen. Wenn man die Reihenfolge verändern möchte, benutzt man `order` und für das Verändern der Säulenbreite `width`.
 ```{r, echo=TRUE, out.width='60%', fig.height= 4, fig.width=6, fig.align='center'}
 plot <- ggbarplot(data = df, 
           x = "Person",
@@ -131,7 +131,7 @@ paired <- ggbarplot(data = indonesisch,
           position = position_dodge(0.8))
 ```
 
-Bis auf die Legende schon wunderschön. Zum Anpassen mit `ggpar()` speichern wir den Graphen als `paired` ab. Das Argument `ylim()` definiert die y-Achse von 0 bis 5, `legend` die Position (erster Wert für Höhe auf x-Achse, zweiter für y-Achse), `legend.title` für den Titel der legende und schließlich `font.legend` für die so wichtige Schriftgröße.
+Bis auf die Legende schon wunderschön. Zum Anpassen mit `ggpar()` speichern wir den Graphen als `paired` ab. Das Argument `ylim()` definiert die y-Achse von 0 bis 5, `legend` die Position (erster Wert für Höhe auf x-Achse, zweiter für y-Achse), `legend.title` für den Titel der Legende und schließlich `font.legend` für die so wichtige Schriftgröße.
 ```{r, echo=TRUE, out.width='60%', fig.height= 4, fig.width=6, fig.align='center'}
 ggpar(p = paired,
       ylim = c(0, 5),
@@ -148,7 +148,7 @@ ggscatter(data = big_five,
           y = "Neurotizismus")
 ```
 
-Man kann auf einfache Art und Weise zusätzliche Informationen wie eine Regressiongerade, das Konfidenzintervall oder einen Korrelationskoeffezienten hinzufügen. Das Argument `cor.method` für die Art der Korrelation, `conf.int` für das Konfidenzintervall, `add` für die Regressionsgerade, `add.params` zum anpassen der Regressionsgerade (auch hier müssen die Argumente genau in dieser Form innerhalb von `list()` stehen), `size` für die Größe der Punkte, `shape` für die Form und schließlich `color` für die Farbe. 
+Man kann auf einfache Art und Weise zusätzliche Informationen wie eine Regressiongerade, das Konfidenzintervall oder einen Korrelationskoeffezienten hinzufügen. Das Argument `cor.method` für die Art der Korrelation, `conf.int` für das Konfidenzintervall, `add` für die Regressionsgerade, `add.params` zum Anpassen der Regressionsgerade (auch hier müssen die Argumente genau in dieser Form innerhalb von `list()` stehen), `size` für die Größe der Punkte, `shape` für die Form und schließlich `color` für die Farbe. 
 ```{r, echo=TRUE, out.width='60%', fig.height= 4, fig.width=6, fig.align='center'}
 ggscatter(data = big_five, 
           x = "Extraversion", 
@@ -183,7 +183,7 @@ ggboxplot(data = big_five,
 ```
 
 # Histogramm
-Histogramme benötigen kein `y` Argument, da dort die Häufigkeiten abgebildet sind. Das Argument `bins` ist besonders wichtig, da die dargestellt Informationen über die Häufigkeiten in Abhängigkeit der Anzahl der bins (Säulen) stark variieren kann. 
+Histogramme benötigen kein `y` Argument, da dort die Häufigkeiten abgebildet sind. Das Argument `bins` ist besonders wichtig, da die dargestellten Informationen über die Häufigkeiten in Abhängigkeit der Anzahl der bins (Säulen) stark variieren können. 
 ```{r, echo=TRUE, out.width='60%', fig.height= 4, fig.width=6, fig.align='center'}
 gghistogram(data = big_five, 
             x = "Neurotizismus",
@@ -199,7 +199,7 @@ ggline(data = df,
 ```
 
 ## ANOVA Plot
-Eine Besonderheit stellt hierbei der *ANOVA Plot* dar, was nichts anderes als ein einfacher Mittelwertsvergleich ist. Exemplarisch sei dies an der Unterschiedlichen Ausprägung von Selbsttranszendenz zwischen den Geschlechtern innerhalb der Familienstände gezeigt. Das Argument `linetype` ändert wenig überraschend die Art der Linie. Entscheidend ist das Argument `add`, weil uns nur die Mittelwerte interessieren. Das Argument `size` verändert optional die größte der Linien.
+Eine Besonderheit stellt hierbei der *ANOVA Plot* dar, was nichts anderes als ein einfacher Mittelwertsvergleich ist. Exemplarisch sei dies an der unterschiedlichen Ausprägung von Selbsttranszendenz zwischen den Geschlechtern innerhalb der Familienstände gezeigt. Das Argument `linetype` ändert wenig überraschend die Art der Linie. Entscheidend ist das Argument `add`, weil uns nur die Mittelwerte interessieren. Das Argument `size` verändert optional die Dicke der Linien.
 ```{r, echo=TRUE, out.width='60%', fig.height= 4, fig.width=6, fig.align='center'}
 ggline(data = indonesisch,
        x = "Geschlecht",

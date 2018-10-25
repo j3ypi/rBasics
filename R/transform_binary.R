@@ -7,7 +7,7 @@
 #' @param answers Antwortvektor als Vektor / einzeiliger tibble.
 #' @return Ergebnismatrix als tibble
 #' @examples
-#' NOT RUN:
+#' \dontrun{
 #' ########################
 #' # Identische Datentypen
 #' soscisurvey <- data.frame(
@@ -26,7 +26,7 @@
 #' )
 #' antwortvec <- data.frame(3, "Apfel", 4)
 #' transform_binary(soscisurvey, antwortvec)
-#' END NOT RUN:
+#' }
 #' @export
 transform_binary <- function(df, answers){
 

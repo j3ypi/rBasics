@@ -100,7 +100,7 @@
   </ul>
 </li>
 <li>
-  <a href="../reference/index.html">Funktionen</a>
+  <a href="../reference/index.html">Dokumentation</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -123,7 +123,7 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Inferenzstatistik</h1>
-            <h3 class="subtitle">R für empirische Wissenschaften v1.0.3</h3>
+            <h3 class="subtitle">R für empirische Wissenschaften v1.0.2</h3>
                         <h4 class="author">Jan Philipp Nolte</h4>
             
       
@@ -145,7 +145,7 @@
 <a href="#stichprobenplanung-und-power" class="anchor"></a>Stichprobenplanung und Power</h1>
 <p>Sowohl für die Stichprobenplanung als auch für die Power-Berechenung benötigen wir das Package <code>pwr</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pwr)</code></pre></div>
-<p>Möchten wir nun zum Beispiel die optimale Stichprobengröße für eine ANOVA mit zwei Gruppen <code>k</code>, einer erwarteten Effektstärke <code>f</code> von .3, einem <span class="math inline">\(\alpha\)</span>-Niveau von 5% bei einer Power von 0.8 erhalten, benutzen wir <code><a href="http://www.rdocumentation.org/packages/pwr/topics/pwr.anova.test">pwr.anova.test()</a></code> und setzen ein.</p>
+<p>Möchten wir nun zum Beispiel die optimale Stichprobengröße für eine ANOVA mit zwei Gruppen <code>k</code>, einer erwarteten Effektstärke <code>f</code> von .3 und einem <span class="math inline">\(\alpha\)</span>-Niveau von 5% bei einer Power von 0.8 erhalten, benutzen wir <code><a href="http://www.rdocumentation.org/packages/pwr/topics/pwr.anova.test">pwr.anova.test()</a></code> und setzen ein.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/pwr/topics/pwr.anova.test">pwr.anova.test</a></span>(<span class="dt">k =</span> <span class="dv">2</span>,  
                <span class="dt">f =</span> <span class="fl">0.3</span>, 
                <span class="dt">sig.level =</span> <span class="fl">0.05</span>,
@@ -180,7 +180,7 @@
 <div id="exkurs-dollar-operator" class="section level1">
 <h1 class="hasAnchor">
 <a href="#exkurs-dollar-operator" class="anchor"></a>Exkurs: Dollar-Operator</h1>
-<p>Während der Inferenzstatistik lässt es sich leider nicht vermeiden, ab und an das Dollarzeichen zu verwenden, um eine Spalte des Datensatzes auszuwählen. Warum geht es hier nicht einfach zuvor mit <code>select()</code>? Schauen wir uns mal genauer an, was die beiden Befehle jeweils zurück geben.</p>
+<p>Während der Inferenzstatistik lässt es sich leider nicht vermeiden, ab und an das Dollarzeichen zu verwenden, um eine Spalte des Datensatzes auszuwählen. Warum geht es hier nicht einfach zuvor mit <code>select()</code>? Schauen wir uns mal genauer an, was die beiden Befehle jeweils zurückgeben.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tipp_wm <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(Person)</code></pre></div>
 <pre><code>## # A tibble: 384 x 1
@@ -223,14 +223,14 @@
 <div id="shapiro-wilks-test" class="section level3">
 <h3 class="hasAnchor">
 <a href="#shapiro-wilks-test" class="anchor"></a>Shapiro-Wilks Test</h3>
-<p>Alternativ kann auch der Shapiro-Wilks test verwendet werden. Hier verwenden wir zum ersten mal die Dollar-Syntax. Der Funktion übergeben wir die Spalte <code>Extraversion</code> aus dem Datensatz <code>big_five</code>.</p>
+<p>Alternativ kann auch der Shapiro-Wilks Test verwendet werden. Hier verwenden wir zum ersten mal die Dollar-Syntax. Der Funktion übergeben wir die Spalte <code>Extraversion</code> aus dem Datensatz <code>big_five</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">shapiro.test</span>(big_five<span class="op">$</span>Extraversion)</code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  big_five$Extraversion
 ## W = 0.95715, p-value = 9.845e-06</code></pre>
-<p>Nun sieht der p-Wert etwas seltsam aus. Bei SPSS und Stata wird unter .001 nur noch &lt;.001 angezeigt. Bei R hingegen wird bis 2e-16, also <span class="math inline">\(2 \times 10^-16\)</span> (0.0000000000000002) differenziert.</p>
+<p>Nun sieht der p-Wert etwas seltsam aus. Bei SPSS und Stata wird unter .001 nur noch &lt;.001 angezeigt. In <code>base R</code> hingegen wird bis 2e-16, also <span class="math inline">\(2 \times 10^{-16}\)</span> (0.0000000000000002) differenziert. Mit dem <code>broom</code> Package gibt es keine Untergrenze.</p>
 </div>
 <div id="kolgomorov-smirnov-test" class="section level3">
 <h3 class="hasAnchor">
@@ -241,18 +241,18 @@
 ##  One-sample Kolmogorov-Smirnov test
 ## 
 ## data:  big_five$Extraversion
-## D = 2.8894, p-value &lt; 2.2e-16
+## D = 3.1342, p-value &lt; 2.2e-16
 ## alternative hypothesis: two-sided</code></pre>
 </div>
 </div>
 <div id="varianzhomogenitat" class="section level2">
 <h2 class="hasAnchor">
 <a href="#varianzhomogenitat" class="anchor"></a>Varianzhomogenität</h2>
-<p>Auch beim Testen der Varianzhomogenität gibt es drei bekannte Verfahren. Ab hier werden wir versuchen ein konsistentes Schema zum Testen zu entwickeln.</p>
+<p>Auch beim Testen der Varianzhomogenität gibt es drei bekannte Verfahren. Ab hier werden wir versuchen, ein konsistentes Schema zum Testen zu entwickeln.</p>
 <div id="f-test" class="section level3">
 <h3 class="hasAnchor">
 <a href="#f-test" class="anchor"></a>F-Test</h3>
-<p>Zuerst rufen wir den F-Test mit <code>var.test()</code> auf. Angenommen wir möchten Extraversion zwischen den Geschlechtern auf Varianzhomogenität prüfen. Getrennt werden die Variable durch eine sogenannte Tilde (~). Diese Schreibweise ist zwingend notwendig, wenn man als zweite Spalte eine kategorisierende Spalte wie Geschlecht (zwei Ausprägungsgrade) der Funktion übergibt. Um schön formatierte Ergebnisse zu erhalten, rufen wir zuletzt <code>tidy()</code> auf, welches eine Funktion aus dem bereits erwähnten <code>broom</code> Package ist, auf das wir ständig zurückgreifen werden. Zuerst müssen wir also das Package laden. Da wir wieder die Pipe verwenden, müssen wir selbstverständlich auch das <code>tidyverse</code> wieder laden.</p>
+<p>Zuerst rufen wir den F-Test mit <code>var.test()</code> auf. Angenommen wir möchten Extraversion zwischen den Geschlechtern auf Varianzhomogenität prüfen. Getrennt werden die Variablen durch eine sogenannte Tilde (~). Diese Schreibweise ist zwingend notwendig, wenn man als zweite Spalte eine kategorisierende Spalte wie Geschlecht (zwei Ausprägungsgrade) der Funktion übergibt. Um schön formatierte Ergebnisse zu erhalten, rufen wir zuletzt <code>tidy()</code> auf, welches eine Funktion aus dem bereits erwähnten <code>broom</code> Package ist, auf das wir ständig zurückgreifen werden. Zuerst müssen wir also das Package laden. Da wir wieder die Pipe verwenden, müssen wir selbstverständlich auch das <code>tidyverse</code> wieder laden.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
 <span class="kw">library</span>(tidyverse)</code></pre></div>
 <p>Nun können wir den F-Test rechnen.</p>
@@ -271,10 +271,10 @@
 <span class="st">  </span><span class="kw">tidy</span>()</code></pre></div>
 <pre><code>## Multiple parameters; naming those columns num.df, denom.df</code></pre>
 <pre><code>## # A tibble: 1 x 9
-##   estimate `num df` `denom df` statistic  p.value conf.low conf.high
-##      &lt;dbl&gt;    &lt;int&gt;      &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-## 1    0.258      199        199     0.258 3.55e-20    0.196     0.342
-## # ... with 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
+##   estimate `num df` `denom df` statistic  p.value conf.low conf.high method
+##      &lt;dbl&gt;    &lt;int&gt;      &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+## 1    0.258      199        199     0.258 3.55e-20    0.196     0.342 F tes~
+## # ... with 1 more variable: alternative &lt;chr&gt;</code></pre>
 </div>
 <div id="bartletts-test" class="section level3">
 <h3 class="hasAnchor">
@@ -322,10 +322,10 @@
        <span class="dt">var.equal =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">tidy</span>()</code></pre></div>
 <pre><code>## # A tibble: 1 x 9
-##   estimate1 estimate2 statistic p.value parameter conf.low conf.high
-##       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-## 1      3.05      3.11     -1.27   0.204       198   -0.162    0.0347
-## # ... with 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
+##   estimate1 estimate2 statistic p.value parameter conf.low conf.high method
+##       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+## 1      3.05      3.11     -1.27   0.204       198   -0.162    0.0347 " Two~
+## # ... with 1 more variable: alternative &lt;chr&gt;</code></pre>
 <p>Die Argumente <code>alternative</code> und <code>conf.level</code> können auch hier geändert werden. Entscheidend für einen abhängigen oder unabhängigen t-Test ist jedoch das <code>paired</code> Argument. Setze es auf <code>TRUE</code> für abhängige und auf <code>FALSE</code> für unabhängige Stichproben. Das Argument <code>var.equal</code> besagt, dass wir von Varianzhomogenität ausgehen (also einen t-test machen).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(big_five<span class="op">$</span>Extraversion, big_five<span class="op">$</span>Neurotizismus,
        <span class="dt">alternative =</span> <span class="st">"two.sided"</span>, 
@@ -334,10 +334,10 @@
        <span class="dt">var.equal =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">tidy</span>()</code></pre></div>
 <pre><code>## # A tibble: 1 x 9
-##   estimate1 estimate2 statistic p.value parameter conf.low conf.high
-##       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-## 1      3.08      3.13     -1.05   0.292       398   -0.163    0.0493
-## # ... with 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
+##   estimate1 estimate2 statistic p.value parameter conf.low conf.high method
+##       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+## 1      3.08      3.13     -1.05   0.292       398   -0.163    0.0493 " Two~
+## # ... with 1 more variable: alternative &lt;chr&gt;</code></pre>
 </div>
 <div id="welch-test" class="section level3">
 <h3 class="hasAnchor">
@@ -393,7 +393,7 @@
 <div id="multiple-lineare-regression" class="section level3">
 <h3 class="hasAnchor">
 <a href="#multiple-lineare-regression" class="anchor"></a>Multiple Lineare Regression</h3>
-<p>Möchten wir jetzt mehrere unabhängige Variablen auf Einfluss prüfen, müssen wir diese nur mit einem Plus zeichen hinzufügen.</p>
+<p>Möchten wir jetzt mehrere unabhängige Variablen auf Einfluss prüfen, müssen wir diese nur mit einem Pluszeichen hinzufügen.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(Extraversion <span class="op">~</span><span class="st"> </span>Neurotizismus <span class="op">+</span><span class="st"> </span>Geschlecht, <span class="dt">data =</span> big_five) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">tidy</span>()</code></pre></div>
 <pre><code>## # A tibble: 3 x 5
@@ -402,7 +402,7 @@
 ## 1 (Intercept)     2.90      0.123      23.5  5.95e-59
 ## 2 Neurotizismus   0.0469    0.0367      1.28 2.03e- 1
 ## 3 Geschlechtm     0.0768    0.0508      1.51 1.32e- 1</code></pre>
-<p>Wenn wir eine Interaktion zwischen Neurotizismus und Geschlecht erwarten würden, müsste man nur das Plus durch ein Multiplikationszeichen ersetzen.</p>
+<p>Wenn wir eine Interaktion zwischen Neurotizismus und Geschlecht erwarten würden, müsste man nur das Pluszeichen durch ein Multiplikationszeichen ersetzen.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(Extraversion <span class="op">~</span><span class="st"> </span>Neurotizismus <span class="op">*</span><span class="st"> </span>Geschlecht, <span class="dt">data =</span> big_five) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">tidy</span>()</code></pre></div>
 <pre><code>## # A tibble: 4 x 5
@@ -418,7 +418,7 @@
 <h3 class="hasAnchor">
 <a href="#informationskriterien-und-r2" class="anchor"></a>Informationskriterien und <span class="math inline">\(R^2\)</span>
 </h3>
-<p>Natürlich interessiert uns nicht nur der p-Wert sondern auch die Effektstärke <span class="math inline">\(R^2\)</span> und die Informationskriterien (AIC, BIC). Anstelle von <code>tidy()</code> schreiben wir dafür einfach <code>glance()</code>.</p>
+<p>Natürlich interessiert uns nicht nur der p-Wert, sondern auch die Effektstärke <span class="math inline">\(R^2\)</span> und die Informationskriterien (AIC, BIC). Anstelle von <code>tidy()</code> schreiben wir dafür einfach <code>glance()</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(Extraversion <span class="op">~</span><span class="st"> </span>Neurotizismus <span class="op">*</span><span class="st"> </span>Geschlecht, <span class="dt">data =</span> big_five) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">glance</span>()</code></pre></div>
 <pre><code>## # A tibble: 1 x 11
@@ -430,7 +430,7 @@
 <div id="logistische-regression" class="section level3">
 <h3 class="hasAnchor">
 <a href="#logistische-regression" class="anchor"></a>Logistische Regression</h3>
-<p>Für eine logistische Regression ändert sich der Befehl zu <code>glm()</code> (für Generalized linear model). Der Rest bleibt gleich. Zum exemplarischen rechnen, müssen wir erstn das Geschlecht numerisch kodieren.</p>
+<p>Für eine logistische Regression ändert sich der Befehl zu <code>glm()</code> (für Generalized linear model). Der Rest bleibt gleich. Zum exemplarischen Rechnen, müssen wir erst das Geschlecht numerisch kodieren.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big_five_new &lt;-<span class="st"> </span>big_five <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggpubr/topics/reexports">mutate</a></span>(<span class="dt">Geschlecht =</span> <span class="kw">if_else</span>(Geschlecht <span class="op">==</span><span class="st"> "m"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</code></pre></div>
 <p>Nun können wir wie gewohnt das Modell aufstellen.</p>
@@ -445,7 +445,7 @@
 <div id="hierarchische-regression" class="section level3">
 <h3 class="hasAnchor">
 <a href="#hierarchische-regression" class="anchor"></a>Hierarchische Regression</h3>
-<p>Eine hierarchische Regression ist nichts anderes als das Vergleichen verschiedener linearer Modelle unter Hinzufügen von Variablen. Wir werden für eine größere übersichtlichkeit die Modelle diesmal in Variablen speichern. Beachte, dass wir hier kein <code>tidy()</code> aufrufen, da wir die Informationskriterien der linearen Modelle später mit <code>glance()</code> vergleichen wollen.</p>
+<p>Eine hierarchische Regression ist nichts anderes als das Vergleichen verschiedener linearer Modelle unter Hinzufügen von Variablen. Wir werden für eine größere Übersichtlichkeit die Modelle diesmal in Variablen speichern. Beachte, dass wir hier kein <code>tidy()</code> aufrufen, da wir die Informationskriterien der linearen Modelle später mit <code>glance()</code> vergleichen wollen.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Extraversion <span class="op">~</span><span class="st"> </span>Neurotizismus, <span class="dt">data =</span> big_five) 
 model2 &lt;-<span class="st"> </span><span class="kw">lm</span>(Extraversion <span class="op">~</span><span class="st"> </span>Neurotizismus <span class="op">+</span><span class="st"> </span>Geschlecht, <span class="dt">data =</span> big_five)
 model3 &lt;-<span class="st"> </span><span class="kw">lm</span>(Extraversion <span class="op">~</span><span class="st"> </span>Neurotizismus <span class="op">+</span><span class="st"> </span>Geschlecht <span class="op">+</span><span class="st"> </span>Offenheit, <span class="dt">data =</span> big_five) </code></pre></div>
@@ -486,7 +486,7 @@ model3 &lt;-<span class="st"> </span><span class="kw">lm</span>(Extraversion <sp
 <div id="exkurs-faktoren" class="section level2">
 <h2 class="hasAnchor">
 <a href="#exkurs-faktoren" class="anchor"></a>Exkurs: Faktoren</h2>
-<p>Für Varianzanalysen müssen wir einen bisher nicht erwähnten neuen Datentyp einführen - den Faktor. Faktoren sind nichts anderes als Characters mit festgelegten Ausprägungsgraden. Wir schauen uns an dieser Stelle nur an, wie man Faktoren erstellen kann. Dabei greifen wir auf Funktionen aus dem Kapitel der Datenvorbereitung zu. Der Datensatz für die Varianzanalysen hat die Variablen <code>iq</code>, <code>kreativitaet</code>, <code>zeitpunkt</code>, <code>gruppe</code> und <code>person_id</code>.</p>
+<p>Für Varianzanalysen müssen wir einen bisher nicht erwähnten neuen Datentyp einführen - den Faktor. Faktoren sind Characters mit festgelegten Ausprägungsgraden. Wir schauen uns an dieser Stelle nur an, wie man Faktoren erstellen kann. Dabei greifen wir auf Funktionen aus dem Kapitel der Datenvorbereitung zu. Der Datensatz für die Varianzanalysen hat die Variablen <code>iq</code>, <code>kreativitaet</code>, <code>zeitpunkt</code>, <code>gruppe</code> und <code>person_id</code>.</p>
 <pre><code>## # A tibble: 90 x 5
 ##       iq kreativitaet zeitpunkt gruppe person_id
 ##    &lt;dbl&gt;        &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;      &lt;dbl&gt;
@@ -510,7 +510,7 @@ model3 &lt;-<span class="st"> </span><span class="kw">lm</span>(Extraversion <sp
 <p>Für mehrere Spalten verwendet man wie gewohnt <code>mutate_at()</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">repeated <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(zeitpunkt, gruppe), as.factor)</code></pre></div>
-<p>Mehr müssen wir auch gar nicht über Faktoren wissen. Ohne Faktoren können wir jedoch weder Kontraste einstellen noch den Tukey Post-Hoc Test berechnen. Also am besten immer die unabhängigen Variablen bei Varianzanalysen in Faktoren umwandeln.</p>
+<p>Mehr müssen wir auch gar nicht über Faktoren wissen. Ohne Faktoren können wir jedoch weder Kontraste einstellen noch den Tukey Post-Hoc Test berechnen; also am besten immer die unabhängigen Variablen bei Varianzanalysen in Faktoren umwandeln.</p>
 </div>
 <div id="varianzanalysen" class="section level2">
 <h2 class="hasAnchor">
@@ -524,23 +524,24 @@ model3 &lt;-<span class="st"> </span><span class="kw">lm</span>(Extraversion <sp
 <div id="anova" class="section level3">
 <h3 class="hasAnchor">
 <a href="#anova" class="anchor"></a>ANOVA</h3>
-<p>Die erste Zeile verändert sich syntaktisch nicht im Verlgeich zu Regressionmodellen. Nur der Befehl ändert sich zu <code>aov()</code>. In der zweiten Zeile rufen wir aus dem <code>car</code> Package die <code><a href="http://www.rdocumentation.org/packages/car/topics/Anova">Anova()</a></code> Funktion auf (beachte das großgeschriebene A), wordurch wir den Typ der Quadratsummen kontrollieren können. SPSS gibt zum Beispiel standardmäßig Typ 3 aus, R hingegen normaler Weise Typ 1. Als letzts rufen wir aus dem <code>sjstats</code> Package die Funktion <code>anova_stats()</code> auf, um unter anderem direkt zusätzlich die Varianzerklärungen <span class="math inline">\(\eta^2\)</span> zu erhalten.</p>
+<p>Die erste Zeile verändert sich syntaktisch nicht im Verlgeich zu Regressionmodellen. Nur der Befehl ändert sich zu <code>aov()</code>. In der zweiten Zeile rufen wir aus dem <code>car</code> Package die <code><a href="http://www.rdocumentation.org/packages/car/topics/Anova">Anova()</a></code> Funktion auf (beachte das großgeschriebene A), wordurch wir den Typ der Quadratsummen kontrollieren können. SPSS gibt zum Beispiel standardmäßig Typ 3 aus, R hingegen normalerweise Typ 1. Als letztes rufen wir aus dem <code>sjstats</code> Package die Funktion <code>anova_stats()</code> auf, um unter anderem direkt zusätzlich die Varianzerklärungen <span class="math inline">\(\eta^2\)</span> zu erhalten.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aov</span>(iq <span class="op">~</span><span class="st"> </span>zeitpunkt <span class="op">+</span><span class="st"> </span>gruppe, <span class="dt">data =</span> repeated) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/Anova">Anova</a></span>(<span class="dt">type =</span> <span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">anova_stats</span>() </code></pre></div>
-<pre><code>## # A tibble: 4 x 12
-##   term   sumsq meansq    df statistic p.value  etasq partial.etasq omegasq
-##   &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;         &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Int~ 9.22e5 9.22e5     1   4742.     0      0.98          0.983   0.98 
-## 2 zeit~ 4.01e2 2.00e2     2      1.03   0.361  0             0.025   0    
-## 3 grup~ 2.09e3 4.19e2     5      2.16   0.067  0.002         0.116   0.001
-## 4 Resi~ 1.59e4 1.94e2    82     NA     NA     NA            NA      NA    
-## # ... with 3 more variables: partial.omegasq &lt;dbl&gt;, cohens.f &lt;dbl&gt;,
-## #   power &lt;dbl&gt;</code></pre>
+<pre><code>##          term power      sumsq     meansq df statistic p.value etasq
+## 1 (Intercept) 1.000 921619.274 921619.274  1  4741.995   0.000 0.980
+## 2   zeitpunkt 0.231    400.918    200.459  2     1.031   0.361 0.000
+## 3      gruppe 0.717   2094.995    418.999  5     2.156   0.067 0.002
+## 4   Residuals    NA  15936.917    194.353 82        NA      NA    NA
+##   partial.etasq omegasq partial.omegasq cohens.f
+## 1         0.983   0.980           0.981    7.605
+## 2         0.025   0.000           0.001    0.159
+## 3         0.116   0.001           0.060    0.363
+## 4            NA      NA              NA       NA</code></pre>
 <div id="kontraste-einstellen" class="section level4">
 <h4 class="hasAnchor">
 <a href="#kontraste-einstellen" class="anchor"></a>Kontraste einstellen</h4>
-<p>Schauen wir zuerst wie die Kontraste für die Gruppenspalte aussieht. Innerhalb von <code>constrasts()</code> übergeben wir die gewünschte Spalte mit gewohnter Dollar-Syntax.</p>
+<p>Schauen wir zuerst, wie die Kontraste für die Gruppenspalte aussehen. Innerhalb von <code>constrasts()</code> übergeben wir die gewünschte Spalte mit gewohnter Dollar-Syntax.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(repeated<span class="op">$</span>gruppe)</code></pre></div>
 <pre><code>##   [,1] [,2] [,3] [,4] [,5]
 ## A    1    0    0    0    0
@@ -562,7 +563,7 @@ model3 &lt;-<span class="st"> </span><span class="kw">lm</span>(Extraversion <sp
 <a href="#messwiederholung" class="anchor"></a>Messwiederholung</h4>
 <p>Zur ANOVA mit Messwiederholung laden wir das Package <code>lmerTest</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lmerTest)</code></pre></div>
-<p>Der Befehl zum Erstellen des Modell ändert sich zu <code><a href="http://www.rdocumentation.org/packages/lmerTest/topics/lmer">lmer()</a></code>. Ansonsten ist der einzige Unterschied das Kontrollieren der zufälligen Effekte – hier die zufällig schwankenden IQ-Ausprägungen zwischen den Personen. Wir kontrollieren dies mit <code>(1|person_id)</code>. Der Rest bleibt gleich.</p>
+<p>Der Befehl zum Erstellen des Modells ändert sich zu <code><a href="http://www.rdocumentation.org/packages/lmerTest/topics/lmer">lmer()</a></code>. Ansonsten ist der einzige Unterschied das Kontrollieren der zufälligen Effekte – hier die zufällig schwankenden IQ-Ausprägungen zwischen den Personen. Wir kontrollieren dies mit <code>(1|person_id)</code>. Der Rest bleibt gleich.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/lmerTest/topics/lmer">lmer</a></span>(iq <span class="op">~</span><span class="st"> </span>zeitpunkt <span class="op">+</span><span class="st"> </span>gruppe <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>person_id), <span class="dt">data =</span> repeated) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/Anova">Anova</a></span>(<span class="dt">type =</span> <span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">tidy</span>()</code></pre></div>
@@ -575,7 +576,13 @@ model3 &lt;-<span class="st"> </span><span class="kw">lm</span>(Extraversion <sp
 <p>Für die Effektstärke greifen wir erneut auf das <code>sjstats</code> Package zurück. Diesmal rufen wir die Funktion <code>r2()</code> auf.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/lmerTest/topics/lmer">lmer</a></span>(iq <span class="op">~</span><span class="st"> </span>zeitpunkt <span class="op">+</span><span class="st"> </span>gruppe <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>person_id), <span class="dt">data =</span> repeated) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">r2</span>()</code></pre></div>
-<pre><code>##    Marginal R2: 0.130
+<pre><code>## 
+## R-Squared for Generalized Linear Mixed Model
+## 
+## Family : gaussian (identity)
+## Formula: iq ~ zeitpunkt + gruppe + (1 | person_id)
+## 
+##    Marginal R2: 0.130
 ## Conditional R2: 0.320</code></pre>
 </div>
 </div>
@@ -586,7 +593,7 @@ model3 &lt;-<span class="st"> </span><span class="kw">lm</span>(Extraversion <sp
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">AV &lt;-<span class="st"> </span>repeated <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(iq, kreativitaet) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">as.matrix</span>()</code></pre></div>
-<p>Für MANOVAs benötigen wir wieder die <code>lm()</code> Funktion. Das hängt damit zusammen, dass unter jeder ANOVA eine Regression steckt und <code>aov()</code> nur eine spezielle Art ist, den <code>lm()</code> Befehel auszuführen. MANOVAs funktionieren nicht mit <code>aov()</code>! Außerdem ändert sich <code><a href="http://www.rdocumentation.org/packages/car/topics/Anova">Anova()</a></code> zu <code><a href="http://www.rdocumentation.org/packages/car/topics/Anova">Manova()</a></code> und wir können den Output nicht mit <code>tidy()</code> aufräumen.</p>
+<p>Für MANOVAs benötigen wir wieder die <code>lm()</code> Funktion. Das hängt damit zusammen, dass unter jeder ANOVA eine Regression steckt und <code>aov()</code> nur eine spezielle Art ist, den <code>lm()</code> Befehl auszuführen. MANOVAs funktionieren nicht mit <code>aov()</code>! Außerdem ändert sich <code><a href="http://www.rdocumentation.org/packages/car/topics/Anova">Anova()</a></code> zu <code><a href="http://www.rdocumentation.org/packages/car/topics/Anova">Manova()</a></code> und wir können den Output nicht mit <code>tidy()</code> aufräumen.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(AV <span class="op">~</span><span class="st"> </span>gruppe <span class="op">+</span><span class="st"> </span>zeitpunkt, <span class="dt">data =</span> repeated) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/Anova">Manova</a></span>(<span class="dt">type =</span> <span class="dv">3</span>) </code></pre></div>
 <pre><code>## 
@@ -633,10 +640,24 @@ model3 &lt;-<span class="st"> </span><span class="kw">lm</span>(Extraversion <sp
 <div id="tukeyhsd" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tukeyhsd" class="anchor"></a>TukeyHSD</h3>
-<p>Für den Test von Tukey auf Honest Significant Differences (HSD) ändert sich nicht viel in Vergleich zur ANOVA. Nur wird nach der ANOVA die Funktion <code>TukeyHSD()</code> aufgerufen und dann der Output ins aufgeräumte Format gebracht.</p>
+<p>Für den Test von Tukey auf Honest Significant Differences (HSD) ändert sich nicht viel im Vergleich zur ANOVA. Nur wird nach der ANOVA die Funktion <code>TukeyHSD()</code> aufgerufen und dann der Output ins aufgeräumte Format gebracht.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aov</span>(iq <span class="op">~</span><span class="st"> </span>zeitpunkt <span class="op">*</span><span class="st"> </span>gruppe, <span class="dt">data =</span> repeated) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">TukeyHSD</span>() <span class="op">%&gt;%</span><span class="st">  </span>
 <span class="st">  </span><span class="kw">tidy</span>()</code></pre></div>
+<pre><code>## # A tibble: 171 x 6
+##    term      comparison estimate conf.low conf.high adj.p.value
+##    &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+##  1 zeitpunkt t2-t1        -5.15    -13.8       3.47       0.331
+##  2 zeitpunkt t3-t1        -2.23    -10.9       6.39       0.810
+##  3 zeitpunkt t3-t2         2.92     -5.70     11.5        0.697
+##  4 gruppe    B-A           7.45     -7.47     22.4        0.689
+##  5 gruppe    C-A           3.34    -11.6      18.3        0.986
+##  6 gruppe    D-A          -2.54    -17.5      12.4        0.996
+##  7 gruppe    E-A          11.4      -3.51     26.3        0.233
+##  8 gruppe    F-A          -0.124   -15.0      14.8        1.000
+##  9 gruppe    C-B          -4.11    -19.0      10.8        0.966
+## 10 gruppe    D-B          -9.99    -24.9       4.93       0.375
+## # ... with 161 more rows</code></pre>
 </div>
 <div id="post-hoc-t-tests" class="section level3">
 <h3 class="hasAnchor">
@@ -662,7 +683,7 @@ model3 &lt;-<span class="st"> </span><span class="kw">lm</span>(Extraversion <sp
 <div id="korrelationskoeffizienten" class="section level2">
 <h2 class="hasAnchor">
 <a href="#korrelationskoeffizienten" class="anchor"></a>Korrelationskoeffizienten</h2>
-<p>Es gibt einen Unterschied, ob man die Korrelation zwischen zwei Variablen berechnen möchte (mit p-Wert) oder eine Korrealtionstabelle mit allen Korrelation erhalten möchte.</p>
+<p>Es gibt einen Unterschied, ob man die Korrelation zwischen zwei Variablen berechnen (mit p-Wert) oder eine Korrelationstabelle mit allen Korrelation erhalten möchte.</p>
 <div id="produkt-moment-korrelation-nach-pearson" class="section level3">
 <h3 class="hasAnchor">
 <a href="#produkt-moment-korrelation-nach-pearson" class="anchor"></a>Produkt-Moment Korrelation nach Pearson</h3>
@@ -673,9 +694,9 @@ model3 &lt;-<span class="st"> </span><span class="kw">lm</span>(Extraversion <sp
          <span class="dt">conf.level =</span> .<span class="dv">95</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">tidy</span>()</code></pre></div>
 <pre><code>## # A tibble: 1 x 8
-##   estimate statistic p.value parameter conf.low conf.high method          
-##      &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;           
-## 1   0.0697     0.984   0.327       198  -0.0697     0.206 Pearson's produ~
+##   estimate statistic p.value parameter conf.low conf.high method
+##      &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+## 1   0.0697     0.984   0.327       198  -0.0697     0.206 Pears~
 ## # ... with 1 more variable: alternative &lt;chr&gt;</code></pre>
 </div>
 <div id="rangkorrelation-nach-spearman" class="section level3">
@@ -733,7 +754,7 @@ model3 &lt;-<span class="st"> </span><span class="kw">lm</span>(Extraversion <sp
 <div id="mcnemars-chi2-test" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mcnemars-chi2-test" class="anchor"></a>Mcnemars <span class="math inline">\(\chi^2\)</span> Test</h3>
-<p>Das gleiche Spiel für den Mcenamr Test. Hier sparen wir uns <code>tidy()</code>, weil der Output ohnehin bereits schön aufgeräumt aussieht.</p>
+<p>Das gleiche gilt für den Mcenamr Test. Hier sparen wir uns <code>tidy()</code>, weil der Output ohnehin bereits schön aufgeräumt aussieht.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mcnemar.test</span>(tbl) </code></pre></div>
 <pre><code>## 
 ##  McNemar's Chi-squared test with continuity correction
@@ -757,7 +778,7 @@ model3 &lt;-<span class="st"> </span><span class="kw">lm</span>(Extraversion <sp
 <div id="explorative-faktorenanalyse" class="section level1">
 <h1 class="hasAnchor">
 <a href="#explorative-faktorenanalyse" class="anchor"></a>Explorative Faktorenanalyse</h1>
-<p>Kommen wir nun zum letzten Thema - der explorativen Faktorenanalyse. Dabei betrachten wir zwei Verfahren: die Principal Component Analysis (PCA) und die Maximum Likelihood Faktorenanalyse (EFA). Zuerst wählen wir alle numerischen Spalten aus dem <code>big_five</code> Datensatz aus (alle anderen sind unbrauchbar).</p>
+<p>Kommen wir nun zum letzten Thema – der explorativen Faktorenanalyse. Dabei betrachten wir zwei Verfahren: die Principal Component Analysis (PCA) und die Maximum Likelihood Faktorenanalyse (EFA). Zuerst wählen wir alle numerischen Spalten aus dem <code>big_five</code> Datensatz aus (alle anderen sind unbrauchbar).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">num_data &lt;-<span class="st"> </span>big_five <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select_if</span>(is.numeric)</code></pre></div>
 <div id="naive-hauptkomponentenanalyse" class="section level2">
@@ -817,7 +838,7 @@ model3 &lt;-<span class="st"> </span><span class="kw">lm</span>(Extraversion <sp
 ## Test of the hypothesis that 2 factors are sufficient.
 ## The chi square statistic is 5.13 on 4 degrees of freedom.
 ## The p-value is 0.274</code></pre>
-<p>Möchte man mit den Ergebnisse weiterrechen, kann man auch hier wieder <code>tidy()</code> verwenden.</p>
+<p>Möchte man mit den Ergebnissen weiterrechen, kann man auch hier wieder <code>tidy()</code> verwenden.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fac <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">tidy</span>() </code></pre></div>
 <pre><code>## # A tibble: 6 x 4

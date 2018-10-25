@@ -100,7 +100,7 @@
   </ul>
 </li>
 <li>
-  <a href="../reference/index.html">Funktionen</a>
+  <a href="../reference/index.html">Dokumentation</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -123,7 +123,7 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Extras</h1>
-            <h3 class="subtitle">R für empirische Wissenschaften v1.0.3</h3>
+            <h3 class="subtitle">R für empirische Wissenschaften v1.0.2</h3>
                         <h4 class="author">Jan Philipp Nolte</h4>
             
       
@@ -143,7 +143,7 @@
 <div id="verschiedene-datenstrukturen" class="section level1">
 <h1 class="hasAnchor">
 <a href="#verschiedene-datenstrukturen" class="anchor"></a>Verschiedene Datenstrukturen</h1>
-<p>Wie bei den bereits kennengelernten Datentypen gibt es auch verschiedene Strukturen, die jeweils andere Eigenschaften haben. In den vorherigen Kapiteln ist oft das Wort tibble gefallen. Wenn Du bereits die eine oder andere Erfahrung mit R gemacht hast, kennst du wahrscheinlich eher data.frames. Was diese Datenstruktur ausmacht und wie man verschiedene Datenstrukturen innerhalb von R direkt erstellen kann (ohne einlesen eines bereits bestehenden Datensatzes), wird im folgenden erklärt.</p>
+<p>Wie bei den bereits kennengelernten Datentypen gibt es auch verschiedene Strukturen, die jeweils andere Eigenschaften haben. In den vorherigen Kapiteln ist oft das Wort tibble gefallen. Wenn Du bereits die eine oder andere Erfahrung mit R gemacht hast, kennst Du wahrscheinlich eher data.frames. Was diese Datenstruktur ausmacht und wie man verschiedene Datenstrukturen innerhalb von R direkt erstellen kann (ohne Einlesen eines bereits bestehenden Datensatzes), wird im Folgenden erklärt.</p>
 <div id="tibble-und-data-frame" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tibble-und-data-frame" class="anchor"></a>tibble und data.frame</h2>
@@ -185,7 +185,7 @@
 <div id="eckige-klammern" class="section level3">
 <h3 class="hasAnchor">
 <a href="#eckige-klammern" class="anchor"></a>Eckige Klammern</h3>
-<p>Wenn man auf Elemente innerhalb eines Vektor zugreifen möchte, kann man dies mit eckigen Klammern. Das dritte Element des Vektors <code>vec</code></p>
+<p>Wenn man auf Elemente innerhalb eines Vektor zugreifen möchte, erzielt man dies mit eckigen Klammern. Das dritte Element des Vektors <code>vec</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</code></pre></div>
 <p>erhält man mit</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec[<span class="dv">3</span>]</code></pre></div>
@@ -287,14 +287,14 @@
 <div id="matrix" class="section level2">
 <h2 class="hasAnchor">
 <a href="#matrix" class="anchor"></a>Matrix</h2>
-<p>Zwei zumsammengebundene Vektoren ergeben nicht zwingend einen tibble. Wenn die beiden Vektoren den selben Datentyp haben, kann man auch eine Matrix daraus machen. In der wissenschaftlichen Praxis wird das allerdings nur selten benötigt. Wir haben das lediglich bei der MANOVA verwendet. Wir schauen uns trotzdem drei verschiende Möglichkeiten an eine Matrix zu erstellen. Der Funktion <code>matrix()</code> übergibt man als erstes Argument alle gewünschten Werte. Mit <code>ncol</code> respektive <code>nrow</code> kann man dann die Anzahl der Spalten beziehungsweise Zeilen festlegen.</p>
+<p>Zwei zumsammengebundene Vektoren ergeben nicht zwingend einen tibble. Wenn die beiden Vektoren den selben Datentyp haben, kann man auch eine Matrix daraus machen. In der wissenschaftlichen Praxis wird das allerdings nur selten benötigt. Wir haben das lediglich bei der MANOVA verwendet. Wir schauen uns trotzdem drei verschiedene Möglichkeiten an, eine Matrix zu erstellen. Der Funktion <code>matrix()</code> übergibt man als erstes Argument alle gewünschten Werte. Mit <code>ncol</code> respektive <code>nrow</code> kann man dann die Anzahl der Spalten beziehungsweise Zeilen festlegen.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">matrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)</code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    5
 ## [2,]    2    6
 ## [3,]    3    7
 ## [4,]    4    8</code></pre>
-<p>Alternativ kann man auch zwei Vekoren mit <code>cbind()</code> (column bind) Spaltenweise aneinander hängen.</p>
+<p>Alternativ kann man auch zwei Vektoren mit <code>cbind()</code> (column bind) Spaltenweise aneinander hängen.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, 
       <span class="dv">5</span><span class="op">:</span><span class="dv">8</span>)</code></pre></div>
 <pre><code>##      [,1] [,2]
@@ -364,7 +364,7 @@
 ## [2,]    2    6
 ## [3,]    3    7
 ## [4,]    4    8</code></pre>
-<p>Weitergehend kann man direkt auf Element der Matrix im zweiten Listenelement zugreifen. Möchte man beispielsweise den Wert in der dritten Zeile und zweiten Spalte der Matrix ausgegeben haben, schreibt man</p>
+<p>Weitergehend kann man direkt auf Elemente der Matrix im zweiten Listenelement zugreifen. Möchte man beispielsweise den Wert in der dritten Zeile und zweiten Spalte der Matrix ausgegeben haben, schreibt man</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">liste[[<span class="dv">2</span>]][<span class="dv">3</span>, <span class="dv">2</span>]</code></pre></div>
 <pre><code>## [1] 7</code></pre>
 <p>Listen sind extrem wichtig beim funktionalen Programmieren und nützlich beim Importieren mehrerer Datensätzen auf einmal.</p>
@@ -387,7 +387,7 @@
 <div id="funktionen-erstellen" class="section level2">
 <h2 class="hasAnchor">
 <a href="#funktionen-erstellen" class="anchor"></a>Funktionen erstellen</h2>
-<p>Manchmal bietet es sich an, eigene Funktionen zu schreiben. Dabei schreibt man das Argument, was der Funktion weitergegeben werden soll, in die Klammern von <code>function()</code>. Erst einmal gespeichert, kann man die Funktion beliebig oft anwenden. Sie verhält sich dabei genau wie sämtliche anderen Funktionen in R, wie z.B. <code>mean(x)</code>. Angenommen man möchte eine Spalten logarithmieren, die Nullen beinhaltet. Um sinnvolle Werte zu erhalten, sollte man die gesamte Skala anheben - beispielsweise um 2. Unsere erste eigene Funktion <code>log_add_2()</code> (willkürlich gewählter Name) nimmt eine Zahl <code>x</code>, addiert sie mit 2 und logarithmiert diesen Wert anschließend.</p>
+<p>Manchmal bietet es sich an, eigene Funktionen zu schreiben. Dabei schreibt man das Argument, was der Funktion weitergegeben werden soll, in die Klammern von <code>function()</code>. Erst einmal gespeichert, kann man die Funktion beliebig oft anwenden. Sie verhält sich dabei genau wie sämtliche anderen Funktionen in R, wie z.B. <code>mean(x)</code>. Angenommen, man möchte eine Spalte logarithmieren, die Nullen beinhaltet: Um sinnvolle Werte zu erhalten, sollte man die gesamte Skala anheben – beispielsweise um 2. Unsere erste eigene Funktion <code>log_add_2()</code> (willkürlich gewählter Name) nimmt eine Zahl <code>x</code>, addiert sie mit 2 und logarithmiert diesen Wert anschließend.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">log_add_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
   <span class="kw">log</span>(x <span class="op">+</span><span class="st"> </span><span class="dv">2</span>)
 }</code></pre></div>
@@ -397,7 +397,7 @@
 <div id="non-standard-evaluation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#non-standard-evaluation" class="anchor"></a>Non-standard evaluation</h3>
-<p>Funktionen aus dem <code>tidyverse</code> stellen dabei eine Ausnahme dar. An dieser Stelle wird es leider sehr schnell komplex und kryptisch. Es sei nur erwähnt, damit bei Versuchen mit <code>tidyverse</code> Funktionen eigene Funktionen zu schreiben, kein Frust aufkommt. Haben wir zum Beispiel die einfache Aufgabe den Mittelwert und die Standardabweichung einer Variable in einem Datensatz zu berechnen, müssen wir so genannte quosures (<code>enquo()</code>) und doppelte Bang (<code>!!</code>) Operatoren benutzen, um die Aufgabe in Form einer Funktion zu automatisieren.</p>
+<p>Funktionen aus dem <code>tidyverse</code> stellen dabei eine Ausnahme dar. An dieser Stelle wird es leider sehr schnell komplex und kryptisch. Es sei nur erwähnt, damit bei Versuchen mit <code>tidyverse</code> Funktionen eigene Funktionen zu schreiben, kein Frust aufkommt. Haben wir zum Beispiel die einfache Aufgabe, den Mittelwert und die Standardabweichung einer Variablen in einem Datensatz zu berechnen, müssen wir so genannte quosures (<code>enquo()</code>) und doppelte Bang (<code>!!</code>) Operatoren benutzen, um die Aufgabe in Form einer Funktion zu automatisieren.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mean_var &lt;-<span class="st"> </span><span class="cf">function</span>(data, variable){
   variable &lt;-<span class="st"> </span><span class="kw">enquo</span>(variable)
   
@@ -417,7 +417,7 @@
 <div id="mappen" class="section level2">
 <h2 class="hasAnchor">
 <a href="#mappen" class="anchor"></a>Mappen</h2>
-<p>Der Kern von funktionalem Programmieren ist Automatisierung. Erinnern wir uns zurück an die Inferenzstatistik. Genauer gesagt an das Berechnen der Informationskriterien der Modelle der hierarchischen Regression mithilfe von <code>glance()</code>. Wir haben dort drei mal den Befehl ausführen müssen. Für jedes der drei Modelle einmal. Aber was, wenn wir 10 Prädiktoren sukzessive hinzufügen wollen würden? 10 mal Copy &amp; Paste? Eine fehleranfällige und mühsame Vorgehensweise. Mit <code>map()</code> aus dem <code>purrr</code> Package (enhalten im <code>tidyverse</code>) kann man mit 3 Zeilen Code das selbe erreichen. Zuerst speichern wir dafür die drei Modelle in einer Liste.</p>
+<p>Der Kern von funktionalem Programmieren ist Automatisierung. Erinnern wir uns zurück an die Inferenzstatistik. Genauer gesagt an das Berechnen der Informationskriterien der Modelle der hierarchischen Regression mithilfe von <code>glance()</code>. Wir haben dort 3 mal den Befehl ausführen müssen. Für jedes der 3 Modelle einmal. Aber was, wenn wir 10 Prädiktoren sukzessive hinzufügen wollen würden? 10 mal Copy &amp; Paste? Eine fehleranfällige und mühsame Vorgehensweise. Mit <code>map()</code> aus dem <code>purrr</code> Package (enhalten im <code>tidyverse</code>) kann man mit 3 Zeilen Code das selbe erreichen. Zuerst speichern wir dafür die 3 Modelle in einer Liste.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modelle &lt;-<span class="st"> </span><span class="kw">list</span>(model1, model2, model3)</code></pre></div>
 <p>Nun greifen wir in gewohnter <code>tidyverse</code> Manier auf die Liste zu. Die Funktion <code>map()</code> wendet nun auf jedes Listenelement die Funktion <code>glance()</code> an. Nicht vergessen <code>broom</code> vorher zu laden.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modelle <span class="op">%&gt;%</span><span class="st"> </span>
@@ -457,7 +457,7 @@
 <div id="nesten" class="section level2">
 <h2 class="hasAnchor">
 <a href="#nesten" class="anchor"></a>Nesten</h2>
-<p>Wirklich mächtig wird <code>map()</code> allerdings erst in Kombination mit <code>nest()</code>. Zu Beginn ist es durchaus abstrakt und gewöhnungsbedürftig. Aber durch das Nesten kann man gruppenweise mappen. Nehmen wir uns das Beispiel unseres <code>repeated</code> Datensatzes. Es gibt 6 verschiedene Gruppen - A bis F. Was, wenn wir nun innerhalb jeder dieser Gruppen einen F-Test zum Vergleich der Varianzen von <code>iq</code> und <code>kreativitaet</code> machen möchten? Normaler Weise müsste man sechs mal filtern und anschließend die Funktion F-Test aufrufen. Mit <code>nest()</code> benötigt man bloss 4 Zeilen Code.</p>
+<p>Wirklich mächtig wird <code>map()</code> allerdings erst in Kombination mit <code>nest()</code>. Zu Beginn ist es durchaus abstrakt und gewöhnungsbedürftig. Aber durch das Nesten kann man gruppenweise mappen. Nehmen wir uns das Beispiel unseres <code>repeated</code> Datensatzes. Es gibt 6 verschiedene Gruppen - A bis F. Was, wenn wir nun innerhalb jeder dieser Gruppen einen F-Test zum Vergleich der Varianzen von <code>iq</code> und <code>kreativitaet</code> machen möchten? Normalerweise müsste man 6 mal filtern und anschließend die Funktion F-Test aufrufen. Mit <code>nest()</code> benötigt man bloss 4 Zeilen Code.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">repeated <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">nest</span>(<span class="op">-</span>gruppe) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">f_tests =</span> <span class="kw">map</span>(data, <span class="op">~</span><span class="st"> </span><span class="kw">var.test</span>(.<span class="op">$</span>iq, .<span class="op">$</span>kreativitaet)),
@@ -470,14 +470,14 @@
 ## Multiple parameters; naming those columns num.df, denom.df
 ## Multiple parameters; naming those columns num.df, denom.df</code></pre>
 <pre><code>## # A tibble: 6 x 12
-##   gruppe data      f_tests  estimate `num df` `denom df` statistic p.value
-##   &lt;chr&gt;  &lt;list&gt;    &lt;list&gt;      &lt;dbl&gt;    &lt;int&gt;      &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 A      &lt;tibble ~ &lt;S3: ht~    0.954       14         14     0.954  0.931 
-## 2 B      &lt;tibble ~ &lt;S3: ht~    0.496       14         14     0.496  0.202 
-## 3 C      &lt;tibble ~ &lt;S3: ht~    0.992       14         14     0.992  0.988 
-## 4 D      &lt;tibble ~ &lt;S3: ht~    1.63        14         14     1.63   0.369 
-## 5 E      &lt;tibble ~ &lt;S3: ht~    0.502       14         14     0.502  0.209 
-## 6 F      &lt;tibble ~ &lt;S3: ht~    3.24        14         14     3.24   0.0355
+##   gruppe data  f_tests estimate `num df` `denom df` statistic p.value
+##   &lt;chr&gt;  &lt;lis&gt; &lt;list&gt;     &lt;dbl&gt;    &lt;int&gt;      &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 A      &lt;tib~ &lt;S3: h~    0.606       14         14     0.606  0.360 
+## 2 B      &lt;tib~ &lt;S3: h~    1.47        14         14     1.47   0.478 
+## 3 C      &lt;tib~ &lt;S3: h~    0.245       14         14     0.245  0.0127
+## 4 D      &lt;tib~ &lt;S3: h~    0.618       14         14     0.618  0.379 
+## 5 E      &lt;tib~ &lt;S3: h~    0.930       14         14     0.930  0.895 
+## 6 F      &lt;tib~ &lt;S3: h~    0.926       14         14     0.926  0.888 
 ## # ... with 4 more variables: conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;,
 ## #   method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
 <p>Auf die selbe Art könnte man auch mehrere hundert Regressionen ohne auch nur eine zusätzliche Zeile Code rechnen.</p>
@@ -486,7 +486,7 @@
 <div id="transformation-einer-ergebnismatrix" class="section level1">
 <h1 class="hasAnchor">
 <a href="#transformation-einer-ergebnismatrix" class="anchor"></a>Transformation einer Ergebnismatrix</h1>
-<p>Angenommen wir machen eine Online Umfrage mit einem kleinem Mathetest bestehend aus drei Aufgaben. Die richtigen Antworten sind 3, 2 und 4. Es nehmen vier Personen Teil. Unser Datensatz <code>survey</code> würde in etwas so aussehen</p>
+<p>Angenommen wir machen eine Online-Umfrage mit einem kleinen Mathetest bestehend aus 3 Aufgaben. Die richtigen Antworten sind 3, 2 und 4. Es nehmen 4 Personen teil. Unser Datensatz <code>survey</code> würde in etwas so aussehen</p>
 <pre><code>## # A tibble: 4 x 3
 ##      I1    I2    I3
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -505,7 +505,7 @@
 ## 2     0     1     0
 ## 3     1     1     1
 ## 4     0     0     1</code></pre>
-<p>Falls sowohl Zahlen, als auch Characters als richtige Antworten in Frage kommen, kann man der Funktion ebenfalls einen einzeiligen tibble übergeben. Wenn wir also die Umfrage in der Form haben</p>
+<p>Falls sowohl Zahlen als auch Characters als richtige Antworten in Frage kommen, kann man der Funktion ebenfalls einen einzeiligen tibble übergeben. Wenn wir also die Umfrage in der Form haben</p>
 <pre><code>## # A tibble: 4 x 3
 ##      I1 I2          I3
 ##   &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
@@ -513,7 +513,7 @@
 ## 2     2 Banane       1
 ## 3     3 Erdbeere     4
 ## 4     1 Apfel        4</code></pre>
-<p>die richtigen Antworten 3, Apfel und 4 sind</p>
+<p>und die richtigen Antworten 3, Apfel und 4 sind</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">antwortvec &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dv">3</span>, <span class="st">"Apfel"</span>, <span class="dv">4</span>)</code></pre></div>
 <p>erhält man mit dem gleichen Befehl das Ergebnis.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/transform_binary.html">transform_binary</a></span>(survey, antwortvec)</code></pre></div>

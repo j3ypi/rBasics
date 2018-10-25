@@ -2,7 +2,7 @@
 title: "Wiederholung"
 output: 
   learnr::tutorial:
-    tutorial_id: 1.0.1.1
+    tutorial_id: 1.0.2
     progressive: TRUE
     allow_skip: TRUE
     theme: "flatly"
@@ -18,26 +18,12 @@ loadNamespace("ggpubr")
 # library(ggpubr)
 knitr::opts_chunk$set(echo = FALSE)
 
-data(bigFive, package = "rBasics")
-data(indo, package = "rBasics")
-data(df, package = "rBasics")
+data(indonesisch, package = "rBasics")
 ```
 
 ## Der Datensatz
 
 Spätestens jetzt startet Deine Karriere als R Programmierer oder Programmiererin. Zunächst bekommst du die Möglichkeit Dir den Datensatz anzuschauen. Als erste Aufgabe gibt es verschiedene Fragen zu Datentypen. Ein besonderer Fokus wird dabei auf logische Aussagen gelegt, da diesen eine erhebliche Relevanz in der Programmierung zukommt und man erst einmal ein bisschen Zeit braucht um das Prinzip dahinter vollständig zu verstehen. 
-
-Der Datensatz besteht aus 11 Spalten. Neben soziodemografischen Informationen wie Geschlecht, Alter und Familienstand, gibt es 8 Spalten, die verschiedene Dimensionen der Lebenszufriedenheit indonesischer Probanden erfassen. Diese setzen sich aus verschiedenen Faktoren zusammen, die im Datensatz nicht enthalten sind. 
-
-Geschlecht:
-
-* Weiblich = 1
-* Männlich = 2
-
-Familienstand:
-
-* Ledig = 1
-* Verheiratet = 2
 
 ```{r q11, exercise=TRUE, exercise.eval=TRUE}
 indo
@@ -287,77 +273,4 @@ indo %>%
   select(Alter, Gluecklich) 
 ```
 
-## Visualisierung
 
-### Säulendiagramm
-Wähle die Spalten Geschlecht, Sinnerfuellung und Sinnkrise aus. Füge Sinnerfuellung und Sinnkrise in einer Spalte zusammen und benenne den Key mit **Zustand** und die Value mit **Auspraegung**.
-
-So sollte der Datensatz aussehen:
-```{r q51, exercise=TRUE, exercise.eval=TRUE}
-df
-```
-
-Nun bist du an der Reihe.
-
-```{r q52, exercise=TRUE}
-
-```
-
-```{r q52-hint-1}
-select(Geschlecht, ...)
-```
-
-```{r q52-hint-2}
-gather(Zustand, ...)
-```
-
-```{r q52-solution}
-indo %>%
-  select(Geschlecht, Sinnerfuellung, Sinnkrise) %>%
-  gather(Zustand, Auspraegung, Sinnerfuellung:Sinnkrise) 
-```
-
-Nun verwenden wir diesen Datensatz zum Erstellen eines Säulendiagramms mit zwei Spalten für jedes Geschlecht. Eine Säule ist Sinnerfuellung und eine Säule ist Sinnkrise.
-
-```{r q53, exercise=TRUE}
-
-```
-
-```{r q53-hint}
-ggbarplot(data = ...,
-          x = ...)
-```
-
-```{r q53-solution}
-ggbarplot(data = df, 
-          x = "Geschlecht",
-          y = "Auspraegung", 
-          fill = "Zustand")
-```
-
-### Scatterplot
-
-Stelle den Zusammenhang von Sinnkrise und Sinnerfuellung graphisch dar. Zeichne dabei die Sinnkrise auf die x-Achse. Füge außerdem eine Regressionslinie mit Konfidenzintervall hinzu. 
-
-```{r q54, exercise=TRUE}
-
-```
-
-```{r q54-hint-1}
-ggscatter(data = ...,
-          x = ...)
-```
-
-```{r q54-hint-2}
-ggscatter(...,
-          add = ...,
-          conf.int = ...)
-```
-  
-```{r q54-solution}  
-ggscatter(data = indo, 
-          x = "Sinnkrise", 
-          y = "Sinnerfuellung", 
-          add = "reg.line", 
-          conf.int = T)
-```

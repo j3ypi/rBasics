@@ -31,7 +31,7 @@ navbar:
       icon: fa-home fa-lg
       href: index.html
     reference:
-      text: Funktionen
+      text: Dokumentation
       href: reference/index.html
     articles:
       text: Tutorials

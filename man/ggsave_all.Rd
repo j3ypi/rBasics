@@ -22,10 +22,8 @@ Jpegs
 Die Funktion wendet ggsave() aus ggplot2 auf mehrere Graphen gleichzeitig an.
 }
 \examples{
-NOT RUN:
-
+\dontrun{
 plots <- list(a = plot1, b = plot2)
 ggsave_all(plots)
-
-END NOT RUN:
+}
 }

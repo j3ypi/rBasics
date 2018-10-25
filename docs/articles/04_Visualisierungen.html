@@ -100,7 +100,7 @@
   </ul>
 </li>
 <li>
-  <a href="../reference/index.html">Funktionen</a>
+  <a href="../reference/index.html">Dokumentation</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -123,7 +123,7 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Visualisierungen</h1>
-            <h3 class="subtitle">R für empirische Wissenschaften v1.0.3</h3>
+            <h3 class="subtitle">R für empirische Wissenschaften v1.0.2</h3>
                         <h4 class="author">Jan Philipp Nolte</h4>
             
       
@@ -162,7 +162,7 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot &lt;-<span class="st"> </span><span class="kw">ggbarplot</span>(<span class="dt">data =</span> df,
                  <span class="dt">x =</span> <span class="st">"Person"</span>,
                  <span class="dt">y =</span> <span class="st">"Gesamt"</span>)</code></pre></div>
-<p>Diesen gespeicherten Graphen können wir nun wie bereits erwähnt, der Funktion <code>ggpar()</code> übergeben. Die Achsenbeschriftungen passen wir mit <code>xlab</code> respektive <code>ylab</code> an, die Größe der Schrift mit <code>font.x</code> und <code>font.y</code>, den Winkel der Personennamen mit <code>x.text.angle</code> und die Abstände auf der y-Achse mit <code>yticks.by</code>. Im Laufe dieses Kapitels werden wir noch andere Argumente für <code>ggpar()</code> kennenlernen. Für eine vollständige Liste, kannst Du einfach <code>?ggpar</code> ausführen. Gerade das Anpassen der Schriftgröße ist extrem wichtig beim Einfügen in Paper oder Abschlussarbeiten, da die Schriftgröße innerhalb des Graphen in der Regel nicht stark von der des Textes abweichen darf.</p>
+<p>Diesen gespeicherten Graphen können wir nun, wie bereits erwähnt, der Funktion <code>ggpar()</code> übergeben. Die Achsenbeschriftungen passen wir mit <code>xlab</code> respektive <code>ylab</code> an, die Größe der Schrift mit <code>font.x</code> und <code>font.y</code>, den Winkel der Personennamen mit <code>x.text.angle</code> und die Abstände auf der y-Achse mit <code>yticks.by</code>. Im Laufe dieses Kapitels werden wir noch andere Argumente für <code>ggpar()</code> kennenlernen. Für eine vollständige Liste, kannst Du einfach <code>?ggpar</code> ausführen. Gerade das Anpassen der Schriftgröße ist extrem wichtig beim Einfügen in Paper oder Abschlussarbeiten, da die Schriftgröße innerhalb des Graphen in der Regel nicht stark von der des Textes abweichen darf.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggpar</span>(<span class="dt">p =</span> plot, 
       <span class="dt">xlab =</span> <span class="st">"Personen"</span>, 
       <span class="dt">ylab =</span> <span class="st">"Anzahl richtiger Tipps"</span>, 
@@ -171,7 +171,7 @@
       <span class="dt">x.text.angle =</span> <span class="dv">45</span>, 
       <span class="dt">yticks.by =</span> <span class="dv">10</span>)</code></pre></div>
 <p><img src="04_Visualisierungen_files/figure-html/unnamed-chunk-4-1.png" width="60%" style="display: block; margin: auto;"></p>
-<p>Sieht schon schöner aus. Aber auch in der Funktion <code>ggparplot()</code> selber, können wir einige Anpassungen vornehmen. Wenn man die Reihenfolge verändern möchte, benutzt man <code>order</code> und für das Verändern der Säulenbreite <code>width</code>.</p>
+<p>Das sieht jetzt schon schöner aus. Aber auch in der Funktion <code>ggparplot()</code> selber, können wir einige Anpassungen vornehmen. Wenn man die Reihenfolge verändern möchte, benutzt man <code>order</code> und für das Verändern der Säulenbreite <code>width</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot &lt;-<span class="st"> </span><span class="kw">ggbarplot</span>(<span class="dt">data =</span> df, 
           <span class="dt">x =</span> <span class="st">"Person"</span>,
           <span class="dt">y =</span> <span class="st">"Gesamt"</span>, 
@@ -197,7 +197,7 @@
           <span class="dt">palette =</span> <span class="st">"grey"</span>,
           <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="fl">0.8</span>))</code></pre></div>
 <p><img src="04_Visualisierungen_files/figure-html/unnamed-chunk-6-1.png" width="60%" style="display: block; margin: auto;"></p>
-<p>Bis auf die Legende schon wunderschön. Zum Anpassen mit <code>ggpar()</code> speichern wir den Graphen als <code>paired</code> ab. Das Argument <code>ylim()</code> definiert die y-Achse von 0 bis 5, <code>legend</code> die Position (erster Wert für Höhe auf x-Achse, zweiter für y-Achse), <code>legend.title</code> für den Titel der legende und schließlich <code>font.legend</code> für die so wichtige Schriftgröße.</p>
+<p>Bis auf die Legende schon wunderschön. Zum Anpassen mit <code>ggpar()</code> speichern wir den Graphen als <code>paired</code> ab. Das Argument <code>ylim()</code> definiert die y-Achse von 0 bis 5, <code>legend</code> die Position (erster Wert für Höhe auf x-Achse, zweiter für y-Achse), <code>legend.title</code> für den Titel der Legende und schließlich <code>font.legend</code> für die so wichtige Schriftgröße.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggpar</span>(<span class="dt">p =</span> paired,
       <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">5</span>),
       <span class="dt">legend =</span> <span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.9</span>),
@@ -213,7 +213,7 @@
           <span class="dt">x =</span> <span class="st">"Extraversion"</span>, 
           <span class="dt">y =</span> <span class="st">"Neurotizismus"</span>)</code></pre></div>
 <p><img src="04_Visualisierungen_files/figure-html/unnamed-chunk-9-1.png" width="60%" style="display: block; margin: auto;"></p>
-<p>Man kann auf einfache Art und Weise zusätzliche Informationen wie eine Regressiongerade, das Konfidenzintervall oder einen Korrelationskoeffezienten hinzufügen. Das Argument <code>cor.method</code> für die Art der Korrelation, <code>conf.int</code> für das Konfidenzintervall, <code>add</code> für die Regressionsgerade, <code>add.params</code> zum anpassen der Regressionsgerade (auch hier müssen die Argumente genau in dieser Form innerhalb von <code>list()</code> stehen), <code>size</code> für die Größe der Punkte, <code>shape</code> für die Form und schließlich <code>color</code> für die Farbe.</p>
+<p>Man kann auf einfache Art und Weise zusätzliche Informationen wie eine Regressiongerade, das Konfidenzintervall oder einen Korrelationskoeffezienten hinzufügen. Das Argument <code>cor.method</code> für die Art der Korrelation, <code>conf.int</code> für das Konfidenzintervall, <code>add</code> für die Regressionsgerade, <code>add.params</code> zum Anpassen der Regressionsgerade (auch hier müssen die Argumente genau in dieser Form innerhalb von <code>list()</code> stehen), <code>size</code> für die Größe der Punkte, <code>shape</code> für die Form und schließlich <code>color</code> für die Farbe.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggscatter</span>(<span class="dt">data =</span> big_five, 
           <span class="dt">x =</span> <span class="st">"Extraversion"</span>, 
           <span class="dt">y =</span> <span class="st">"Neurotizismus"</span>, 
@@ -247,7 +247,7 @@
 <div id="histogramm" class="section level1">
 <h1 class="hasAnchor">
 <a href="#histogramm" class="anchor"></a>Histogramm</h1>
-<p>Histogramme benötigen kein <code>y</code> Argument, da dort die Häufigkeiten abgebildet sind. Das Argument <code>bins</code> ist besonders wichtig, da die dargestellt Informationen über die Häufigkeiten in Abhängigkeit der Anzahl der bins (Säulen) stark variieren kann.</p>
+<p>Histogramme benötigen kein <code>y</code> Argument, da dort die Häufigkeiten abgebildet sind. Das Argument <code>bins</code> ist besonders wichtig, da die dargestellten Informationen über die Häufigkeiten in Abhängigkeit der Anzahl der bins (Säulen) stark variieren können.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gghistogram</span>(<span class="dt">data =</span> big_five, 
             <span class="dt">x =</span> <span class="st">"Neurotizismus"</span>,
             <span class="dt">bins =</span> <span class="dv">20</span>)</code></pre></div>
@@ -264,7 +264,7 @@
 <div id="anova-plot" class="section level2">
 <h2 class="hasAnchor">
 <a href="#anova-plot" class="anchor"></a>ANOVA Plot</h2>
-<p>Eine Besonderheit stellt hierbei der <em>ANOVA Plot</em> dar, was nichts anderes als ein einfacher Mittelwertsvergleich ist. Exemplarisch sei dies an der Unterschiedlichen Ausprägung von Selbsttranszendenz zwischen den Geschlechtern innerhalb der Familienstände gezeigt. Das Argument <code>linetype</code> ändert wenig überraschend die Art der Linie. Entscheidend ist das Argument <code>add</code>, weil uns nur die Mittelwerte interessieren. Das Argument <code>size</code> verändert optional die größte der Linien.</p>
+<p>Eine Besonderheit stellt hierbei der <em>ANOVA Plot</em> dar, was nichts anderes als ein einfacher Mittelwertsvergleich ist. Exemplarisch sei dies an der unterschiedlichen Ausprägung von Selbsttranszendenz zwischen den Geschlechtern innerhalb der Familienstände gezeigt. Das Argument <code>linetype</code> ändert wenig überraschend die Art der Linie. Entscheidend ist das Argument <code>add</code>, weil uns nur die Mittelwerte interessieren. Das Argument <code>size</code> verändert optional die Dicke der Linien.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggline</span>(<span class="dt">data =</span> indonesisch,
        <span class="dt">x =</span> <span class="st">"Geschlecht"</span>,
        <span class="dt">y =</span> <span class="st">"Selbsttranszendenz"</span>,

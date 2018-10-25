@@ -4,9 +4,9 @@
 #' @param fa Data.frame oder tibble mit numerischen Spalten.
 #' @return Scree Plot
 #' @examples
-#' NOT RUN:
+#' \dontrun{
 #' scree_plot(dataset)
-#' END NOT RUN:
+#' }
 #' @export
 scree_plot <- function(fa) {
 

@@ -7,12 +7,10 @@
 #' @param dpi Auflösung.
 #' @return Jpegs
 #' @examples
-#' NOT RUN:
-#'
+#' \dontrun{
 #' plots <- list(a = plot1, b = plot2)
 #' ggsave_all(plots)
-#'
-#' END NOT RUN:
+#' }
 #' @export
 ggsave_all <- function(list, width = 5, height = 5, dpi = 500) {
   list %>%

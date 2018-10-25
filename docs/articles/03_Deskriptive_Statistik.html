@@ -100,7 +100,7 @@
   </ul>
 </li>
 <li>
-  <a href="../reference/index.html">Funktionen</a>
+  <a href="../reference/index.html">Dokumentation</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -123,7 +123,7 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Deskriptive Statistik</h1>
-            <h3 class="subtitle">R für empirische Wissenschaften v1.0.3</h3>
+            <h3 class="subtitle">R für empirische Wissenschaften v1.0.2</h3>
                         <h4 class="author">Jan Philipp Nolte</h4>
             
       
@@ -145,14 +145,26 @@
 <a href="#deskriptive-statistik" class="anchor"></a>Deskriptive Statistik</h1>
 <p>Wir nehmen wieder den Datensatz aus dem letzten Kapitel mit den fünf Persönlichkeitsfaktoren. Das <code>skimr</code> Package enthält die Funktion <code><a href="http://www.rdocumentation.org/packages/skimr/topics/skim">skim()</a></code>, die wir wie gewohnt in einer Pipe ausführen können. Zuerst laden wir das Package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(skimr)</code></pre></div>
-<p>Der Funktion muss kein weiteres Argument übergeben werden, weil alle Spalten analysiert werden. Es werden Informationen über Zeilen- und Spaltenzahl, Anzahl an fehlenden Werten, übliche deskriptive Maße sowie ein Histogram über die Verteilung der jeweiligen Werte ausgegeben. Für einen ersten Überblick optimal. Da der Output im Internet und im PDF nicht richtig abgebildet werden kann, wird der Output hier ausgespart. Aber probiere es selbst einmal.</p>
+<p>Der Funktion muss kein weiteres Argument übergeben werden, weil alle Spalten analysiert werden. Es werden Informationen über Zeilen- und Spaltenzahl, Anzahl an fehlenden Werten, übliche deskriptive Maße sowie ein Histogram über die Verteilung der jeweiligen Werte ausgegeben – für einen ersten Überblick optimal. Da der Output im Internet und im PDF nicht richtig abgebildet werden kann, wird der Output hier ausgespart. Aber probiere es selbst einmal.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big_five <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/skimr/topics/skim">skim</a></span>()</code></pre></div>
 <p>Natürlich können wir auch hier mit <code>group_by()</code> den Datensatz in die jeweiligen Untergruppen unterteilen.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big_five <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(Geschlecht) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/skimr/topics/skim">skim</a></span>()</code></pre></div>
-<p>Schauen wir uns den Output einmal genauer an. Was ist denn da mit dem Alter los? Maximales Alter ist 1995? Da hat wohl jemand sein Geburtsjahr und nicht sein Alter in Jahren angegeben. Schauen wir mal, ob mehrere unrealistische Alter angegeben wurden.</p>
+<p>Es gibt selbstververständlich auch eine Funktion aus dem <code>tidyverse</code> für die deskriptive Statistik. Möchten wir die Anzahl der Personen, den Mittelwert des Alters, deren Standardabweichung, den Standardfehler sowie Maximum und Minimum ausgegeben haben, benutzen wir <code>summarise()</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big_five <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N =</span> <span class="kw">n</span>(), 
+            <span class="dt">Mittelwert =</span> <span class="kw">mean</span>(Alter),
+            <span class="dt">SD =</span> <span class="kw">sd</span>(Alter),
+            <span class="dt">SE =</span> SD <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(N), 
+            <span class="dt">Minimum =</span> <span class="kw">min</span>(Alter),
+            <span class="dt">Maximum =</span> <span class="kw">max</span>(Alter))</code></pre></div>
+<pre><code>## # A tibble: 1 x 6
+##       N Mittelwert    SD    SE Minimum Maximum
+##   &lt;int&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1   200       45.9  195.  13.8      13    1995</code></pre>
+<p>mit <code>n()</code> für die Anzahl, <code>mean()</code> für den Mittelwert, <code>sd()</code> für die Standardabweichung, <code>sqrt()</code> für die Quadratwurzel, <code>min()</code> für das Minimum und <code>max()</code> für das Maximum. Schauen wir uns den Output einmal genauer an. Was ist denn da mit dem Alter los? Maximales Alter ist 1995? Da hat wohl jemand sein Geburtsjahr und nicht sein Alter in Jahren angegeben. Schauen wir mal, ob mehrere unrealistische Alter angegeben wurden.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big_five <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(Alter <span class="op">&gt;</span><span class="st"> </span><span class="dv">150</span>) </code></pre></div>
 <pre><code>## # A tibble: 2 x 8
@@ -164,30 +176,22 @@
 <p>Wie man sieht, haben nur zwei Personen das Eintragen falsch verstanden. Ändern wir das mit der bereits gelernten <code>if_else()</code> Funktion kurz ab. Für alle Personen, die ein Alter größer als 150 eingetragen haben, wird 2018 minus das angegebene Geburtsjahr gerechnet und für die Restlichen nur das richtig eingetragene Alter zurückgegeben.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big_five &lt;-<span class="st"> </span>big_five <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Alter =</span> <span class="kw">if_else</span>(Alter <span class="op">&gt;</span><span class="st"> </span><span class="dv">150</span>, <span class="dv">2018</span> <span class="op">-</span><span class="st"> </span>Alter, Alter)) </code></pre></div>
-<p>Wir merken sofort, wie eng die Datenvorbereitung mit der deskriptiven Statistik verknüpft ist. In der Regel merkt man erst beim Erkunden des Datensatzes, was noch alles verändert werden muss, damit man die geplanten Rechnung durchführen kann.</p>
-<p>Es gibt natürlich auch eine Funktion aus dem <code>tidyverse</code> für die deskriptive Statistik. Möchten wir die Anzahl der Personen, den Mittelwert des Alters, deren Standardabweichung und Standardfehler ausgegeben haben, benutzen wir <code>summarise()</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big_five <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N =</span> <span class="kw">n</span>(), 
-            <span class="dt">Mittelwert =</span> <span class="kw">mean</span>(Alter),
-            <span class="dt">SD =</span> <span class="kw">sd</span>(Alter),
-            <span class="dt">SE =</span> SD <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(N))</code></pre></div>
-<pre><code>## # A tibble: 1 x 4
-##       N Mittelwert    SD    SE
-##   &lt;int&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1   200       26.5  11.3 0.801</code></pre>
-<p>mit <code>n()</code> für die Anzahl, <code>mean()</code> für den Mittelwert, <code>sd()</code> für die Standardabweichung und <code>sqrt()</code> für die Quadratwurzel. Für die selben Statistiken pro Geschlecht, benutzen wir wieder <code>group_by()</code>.</p>
+<p>Für die selben Statistiken pro Geschlecht benutzen wir wieder <code>group_by()</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big_five <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(Geschlecht) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N =</span> <span class="kw">n</span>(), 
             <span class="dt">Mittelwert =</span> <span class="kw">mean</span>(Alter),
             <span class="dt">SD =</span> <span class="kw">sd</span>(Alter),
-            <span class="dt">SE =</span> SD <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(N))</code></pre></div>
-<pre><code>## # A tibble: 2 x 5
-##   Geschlecht     N Mittelwert    SD    SE
-##   &lt;chr&gt;      &lt;int&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 f            118       25.9  11.3  1.04
-## 2 m             82       27.3  11.3  1.25</code></pre>
-<p>Nun kommen wir zur alles entscheidenen Frage. Wer hat denn nun die Tipprunde gewonnen? Zur schöneren Ausgabe benutzen wir die bereits kennengelernte <code>arrange()</code> Funktion.</p>
+            <span class="dt">SE =</span> SD <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(N),
+            <span class="dt">Minimum =</span> <span class="kw">min</span>(Alter),
+            <span class="dt">Maximum =</span> <span class="kw">max</span>(Alter))</code></pre></div>
+<pre><code>## # A tibble: 2 x 7
+##   Geschlecht     N Mittelwert    SD    SE Minimum Maximum
+##   &lt;chr&gt;      &lt;int&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 f            118       25.9  11.3  1.04      14      60
+## 2 m             82       27.3  11.3  1.25      13      59</code></pre>
+<p>Wir merken sofort, wie eng die Datenvorbereitung mit der deskriptiven Statistik verknüpft ist. In der Regel merkt man erst beim Erkunden des Datensatzes, was noch alles verändert werden muss, damit man die geplanten Rechnung durchführen kann.</p>
+<p>Nun kommen wir zur alles entscheidenen Frage: Wer hat denn nun die Tipprunde gewonnen? Zur schöneren Ausgabe benutzen wir die bereits kennengelernte <code>arrange()</code> Funktion.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tipp_wm <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(Person) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Gesamtpunktzahl =</span> <span class="kw">sum</span>(Punkte)) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -201,11 +205,11 @@
 ## 4 Thomas_Bayes              48
 ## 5 Jerzy_Neyman              40
 ## 6 Egon_Pearson              33</code></pre>
-<p>Alice hat gewonnen! Juhu!</p>
+<p>Alice hat gewonnen! Juhu! :)</p>
 <div id="umgang-mit-fehlenden-werten" class="section level2">
 <h2 class="hasAnchor">
 <a href="#umgang-mit-fehlenden-werten" class="anchor"></a>Umgang mit fehlenden Werten</h2>
-<p>Was aber nun, wenn nicht alle Werte vorhanden sind? Im Datensatz zur Tipp WM haben manche Tipper teilweise vergessen, ihren Tipp abzugeben. Solche fehlenden Werte nennt man NAs (not available). NAs können zu Fehlermeldungen führen. Es gibt verschiedene Möglichkeiten mit NAs umzugehen. Welche man verwendet, hängt stark vom Kontext ab.</p>
+<p>Was aber nun, wenn nicht alle Werte vorhanden sind? Im Datensatz zur Tipp WM haben manche Tipper teilweise vergessen, ihren Tipp abzugeben. Solche fehlenden Werte nennt man NAs (not available). NAs können zu Fehlermeldungen führen. Es gibt verschiedene Möglichkeiten, mit NAs umzugehen. Welche man verwendet, hängt stark vom Kontext ab.</p>
 <p>Möchte man zum Beispiel nur den Mittelwert einer Variable berechnen, kann man bei der Funktion <code>mean()</code> das Argument <code>na.rm</code> auf <code>TRUE</code> setzen.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tipp_wm <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Mittelwert =</span> <span class="kw">mean</span>(Punkte, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre></div>
@@ -240,8 +244,6 @@
 <li><code>quantile()</code></li>
 <li><code>var()</code></li>
 <li><code>median()</code></li>
-<li><code>min()</code></li>
-<li><code>max()</code></li>
 </ul>
 </div>
 </div>

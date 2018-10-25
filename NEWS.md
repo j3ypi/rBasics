@@ -17,5 +17,5 @@
 
 * R für Psychologen: erster Release
 * Unterteilung des Tutorials in
-   * Einführung
-   * Die Nächsten Schritte
+    * Einführung
+    * Die Nächsten Schritte

@@ -10,8 +10,8 @@
   \item{Person}{Tipper}
   \item{Tipp}{Tipp}
   \item{Ergebnis}{Wahres Ergebnis}
-  \item{Tipp_Richtung}{Getippte Richtung: S / N / U}
-  \item{Wahre_Richtung}{Wahre Richtung: S / N / U}
+  \item{Tipp_Richtung}{Getippte Richtung: S/N/U}
+  \item{Wahre_Richtung}{Wahre Richtung: S/N/U}
   \item{Art}{Art des Spieles}
 }}
 \source{

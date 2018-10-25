@@ -100,7 +100,7 @@
   </ul>
 </li>
 <li>
-  <a href="../reference/index.html">Funktionen</a>
+  <a href="../reference/index.html">Dokumentation</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -123,7 +123,7 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Datenvorbereitung</h1>
-            <h3 class="subtitle">R für empirische Wissenschaften v1.0.3</h3>
+            <h3 class="subtitle">R für empirische Wissenschaften v1.0.2</h3>
                         <h4 class="author">Jan Philipp Nolte</h4>
             
       
@@ -138,39 +138,40 @@
 <div id="einfuhrung" class="section level1">
 <h1 class="hasAnchor">
 <a href="#einfuhrung" class="anchor"></a>Einführung</h1>
-<p>Die Methoden zur Datenvorbereitung zu lernen, ist der mit Abstand wichtigste und schwierigste Schritt auf dem Weg R in der Praxis anwenden zu können. Deswegen ist dieser Teil auch der umfangreichste und mit einer interaktiven Übung am Ende versehehn, an der Du Dein Wissen festigen kannst. Allerdings liegt in der Datenvorbereitung auch die größte Stärke im Verleich zu Programmen wie SPSS. Bevor wir mit der <a href="#datenvorbereitung">Datenvorbereitung</a> beginnen, müssen wir uns jedoch noch verschiedene Themen aneignen.</p>
+<p>Die Methoden zur Datenvorbereitung zu lernen, ist der mit Abstand wichtigste und schwierigste Schritt auf dem Weg, R in der Praxis anwenden zu können. Deswegen ist dieser Teil auch der umfangreichste und mit einer interaktiven Übung am Ende versehen, an der Du Dein Wissen festigen kannst. Allerdings liegt in der Datenvorbereitung auch die größte Stärke im Vergleich zu Programmen wie SPSS. Bevor wir mit der <a href="#datenvorbereitung">Datenvorbereitung</a> beginnen, müssen wir uns jedoch noch verschiedene Themen aneignen.</p>
 </div>
 <div id="projektorientierter-workflow" class="section level1">
 <h1 class="hasAnchor">
 <a href="#projektorientierter-workflow" class="anchor"></a>Projektorientierter Workflow</h1>
-<p>Projekte sind ein modernes Konzept, um R Scripte und Datensätze zu organisieren. Es gibt verschiedene Vorteile durch Projekte. Man kann zwischen Projekten innerhalb von R oben rechts einfach wechseln, der Ort von Datensätzes muss nicht mehr in Abhängigkeit vom eigenen Computer angepasst werden und Projekte sind aufgrund von in sich abgeschlossenen Umgebungen replizierbar. Aber wie erstellt man ein Projekt?</p>
+<p>Projekte sind ein modernes Konzept, um R Scripte und Datensätze zu organisieren. Es gibt verschiedene Vorteile durch Projekte. Man kann zwischen Projekten innerhalb von R oben rechts einfach wechseln, der Ort von Datensätzen muss nicht mehr in Abhängigkeit vom eigenen Computer angepasst werden und Projekte sind aufgrund von in sich abgeschlossenen Umgebungen replizierbar. Aber wie erstellt man ein Projekt?</p>
 <ol style="list-style-type: decimal">
-<li><p>Oben rechts befindet sich ein Reiter namens <code>Project: (None)</code>. Klicke den Reiter und klicke auf <code>New Project...</code> . In dem Reiter kann man auch schon bestehende Projekte sehen. Bei Klick auf die Projekte wird das Projekt sofort mit allen zuvor geöffneten R Scripten geöffnet. Ganz ohne suchen des Ordners auf Deinem Computer. <img src="images/rproj1.jpg" width="35%" style="display: block; margin: auto;"></p></li>
+<li><p>Oben rechts befindet sich ein Reiter namens <code>Project: (None)</code>. Klicke auf den Reiter und klicke auf <code>New Project...</code> . In dem Reiter kann man auch schon bestehende Projekte sehen. Bei Klick auf die Projekte wird das Projekt sofort mit allen zuvor geöffneten R Scripten geöffnet. Ganz ohne suchen des Ordners auf Deinem Computer. <img src="images/rproj1.jpg" width="35%" style="display: block; margin: auto;"></p></li>
 <li><p>Nun sehen wir drei Möglichkeiten. Wir entscheiden uns exemplarisch für <code>New Directory</code>, was einen neuen Ordner mit einer Projektdatei erstellen wird. <img src="images/rproj2.jpg" width="50%" style="display: block; margin: auto;"></p></li>
 <li>Bevor die Projektdatei erstellt wird, müsenn wir noch spezifizieren, welchen Projektyp wir haben möchten. Hier wählen wir <code>New Project</code>. <img src="images/rproj3.jpg" width="50%" style="display: block; margin: auto;">
 </li>
 <li><p>Nun müssen wir noch den Namen des neuen Ordners festlegen und angeben, wo auf dem Computer der Ordner erstellt werden soll. In Zukunft kann der Ordner nach belieben verschoben werden. Das wichtige ist die nun in diesem Ordner enthaltene Projektdatei (<code>projektname.rproj</code>). <img src="images/rproj4.jpg" width="50%" style="display: block; margin: auto;"></p></li>
 </ol>
-<p>Wenn Du nun das Package <code>here</code> lädst, findet das Package sofort den relativen Pfad zu deiner Projektdatei heraus. Was bedeutet das? Egal wo sich der Ordner befindet (Desktop, Downloads Ordner oder tief verschachtel in Ordnerstrukturen), <code>here</code> findet den richtigen Weg. Zu wissen, wo sich das benutze R Script auf dem Computer befindet, ist kriegsentscheident zum Einlesen des Datensatzes. Durch die Projektdatei braucht man also nie wieder das Working Directory per Hand mit <code>setwd()</code> festzulegen.</p>
-<p>Der erste Schritt ist also immer das erstellen eines R Projekts und das Laden des Packages am Anfang jedes neuen Scripts, mit dem man einen Datensatz einlesen möchte.</p>
+<p>Wenn Du nun das Package <code>here</code> lädst, findet das Package sofort den relativen Pfad zu Deiner Projektdatei heraus. Was bedeutet das? Egal wo sich der Ordner befindet (Desktop, Downloads Ordner oder tief verschachtel in Ordnerstrukturen), <code>here</code> findet den richtigen Weg. Zu wissen, wo sich das benutze R Script auf dem Computer befindet, ist kriegsentscheidend zum Einlesen des Datensatzes. Durch die Projektdatei braucht man also nie wieder das Working Directory per Hand mit <code>setwd()</code> festzulegen.</p>
+<p>Der erste Schritt ist also immer das Erstellen eines R Projekts und das Laden des Packages am Anfang jedes neuen Scripts, mit dem man einen Datensatz einlesen möchte.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(here)</code></pre></div>
 <p>Aber wie kann man den Datensatz nun einlesen?</p>
 </div>
-<div id="import-export" class="section level1">
+<div id="importexport" class="section level1">
 <h1 class="hasAnchor">
-<a href="#import-export" class="anchor"></a>Import / Export</h1>
+<a href="#importexport" class="anchor"></a>Import/Export</h1>
 <p>Auch wenn in diesem Tutorial die Datensätze bereits im Package enthalten sind, muss man in den meisten Fällen den Datensatz erst einmal einlesen. Datensätze können in verschiedenen Formaten vorliegen. Dies ist vor allem abhängig davon, mit welchen Programmen Unternehmen, Universitäten oder Kollegen arbeiten. Einige Beispiele sind:</p>
 <ul>
 <li>R (<code>.RData</code> | <code>.rda</code> | <code>.rds</code>)</li>
 <li>Excel (<code>.xlsx</code> | <code>.xls</code>)</li>
 <li>SPSS (<code>.sav</code>)</li>
+<li>Stata (<code>.dta</code>)</li>
 <li>Comma seperated values (<code>.csv</code>)</li>
 <li>Tab seperated values (<code>.tsv</code>)</li>
 </ul>
 <div id="einlesen-eines-datensatzes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#einlesen-eines-datensatzes" class="anchor"></a>Einlesen eines Datensatzes</h2>
-<p>Eingelesen werden können sämtliche Dateientypen mithilfe von <code>import()</code> aus dem <code>rio</code> Package. Dabei erkennt die Funktion die Dateiendung und übernimmt hinter den Kulissen alles Weitere. Damit der Datensatz als tibble (siehe Kapitel <code>Extras</code>) eingelesen wird, muss man <code>setclass = "tbl"</code> setzen. Für den Moment musst du Dir beim <code>setclass</code> Argument noch nichts denken (aber trotzdem verwenden!).</p>
+<p>Eingelesen werden können sämtliche Dateientypen mithilfe von <code>import()</code> aus dem <code>rio</code> Package. Dabei erkennt die Funktion die Dateiendung und übernimmt hinter den Kulissen alles weitere. Damit der Datensatz als tibble (siehe Kapitel <code>Extras</code>) eingelesen wird, muss man <code>setclass = "tbl"</code> setzen. Für den Moment musst Du Dir beim <code>setclass</code> Argument noch nichts denken (aber trotzdem verwenden!).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rio)
 <span class="kw">import</span>(<span class="st">"test.xlsx"</span>, <span class="dt">setclass =</span> <span class="st">"tbl"</span>)</code></pre></div>
 <p>Dabei muss sich das <code>test.xlsx</code> Excel Sheet innerhalb des selben Ordners wie die Projektdatei befinden. Der zweite Schritt ist also immer <code>rio</code> zu laden, da sonst die Funktionen nicht aufgerufen werden können.</p>
@@ -178,29 +179,29 @@
 <div id="einlesen-multipler-datensatze" class="section level2">
 <h2 class="hasAnchor">
 <a href="#einlesen-multipler-datensatze" class="anchor"></a>Einlesen multipler Datensätze</h2>
-<p>Nicht selten kommt es vor, dass man nicht nur einen, sondern gleich mehrere Datensätze einlesen möchte. Dabei werden die verschiedenen Files in einer Liste (mehr zu Listen im Kapitel <code>Extras</code>) gespeichert. <code>dir()</code> (für directory) listet alle Files innerhalb eines Ordners auf.</p>
+<p>Nicht selten kommt es vor, dass man nicht nur einen, sondern gleich mehrere Datensätze einlesen möchte. Dabei werden die verschiedenen Files in einer Liste (mehr zu Listen im Kapitel <code>Extras</code>) gespeichert. <code>dir()</code> (für directory) listet alle Files innerhalb eines Ordners auf. Der <a href="Zuweisungspfeil">Pfeil</a> wird später erklärt.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">files &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="dt">pattern =</span> <span class="st">"csv$"</span>)</code></pre></div>
-<p>Das <code>pattern</code> Argument ist optional. Man damit zum Beispiel die Dateiendung spezifizieren. Das Dollar-Zeichen am Ende stellt sicher, dass <em>csv</em> am Ende des Dateinamen steht. Zum importieren verwenden wir hier <code>import_list()</code>.</p>
+<p>Das <code>pattern</code> Argument ist optional. Man kann damit zum Beispiel die Dateiendung spezifizieren. Das Dollar-Zeichen am Ende stellt sicher, dass <em>csv</em> am Ende des Dateinamen steht. Zum Importieren verwenden wir hier <code>import_list()</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">import_list</span>(files, <span class="dt">setclass =</span> <span class="st">"tbl"</span>)</code></pre></div>
-<p>Würden die Dateien in einem Unterordner <code>data</code> liegen könnte man mir der Funktion <code><a href="http://www.rdocumentation.org/packages/here/topics/here">here()</a></code> aus dem gleichnamigen Package den Pfad dahin spezifizieren.</p>
+<p>Würden die Dateien in einem Unterordner <code>data</code> liegen, könnte man mit der Funktion <code><a href="http://www.rdocumentation.org/packages/here/topics/here">here()</a></code> aus dem gleichnamigen Package den Pfad dahin spezifizieren.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">files &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/here/topics/here">here</a></span>(<span class="st">"data"</span>), <span class="dt">pattern =</span> <span class="st">"csv$"</span>)</code></pre></div>
 <p>Sind die Datensätze im selben Format, kann man <code>import_list()</code> das Argument <code>rbind</code> geben, sodass alle Datensätze zeilenweise zusammengebunden werden.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">import_list</span>(files, <span class="dt">setclass =</span> <span class="st">"tbl"</span>, <span class="dt">rbind =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">import_list</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/here/topics/here">here</a></span>(<span class="st">"data"</span>, files), <span class="dt">setclass =</span> <span class="st">"tbl"</span>, <span class="dt">rbind =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><code>import_list()</code> funktioniert übrigens auch auch bei Excel Workbooks, die mehrere Excel Sheets beinhalten. Dabei wird jedes Sheet in einem Listenelement gespeichert. Für den Moment sind Listen für uns allerdings nicht weiter von Bedeutung.</p>
 </div>
 <div id="speichern" class="section level2">
 <h2 class="hasAnchor">
 <a href="#speichern" class="anchor"></a>Speichern</h2>
-<p>Auch das speichern von Datensätzen könnte in R durch das <code>rio</code> Package intuitiver nicht sein. Anstelle von <code>import()</code> muss man lediglich <code>export()</code> benutzen. Das erste Argument der Funktion ist der Datensatzname, mit dem man innerhalb von R auf selbigen zugreift. Das Zweite der gewünschte Dateienname.</p>
+<p>Auch das Speichern von Datensätzen könnte in R durch das <code>rio</code> Package intuitiver nicht sein. Anstelle von <code>import()</code> muss man lediglich <code>export()</code> benutzen. Das erste Argument der Funktion ist der Datensatzname, mit dem man innerhalb von R auf selbigen zugreift. Das zweite der gewünschte Dateienname.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">export</span>(datensatz, <span class="st">"test.xlsx"</span>)</code></pre></div>
 </div>
 </div>
 <div id="zuweisungspfeil" class="section level1">
 <h1 class="hasAnchor">
 <a href="#zuweisungspfeil" class="anchor"></a>Zuweisungspfeil</h1>
-<p>Damit man den Datensatz auch speichert, muss man ihn einer Variable zuweisen. Dies macht man in R mit einem Zuweisungspfeil. Dabei wird die Variable in die lokale <strong>Environment</strong> gespeichert. Wichtig zu verstehen ist, dass in R nichts gespeichert wird, wenn man es nicht einer Variable zuweist. Alles andere ist nur Schall und Rauch.</p>
+<p>Damit man den Datensatz auch speichert, muss man ihn einer Variable zuweisen. Dies macht man in R mit einem Zuweisungspfeil. Dabei wird die Variable in die lokale <strong>Environment</strong> gespeichert. Wichtig zu verstehen ist, dass in R nichts gespeichert wird, wenn man es nicht einer Variable zuweist.</p>
 <p>Variablen kann man grundsätzlich fast so benennen wie man möchte. Man darf nur nicht mit einer Zahl anfangen oder nach einem Punkt direkt eine Zahl als Namen wählen wie bei <code>.2VariablenName</code>. Auf Umlaute sollte im Zusammenhang mit Programmiersprachen ebenfalls <strong>immer</strong> verzichtet werden. In diesem Fall ist der Variablenname <code>tipp_wm</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tipp_wm &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">"tipp_wm.xslx"</span>, <span class="dt">setclass =</span> <span class="st">"tbl"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tipp_wm &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">"tipp_wm.xlsx"</span>, <span class="dt">setclass =</span> <span class="st">"tbl"</span>)</code></pre></div>
 <p>Auch bei anderen Befehlen, die wir später kennenlernen, ist der Zuweisungspfeil zentral, um Ergebnisse zu speichern und sie später wieder zu verwenden.</p>
 </div>
 <div id="der-tidyverse-ansatz" class="section level1">
@@ -220,7 +221,7 @@
 <div id="datentypen" class="section level2">
 <h2 class="hasAnchor">
 <a href="#datentypen" class="anchor"></a>Datentypen</h2>
-<p>Es gibt verschiedene Datentypen, die in den Spalten gespeichert werden. Die drei Hauptdatentypen, seien hier aufgelistet. In R werden sie etwas untypisch im Vergleich zu anderen Programmiersprachen benannt. In Klammern steht die jeweilige Abkürzung.</p>
+<p>Es gibt verschiedene Datentypen, die in den Spalten gespeichert werden. Die drei Hauptdatentypen, sind hier aufgelistet. In R werden sie etwas untypisch im Vergleich zu anderen Programmiersprachen benannt. In Klammern steht die jeweilige Abkürzung.</p>
 <ul>
 <li>
 <code>numeric</code> (num / int / dbl): z.B. Alter, Gehalt</li>
@@ -254,53 +255,6 @@
 <p>Um den Datensatz ausgeben zu lassen, kannst Du einfach den Datensatznamen ausführen.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tipp_wm</code></pre></div>
 <pre><code>## # A tibble: 384 x 7
-##    Spieltag Person       Tipp  Ergebnis Tipp_Richtung Wahre_Richtung Art  
-##       &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;
-##  1        1 Thomas_Bayes 2:0   5:0      S             S              Grup~
-##  2        2 Thomas_Bayes 1:3   0:1      N             N              Grup~
-##  3        2 Thomas_Bayes 0:0   0:1      U             N              Grup~
-##  4        2 Thomas_Bayes 1:2   3:3      N             U              Grup~
-##  5        3 Thomas_Bayes 2:1   2:1      S             S              Grup~
-##  6        3 Thomas_Bayes 3:0   1:1      S             U              Grup~
-##  7        3 Thomas_Bayes 0:2   0:1      N             N              Grup~
-##  8        3 Thomas_Bayes 4:0   2:0      S             S              Grup~
-##  9        4 Thomas_Bayes 2:1   0:1      S             N              Grup~
-## 10        4 Thomas_Bayes 3:0   0:1      S             N              Grup~
-## # ... with 374 more rows</code></pre>
-<p>Wir sehen sofort, es gibt 384 Zeilen und 7 Spalten. Es werden immer nur die ersten 10 Werte angezeigt.</p>
-<ul>
-<li>Spieltag: Nummer des Spieltags. An jedem Spieltag haben 1 bis 4 Spiele statt gefunden.</li>
-<li>Person: Die 6 verschiedenen Tipper</li>
-<li>Tipp: Der abgegebene Tipp für das jeweilige Spiel</li>
-<li>Ergebnis: Das tatsächliche Ergebnis</li>
-<li>Tipp_Richtung: Tipp, ob Sieg / Niederlage oder Unentschieden ausgehend von der Heimmannschaft</li>
-<li>Wahre_Richtung: Tatsächliche Richtung, ob Sieg / Niederlage oder Unentschieden ausgehend von der Heimmannschaft</li>
-<li>Art: Art des Spiels (Gruppenphase, Achtelfinale, etc.)</li>
-</ul>
-<p>(Der Datensatz ist in der Form nicht <strong>tidy</strong>.)</p>
-<p>Du wirst schnell sehen, wie sehr sich die Methoden des <code>tidyverse</code> am normalen Englisch orientieren. Wenn wir zum Beispiel nur auf die Tipps von Reverent Bayes schauen möchten, können wir mit <code>filter()</code> einen einfach Filter setzen. Dabei müssen wir nur die Spalte mit der Information über die Person auswählen und mit einem doppelten Gleichheitszeichen abfragen, ob diese Herrn Bayes entspricht.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tipp_wm <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(Person <span class="op">==</span><span class="st"> "Thomas_Bayes"</span>)</code></pre></div>
-<pre><code>## # A tibble: 64 x 7
-##    Spieltag Person       Tipp  Ergebnis Tipp_Richtung Wahre_Richtung Art  
-##       &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;
-##  1        1 Thomas_Bayes 2:0   5:0      S             S              Grup~
-##  2        2 Thomas_Bayes 1:3   0:1      N             N              Grup~
-##  3        2 Thomas_Bayes 0:0   0:1      U             N              Grup~
-##  4        2 Thomas_Bayes 1:2   3:3      N             U              Grup~
-##  5        3 Thomas_Bayes 2:1   2:1      S             S              Grup~
-##  6        3 Thomas_Bayes 3:0   1:1      S             U              Grup~
-##  7        3 Thomas_Bayes 0:2   0:1      N             N              Grup~
-##  8        3 Thomas_Bayes 4:0   2:0      S             S              Grup~
-##  9        4 Thomas_Bayes 2:1   0:1      S             N              Grup~
-## 10        4 Thomas_Bayes 3:0   0:1      S             N              Grup~
-## # ... with 54 more rows</code></pre>
-<p>Wir sehen, dass nur noch 64 Spalten enthalten sind. So weit so gut, aber was ist dieses kryptische “Prozent, größer als, Prozent” ( <code>%&gt;%</code> )? Was erst einmal nach Hacken ala Mr. Robot aussieht, bindet ganz einfach nur zwei Code Zeilen aneinander. Wir werden gleich sehen, worin der große Vorteil davon besteht. Man bezeichnet diese Zeichnenkombination als <strong>Pipe</strong>. Am Anfang jeder Pipe steht immer der Name des Datensatz. In unserem Fall <code>tipp_wm</code>. Ab hier weiß R für alle mit der Pipe verbunden Funktionen, welcher Datensatz gemeint ist. Deswegen müssen wir <code>filter()</code> auch nicht noch einmal extra mitteilen, in welchen Datensatz nach der Spalte <code>Person</code> gesucht werden soll.</p>
-<p>Um dieses <em>Monster</em> zu erschaffen, muss man allerdings nicht immer % und &gt; und % einzelnd eingeben sondern kann einfach <code>crtl + shift + M</code> auf Windows oder <code>cmd + shift + M</code> auf Mac schreiben. Shortcuts sind des Programmieres bester Freund.</p>
-<p>Schauen wir uns direkt das nächste Beispiel an. Wollen wir nun die häufige Aufgabe ausführen, eine neue Spalte zu erstellen, können wir dies mit <code>mutate()</code> machen. Auch hier kann man sich den Befehl gut mit der deutschen Übersetzung des Wortes als etwas verändern, merken. Wie immer steht der Datensatzname ganz oben noch vor der ersten Pipe. Wie für alle kommenden Funktionen zur Datenmanipulation muss auch hier der Datensatzname nicht extra innerhalb von <code>mutate()</code> aufgerufen werden. Das geschieht alles hinter den Kulissen. In diesem Beispiel nehmen wir willkürlich die <code>Spieltag</code> Spalte und addieren Zeilenweise eine 1 hinzu (würde uns in der Praxis natürlich nichts bringen) und nennen diese neue Spalte kreativer Weise <code>Neue_Spalte</code>. Der Name vor dem Gleichheitszeichen ist immer der Name der neuen Spalte.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tipp_wm <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Neue_Spalte =</span> Spieltag <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</code></pre></div>
-<pre><code>## # A tibble: 384 x 8
 ##    Spieltag Person    Tipp  Ergebnis Tipp_Richtung Wahre_Richtung Art     
 ##       &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;   
 ##  1        1 Thomas_B~ 2:0   5:0      S             S              Gruppen~
@@ -313,6 +267,53 @@
 ##  8        3 Thomas_B~ 4:0   2:0      S             S              Gruppen~
 ##  9        4 Thomas_B~ 2:1   0:1      S             N              Gruppen~
 ## 10        4 Thomas_B~ 3:0   0:1      S             N              Gruppen~
+## # ... with 374 more rows</code></pre>
+<p>Wir sehen sofort, es gibt 384 Zeilen und 7 Spalten. Es werden immer nur die ersten 10 Werte angezeigt.</p>
+<ul>
+<li>Spieltag: Nummer des Spieltags. An jedem Spieltag haben 1 bis 4 Spiele statt gefunden.</li>
+<li>Person: Die 6 verschiedenen Tipper</li>
+<li>Tipp: Der abgegebene Tipp für das jeweilige Spiel</li>
+<li>Ergebnis: Das tatsächliche Ergebnis</li>
+<li>Tipp_Richtung: Tipp, ob Sieg/Niederlage oder Unentschieden ausgehend von der Heimmannschaft</li>
+<li>Wahre_Richtung: Tatsächliche Richtung, ob Sieg/Niederlage oder Unentschieden ausgehend von der Heimmannschaft</li>
+<li>Art: Art des Spiels (Gruppenphase, Achtelfinale, etc.)</li>
+</ul>
+<p>(Der Datensatz ist in der Form nicht <strong>tidy</strong>.)</p>
+<p>Du wirst schnell sehen, wie sehr sich die Methoden des <code>tidyverse</code> am normalen Englisch orientieren. Wenn wir zum Beispiel nur auf die Tipps von Reverent Bayes schauen möchten, können wir mit <code>filter()</code> einen einfach Filter setzen. Dabei müssen wir nur die Spalte mit der Information über die Person auswählen und mit einem doppelten Gleichheitszeichen abfragen, ob diese Herrn Bayes entspricht.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tipp_wm <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(Person <span class="op">==</span><span class="st"> "Thomas_Bayes"</span>)</code></pre></div>
+<pre><code>## # A tibble: 64 x 7
+##    Spieltag Person    Tipp  Ergebnis Tipp_Richtung Wahre_Richtung Art     
+##       &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;   
+##  1        1 Thomas_B~ 2:0   5:0      S             S              Gruppen~
+##  2        2 Thomas_B~ 1:3   0:1      N             N              Gruppen~
+##  3        2 Thomas_B~ 0:0   0:1      U             N              Gruppen~
+##  4        2 Thomas_B~ 1:2   3:3      N             U              Gruppen~
+##  5        3 Thomas_B~ 2:1   2:1      S             S              Gruppen~
+##  6        3 Thomas_B~ 3:0   1:1      S             U              Gruppen~
+##  7        3 Thomas_B~ 0:2   0:1      N             N              Gruppen~
+##  8        3 Thomas_B~ 4:0   2:0      S             S              Gruppen~
+##  9        4 Thomas_B~ 2:1   0:1      S             N              Gruppen~
+## 10        4 Thomas_B~ 3:0   0:1      S             N              Gruppen~
+## # ... with 54 more rows</code></pre>
+<p>Wir sehen, dass nur noch 64 Spalten enthalten sind. So weit so gut, aber was ist dieses kryptische “Prozent, größer als, Prozent” ( <code>%&gt;%</code> )? Was erst einmal nach Hacken ala Mr. Robot aussieht, bindet ganz einfach nur zwei Code Zeilen aneinander. Wir werden gleich sehen, worin der große Vorteil davon besteht. Man bezeichnet diese Zeichnenkombination als <strong>Pipe</strong>. Am Anfang jeder Pipe steht immer der Name des Datensatz. In unserem Fall <code>tipp_wm</code>. Ab hier weiß R für alle mit der Pipe verbunden Funktionen, welcher Datensatz gemeint ist. Deswegen müssen wir <code>filter()</code> auch nicht noch einmal extra mitteilen, in welchen Datensatz nach der Spalte <code>Person</code> gesucht werden soll.</p>
+<p>Um dieses <em>Monster</em> zu erschaffen, muss man allerdings nicht immer % und &gt; und % einzelnd eingeben sondern kann einfach <code>crtl + shift + M</code> auf Windows oder <code>cmd + shift + M</code> auf Mac schreiben. Shortcuts sind des Programmierers bester Freund.</p>
+<p>Schauen wir uns direkt das nächste Beispiel an. Wollen wir nun die häufige Aufgabe ausführen, eine neue Spalte zu erstellen, können wir dies mit <code>mutate()</code> machen. Auch hier kann man sich den Befehl gut mit der deutschen Übersetzung des Wortes als etwas verändern, merken. Wie immer steht der Datensatzname ganz oben noch vor der ersten Pipe. Wie für alle kommenden Funktionen zur Datenmanipulation muss auch hier der Datensatzname nicht extra innerhalb von <code>mutate()</code> aufgerufen werden. Das geschieht alles hinter den Kulissen. In diesem Beispiel nehmen wir willkürlich die <code>Spieltag</code> Spalte und addieren Zeilenweise eine 1 hinzu (würde uns in der Praxis natürlich nichts bringen) und nennen diese neue Spalte kreativer Weise <code>Neue_Spalte</code>. Der Name vor dem Gleichheitszeichen ist immer der Name der neuen Spalte.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tipp_wm <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Neue_Spalte =</span> Spieltag <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</code></pre></div>
+<pre><code>## # A tibble: 384 x 8
+##    Spieltag Person Tipp  Ergebnis Tipp_Richtung Wahre_Richtung Art  
+##       &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;
+##  1        1 Thoma~ 2:0   5:0      S             S              Grup~
+##  2        2 Thoma~ 1:3   0:1      N             N              Grup~
+##  3        2 Thoma~ 0:0   0:1      U             N              Grup~
+##  4        2 Thoma~ 1:2   3:3      N             U              Grup~
+##  5        3 Thoma~ 2:1   2:1      S             S              Grup~
+##  6        3 Thoma~ 3:0   1:1      S             U              Grup~
+##  7        3 Thoma~ 0:2   0:1      N             N              Grup~
+##  8        3 Thoma~ 4:0   2:0      S             S              Grup~
+##  9        4 Thoma~ 2:1   0:1      S             N              Grup~
+## 10        4 Thoma~ 3:0   0:1      S             N              Grup~
 ## # ... with 374 more rows, and 1 more variable: Neue_Spalte &lt;dbl&gt;</code></pre>
 <p>Möchten wir nun bestimmte Spalten auswählen, können wir das einfach mit <code>select()</code> machen. Erneut nach genau dem selben Schema. Hier wählen wir die Spalten <code>Spieltag</code>, <code>Person</code> und <code>Ergebnis</code> aus. Man kann an dieser Stelle auch Spalten umbenennen, indem man den neuen Namen einfach vor den Spaltennamen schreibt. Wir machen exemplarisch aus <code>Person</code> einfach mal <code>Tipper</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tipp_wm <span class="op">%&gt;%</span><span class="st"> </span>
@@ -331,22 +332,22 @@
 ##  9        4 Thomas_Bayes 0:1     
 ## 10        4 Thomas_Bayes 0:1     
 ## # ... with 374 more rows</code></pre>
-<p>Manchmal möchte man aber Spalten umbennen und alle Spalten im Datensatz behalten. Wir erinnern uns, <code>select()</code> wählt nur die explizit genannten aus. Eine Lösung bietet <code>rename()</code> mit genau der gleichen Syntax. Nur werden hier alle weiteren Spalten behalten.</p>
+<p>Manchmal möchte man aber Spalten umbennen und alle Spalten im Datensatz behalten. Wir erinnern uns, <code>select()</code> wählt nur die explizit genannten aus. Eine Lösung bietet <code>rename()</code> mit genau der gleichen Syntax, nur werden hier alle weiteren Spalten behalten.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tipp_wm <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">rename</span>(<span class="dt">Tipper =</span> Person)</code></pre></div>
 <pre><code>## # A tibble: 384 x 7
-##    Spieltag Tipper       Tipp  Ergebnis Tipp_Richtung Wahre_Richtung Art  
-##       &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;
-##  1        1 Thomas_Bayes 2:0   5:0      S             S              Grup~
-##  2        2 Thomas_Bayes 1:3   0:1      N             N              Grup~
-##  3        2 Thomas_Bayes 0:0   0:1      U             N              Grup~
-##  4        2 Thomas_Bayes 1:2   3:3      N             U              Grup~
-##  5        3 Thomas_Bayes 2:1   2:1      S             S              Grup~
-##  6        3 Thomas_Bayes 3:0   1:1      S             U              Grup~
-##  7        3 Thomas_Bayes 0:2   0:1      N             N              Grup~
-##  8        3 Thomas_Bayes 4:0   2:0      S             S              Grup~
-##  9        4 Thomas_Bayes 2:1   0:1      S             N              Grup~
-## 10        4 Thomas_Bayes 3:0   0:1      S             N              Grup~
+##    Spieltag Tipper    Tipp  Ergebnis Tipp_Richtung Wahre_Richtung Art     
+##       &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;   
+##  1        1 Thomas_B~ 2:0   5:0      S             S              Gruppen~
+##  2        2 Thomas_B~ 1:3   0:1      N             N              Gruppen~
+##  3        2 Thomas_B~ 0:0   0:1      U             N              Gruppen~
+##  4        2 Thomas_B~ 1:2   3:3      N             U              Gruppen~
+##  5        3 Thomas_B~ 2:1   2:1      S             S              Gruppen~
+##  6        3 Thomas_B~ 3:0   1:1      S             U              Gruppen~
+##  7        3 Thomas_B~ 0:2   0:1      N             N              Gruppen~
+##  8        3 Thomas_B~ 4:0   2:0      S             S              Gruppen~
+##  9        4 Thomas_B~ 2:1   0:1      S             N              Gruppen~
+## 10        4 Thomas_B~ 3:0   0:1      S             N              Gruppen~
 ## # ... with 374 more rows</code></pre>
 <p>So weit so gut. Aber wozu brauchen wir nun diese kryptische Pipe? Es ist äußerst selten, dass man nur einen Befehl auf einmal anwenden möchte. Wenn wir zum Beispiel die drei gelernten Funktionen innerhalb eines Befehls kombinieren möchten, können wir diese einfach mit einer Pipe verbinden. Wir erstellen also zuerst eine neue Spalte, filtern alle Einträge von Bob heraus und schauen uns dann nur die drei Spalten <code>Person</code>, <code>Ergebnis</code> und <code>Neue_Spalte</code> an.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tipp_wm <span class="op">%&gt;%</span><span class="st"> </span>
@@ -384,7 +385,7 @@
 ## 5 Bob             64
 ## 6 Alice           64</code></pre>
 <p>Hier hat jede Person gleich viele Tipps abgegeben. Zumindest befinden sich gleich viele Zeilen für jede Person im Datensatz. Aufschluss über die Anzahl der NAs kriegen wir erst später (siehe Kapitel <code>Deskriptive Statistik</code>).</p>
-<p>Bei ANOVAs braucht man Kategorien nach denen man die abhängige Variable untersuchen kann. Was wäre, wenn wir untersuchen möchten, ob sich die erreichten Punktzahlen – also die Qualität der Tipps – zwischen Gruppenphase und KO-Phase verändert haben? In der Spalte <code>Art</code> gibt es allerdings die Ausprägungen <code>Gruppenphase</code>, <code>Achtelfinale</code>, <code>Viertelfinale</code>, <code>Halbfinale</code> und <code>Finale</code>. Alle Finalarten fallen in die Kategorie KO-Phase. Was wir brauchen, ist also eine neue Spalte, die immer <strong>wenn</strong> <code>Gruppenphase</code> in der Spalte <code>Art</code> steht, <code>Gruppe</code> beinhaltet und <strong>ansonsten</strong> <code>KO</code>. Erreichen können wir dies mit dem <code>if_else()</code> (engl. für wenn_ansonsten) Befehl. Als erstes Argument muss der Funktion die Bedingung gegeben werden, die erfüllt werden soll. Diese muss immer einen logischen Datentyp zurückgeben – also wahr oder falsch (<code>TRUE</code>, <code>FALSE</code>). Das zweite Argument ist das, was passieren soll, <strong>wenn</strong> die Bedingungen zutrifft. Das dritte Argument kümmert sich um alle <strong>sonstigen</strong> Fälle. Also <strong>wenn</strong> in der Spalte <code>Art</code> die <code>Gruppenphase</code> steht, trage <code>Gruppe</code> ein, ansonsten <code>KO</code>. Wir nennen diese neue Spalte <code>Phase</code>.</p>
+<p>Bei ANOVAs braucht man Kategorien, nach denen man die abhängige Variable untersuchen kann. Was wäre, wenn wir untersuchen möchten, ob sich die erreichten Punktzahlen – also die Qualität der Tipps – zwischen Gruppenphase und KO-Phase verändert haben? In der Spalte <code>Art</code> gibt es allerdings die Ausprägungen <code>Gruppenphase</code>, <code>Achtelfinale</code>, <code>Viertelfinale</code>, <code>Halbfinale</code> und <code>Finale</code>. Alle Finalarten fallen in die Kategorie KO-Phase. Was wir brauchen, ist also eine neue Spalte, die immer <strong>wenn</strong> <code>Gruppenphase</code> in der Spalte <code>Art</code> steht, <code>Gruppe</code> beinhaltet und <strong>ansonsten</strong> <code>KO</code>. Erreichen können wir dies mit dem <code>if_else()</code> (engl. für wenn_ansonsten) Befehl. Als erstes Argument muss der Funktion die Bedingung gegeben werden, die erfüllt werden soll. Diese muss immer einen logischen Datentyp zurückgeben – also wahr oder falsch (<code>TRUE</code>, <code>FALSE</code>). Das zweite Argument ist das, was passieren soll, <strong>wenn</strong> die Bedingungen zutrifft. Das dritte Argument kümmert sich um alle <strong>sonstigen</strong> Fälle. Also <strong>wenn</strong> in der Spalte <code>Art</code> die <code>Gruppenphase</code> steht, trage <code>Gruppe</code> ein, ansonsten <code>KO</code>. Wir nennen diese neue Spalte <code>Phase</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tipp_wm <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Phase =</span> <span class="kw">if_else</span>(Art <span class="op">==</span><span class="st"> "Gruppenphase"</span>, <span class="st">"Gruppe"</span>, <span class="st">"KO"</span>))</code></pre></div>
 <pre><code>## # A tibble: 384 x 8
@@ -419,7 +420,7 @@
 ##  9        4 Thoma~ 2:1   0:1      S             N              Grup~ Grup~
 ## 10        4 Thoma~ 3:0   0:1      S             N              Grup~ Grup~
 ## # ... with 374 more rows, and 2 more variables: Gruppe &lt;dbl&gt;, KO &lt;dbl&gt;</code></pre>
-<p>Eine <code>if_else</code> Verzweigung kann immer nur 2 Fälle abgedecken. Wenn die Bedingung wahr oder eben falsch ist. Was wenn es mehr Fälle gibt? Angenommen wir möchten eine Spalte mit der Punktezahl pro Spiel erstellen. Bepunkten wollen wir es in traditioneller Manier mit 3 Punkten für einen komplett richtigen Tipp, 1 Punkt für die richtige Richtung (Sieg / Niederlage / Unentschieden) und keine Punkte, wenn weder noch erraten wurde. Das sind drei Fälle. Deswegen benötigen wir nun <code>case_when()</code>. Hier können beliebig viele Bedingungen abgefragt werden. Dabei steht die logische Bedingung wieder an erster Stelle. Was bei der Wahrheit der Bedingung geschehen soll, steht hinter der Tilde <code>~</code>. Wenn der Tipp gleich dem Ergebnis ist, gibt es drei Punkte usw. Die letzte Zeile des Befehls sieht etwas komisch aus. Dabei funktioniert das <code>TRUE</code> wie das <code>else</code> im <code>if_else</code> Befehl. Es deckt alle <strong>sonstigen</strong> Fälle ab.</p>
+<p>Eine <code>if_else</code> Verzweigung kann immer nur 2 Fälle abgedecken. Wenn die Bedingung wahr oder eben falsch ist. Was, wenn es mehr Fälle gibt? Angenommen, wir möchten eine Spalte mit der Punktezahl pro Spiel erstellen. Bepunkten wollen wir es in traditioneller Manier mit 3 Punkten für einen komplett richtigen Tipp, 1 Punkt für die richtige Richtung (Sieg/Niederlage/Unentschieden) und keine Punkte, wenn weder noch erraten wurde. Das sind drei Fälle. Deswegen benötigen wir nun <code>case_when()</code>. Hier können beliebig viele Bedingungen abgefragt werden. Dabei steht die logische Bedingung wieder an erster Stelle. Was bei der Wahrheit der Bedingung geschehen soll, steht hinter der Tilde <code>~</code>. Wenn der Tipp gleich dem Ergebnis ist, gibt es drei Punkte usw. Die letzte Zeile des Befehls sieht etwas komisch aus. Dabei funktioniert das <code>TRUE</code> wie das <code>else</code> im <code>if_else</code> Befehl. Es deckt alle <strong>sonstigen</strong> Fälle ab.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tipp_wm <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Punkte =</span> <span class="kw">case_when</span>(Tipp <span class="op">==</span><span class="st"> </span>Ergebnis <span class="op">~</span><span class="st"> </span><span class="dv">3</span>,
                             Tipp_Richtung <span class="op">==</span><span class="st"> </span>Wahre_Richtung <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,
@@ -438,7 +439,7 @@
 ##  9        4 Thoma~ 2:1   0:1      S             N              Grup~ Grup~
 ## 10        4 Thoma~ 3:0   0:1      S             N              Grup~ Grup~
 ## # ... with 374 more rows, and 1 more variable: Punkte &lt;dbl&gt;</code></pre>
-<p>Es ist dir sicher aufgefallen, dass wir bisher noch nie den bereits erwähnten Zuweisungspfeil <code>&lt;-</code> verwendet haben. Das heißt, dass unsere Rechnungen in Schall und Rauch aus einsen und nullen verschwunden sind. Möchten wir die Ergebnisse der Pipe speichern, müsse wir die Ergebnisse einer Variable zuordnen. Wenn wir lediglich Spalten dran gehängt haben, macht es durchaus Sinn dabei den selben Datensatznamen zu verwenden. Ansonsten ist ein anderer, aussagekräftiger Name zu empfehlen wie <code>tipp_wm_bayes</code> falls zum Beispiel nach allen Tipps von Thomas Bayes gefilter wurde.</p>
+<p>Es ist Dir sicher aufgefallen, dass wir bisher noch nie den bereits erwähnten Zuweisungspfeil <code>&lt;-</code> verwendet haben. Das heißt, dass unsere Rechnungen in Schall und Rauch aus Einsen und Nullen verschwunden sind. Möchten wir die Ergebnisse der Pipe speichern, müsse wir die Ergebnisse einer Variable zuordnen. Wenn wir lediglich Spalten dran gehängt haben, macht es durchaus Sinn, dabei den selben Datensatznamen zu verwenden. Ansonsten ist ein anderer, aussagekräftiger Name zu empfehlen wie <code>tipp_wm_bayes</code> falls zum Beispiel nach allen Tipps von Thomas Bayes gefiltert wurde.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tipp_wm &lt;-<span class="st"> </span>tipp_wm <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Punkte =</span> <span class="kw">case_when</span>(Tipp <span class="op">==</span><span class="st"> </span>Ergebnis <span class="op">~</span><span class="st"> </span><span class="dv">3</span>,
                             Tipp_Richtung <span class="op">==</span><span class="st"> </span>Wahre_Richtung <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,
@@ -479,7 +480,7 @@
 ##  9    1.39  Thoma~ 2:1   0:1      S             N              Grup~ Grup~
 ## 10    1.39  Thoma~ 3:0   0:1      S             N              Grup~ Grup~
 ## # ... with 374 more rows, and 1 more variable: Punkte &lt;dbl&gt;</code></pre>
-<p>Ein paar wichtige Konzepte fehlen uns noch. Dafür schauen wir uns einen neuen Datensatz namens <code>big_five</code> an. Der Datensatz beinhaltet soziodemographische Daten wie <code>Alter</code>, <code>Geschlecht</code> und <code>Herkunft</code> sowie Spalten für die durschnittliche Ausprägung von <code>Extraversion</code>, <code>Neurotizismus</code>, <code>Verträglichkeit</code> und <code>Gewissenhaftigkeit</code>. Für den fünften Persönlichkeitsfaktor <code>Offenheit</code> wurde noch kein durchschnittlicher Wert berechnet. Es gibt 10 Items O1 bis O10, die die Dimension der Offenheit abgefragt haben.</p>
+<p>Ein paar wichtige Konzepte fehlen uns noch. Dafür schauen wir uns einen neuen Datensatz namens <code>big_five</code> an. Der Datensatz beinhaltet soziodemographische Daten wie <code>Alter</code>, <code>Geschlecht</code> und <code>Herkunft</code> sowie Spalten für die durchschnittliche Ausprägung von <code>Extraversion</code>, <code>Neurotizismus</code>, <code>Verträglichkeit</code> und <code>Gewissenhaftigkeit</code>. Für den fünften Persönlichkeitsfaktor <code>Offenheit</code> wurde noch kein durchschnittlicher Wert berechnet. Es gibt 10 Items <code>O1</code> bis <code>O10</code>, die die Dimension der Offenheit abgefragt haben.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big_five</code></pre></div>
 <pre><code>## # A tibble: 200 x 17
 ##    Alter Geschlecht Herkunft Extraversion Neurotizismus Vertraeglichkeit
@@ -497,10 +498,10 @@
 ## # ... with 190 more rows, and 11 more variables: Gewissenhaftigkeit &lt;dbl&gt;,
 ## #   O1 &lt;dbl&gt;, O2 &lt;dbl&gt;, O3 &lt;dbl&gt;, O4 &lt;dbl&gt;, O5 &lt;dbl&gt;, O6 &lt;dbl&gt;, O7 &lt;dbl&gt;,
 ## #   O8 &lt;dbl&gt;, O9 &lt;dbl&gt;, O10 &lt;dbl&gt;</code></pre>
-<p>Somit stoßen wir auch schon auf eine sehr häufige Problemstellung. Das Berechnen von Mittelwerten oder Summen über mehrer Spalten pro Person (also zeilenweise). Dafür wählen wir uns zuerst die interessierenden Spalten wie gewohnt mit <code>select()</code> aus. Wenn die Spalten nebeneinander liegen, kann man auch einfach einen Doppelpunkt benutzten.</p>
+<p>Somit stoßen wir auch schon auf eine sehr häufige Problemstellung. Das Berechnen von Mittelwerten oder Summen über mehrer Spalten pro Person (also zeilenweise). Dafür wählen wir uns zuerst die interessierenden Spalten wie gewohnt mit <code>select()</code> aus. Wenn die Spalten nebeneinander liegen, kann man auch einfach einen Doppelpunkt benutzen.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vars &lt;-<span class="st"> </span>big_five <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(O1<span class="op">:</span>O10)</code></pre></div>
-<p>Der Doppelpunkt liest sich hier zum Beispiel als O1 bis O10. Erst einmal ausgewählt, ist der Rest schnell erledigt. Wir erstellen mit <code>mutate()</code> eine neue Spalte namens <code>Offenheit</code> und erhalten mit <code>rowMeans()</code> die Mittelwerte pro Zeile (row), also pro Person. Es gibt eine äquivalente Funktion <code>rowSums()</code> zum Summieren. Anschließend möchten wir die einzelnen Items nicht im Datensatz sondern nur die soziodemographischen Daten und die fünf Dimensionen der Persönlichkeitsfaktoren behalten.</p>
+<p>Der Doppelpunkt liest sich hier zum Beispiel als O1 bis O10. Erst einmal ausgewählt, ist der Rest schnell erledigt. Wir erstellen mit <code>mutate()</code> eine neue Spalte namens <code>Offenheit</code> und erhalten mit <code>rowMeans()</code> die Mittelwerte pro Zeile (row), also pro Person. Es gibt eine äquivalente Funktion <code>rowSums()</code> zum Summieren. Anschließend möchten wir die einzelnen Items nicht im Datensatz, sondern nur die soziodemographischen Daten und die fünf Dimensionen der Persönlichkeitsfaktoren behalten.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big_five <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Offenheit =</span> <span class="kw">rowMeans</span>(vars)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(Alter<span class="op">:</span>Gewissenhaftigkeit, Offenheit)</code></pre></div>
@@ -519,7 +520,7 @@
 ## 10    17 m          US                3.1           3.6              3  
 ## # ... with 190 more rows, and 2 more variables: Gewissenhaftigkeit &lt;dbl&gt;,
 ## #   Offenheit &lt;dbl&gt;</code></pre>
-<p>Die Reihenfolge der in <code>select()</code> ausgewählten Spalten entscheidet übrigens über die Reihenfolge der Spalten. Alternativ zum Auswählen der Spalten, die man behalten möchte, kann man auch einfach die ungewünschten Spalten O1 bis O10 entfernen.</p>
+<p>Die Reihenfolge der in <code>select()</code> ausgewählten Spalten entscheidet übrigens über die Reihenfolge der Spalten. Alternativ zum Auswählen der Spalten, die man behalten möchte, kann man auch einfach die ungewünschten Spalten <code>O1</code> bis <code>O10</code> entfernen.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big_five <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Offenheit =</span> <span class="kw">rowMeans</span>(vars)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>(O1<span class="op">:</span>O10))</code></pre></div>
@@ -527,21 +528,20 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big_five <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select_if</span>(is.numeric)</code></pre></div>
 <pre><code>## # A tibble: 200 x 15
-##    Alter Extraversion Neurotizismus Vertraeglichkeit Gewissenhaftigkeit
-##    &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;              &lt;dbl&gt;
-##  1    36          3             1.9              3.4                3.3
-##  2    30          3.1           3.4              3.1                2.7
-##  3    23          3.4           2.4              3.6                3  
-##  4    54          3.3           4.2              3.6                3  
-##  5    24          3             2.8              3                  3.3
-##  6    14          2.8           3.5              3.2                3.3
-##  7    32          3.5           3.1              4.2                3  
-##  8    20          3.5           2.6              3.5                2.7
-##  9    29          3             3.7              3.2                2.9
-## 10    17          3.1           3.6              3                  2.9
-## # ... with 190 more rows, and 10 more variables: O1 &lt;dbl&gt;, O2 &lt;dbl&gt;,
-## #   O3 &lt;dbl&gt;, O4 &lt;dbl&gt;, O5 &lt;dbl&gt;, O6 &lt;dbl&gt;, O7 &lt;dbl&gt;, O8 &lt;dbl&gt;, O9 &lt;dbl&gt;,
-## #   O10 &lt;dbl&gt;</code></pre>
+##    Alter Extraversion Neurotizismus Vertraeglichkeit Gewissenhaftigk~    O1
+##    &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt; &lt;dbl&gt;
+##  1    36          3             1.9              3.4              3.3     5
+##  2    30          3.1           3.4              3.1              2.7     5
+##  3    23          3.4           2.4              3.6              3       3
+##  4    54          3.3           4.2              3.6              3       2
+##  5    24          3             2.8              3                3.3     5
+##  6    14          2.8           3.5              3.2              3.3     5
+##  7    32          3.5           3.1              4.2              3       3
+##  8    20          3.5           2.6              3.5              2.7     2
+##  9    29          3             3.7              3.2              2.9     4
+## 10    17          3.1           3.6              3                2.9     4
+## # ... with 190 more rows, and 9 more variables: O2 &lt;dbl&gt;, O3 &lt;dbl&gt;,
+## #   O4 &lt;dbl&gt;, O5 &lt;dbl&gt;, O6 &lt;dbl&gt;, O7 &lt;dbl&gt;, O8 &lt;dbl&gt;, O9 &lt;dbl&gt;, O10 &lt;dbl&gt;</code></pre>
 <p>Ein weiterer praktischer Sonderfall ist <code>select_at()</code>. Die Funktionsweise ist die selbe wie bei <code>mutate_at()</code>. Der Vorteil ist die Integration von <code>starts_with()</code> und <code>ends_with()</code> womit man, wie der Name bereits suggeriert, Anfangs- respektive Endbuchstaben oder ganze Wörter auswählen kann. Es werden also nur die Spalten behalten, die mit der Zeichenkombination starten oder enden. Hier erhalten wir alle Spalten mit dem Anfangsbuchstaben <code>E</code>. Also hier nur Extraversion.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big_five <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select_at</span>(<span class="kw">vars</span>(<span class="kw">starts_with</span>(<span class="st">"E"</span>)))</code></pre></div>
@@ -619,12 +619,12 @@
 <div id="fehler--und-warnmeldungen" class="section level1">
 <h1 class="hasAnchor">
 <a href="#fehler--und-warnmeldungen" class="anchor"></a>Fehler- und Warnmeldungen</h1>
-<p>Es gibt einen großen Unterschied zwischen Fehler- und Warnmeldungen. Wie der Name bereits suggeriert, stoppen Fehlermeldungen den Code, während Warnmeldungen ein Ergebnis zurückgeben und nur auf eine Ungereimtheit hinweisen. Es ist also sehr wichtig, die roten Meldungen in der Konsolte genau zu lesen. Wichtig ist, beim roten Text nicht gleich in Panik zu geraten sondern entspannt die Meldung durchzulesen und falls man nicht weiter weiß, die Meldung zu googlen.</p>
+<p>Es gibt einen großen Unterschied zwischen Fehler- und Warnmeldungen. Wie der Name bereits suggeriert, stoppen Fehlermeldungen den Code, während Warnmeldungen ein Ergebnis zurückgeben und nur auf eine Ungereimtheit hinweisen. Es ist also sehr wichtig, die roten Meldungen in der Konsole genau zu lesen. Wichtig ist, beim roten Text nicht gleich in Panik zu geraten, sondern entspannt die Meldung durchzulesen und falls man nicht weiter weiß, die Meldung zu googeln.</p>
 </div>
 <div id="ubungen" class="section level1">
 <h1 class="hasAnchor">
 <a href="#ubungen" class="anchor"></a>Übungen</h1>
-<p>Nun gehts an die Übung. Kopiere den R Befehl in Deine Konsole und es startet sich ein interaktives Tutorial in Deinem Standardbrowser.</p>
+<p>Nun geht’s an die Übung. Kopiere den R Befehl in Deine Konsole und es startet sich ein interaktives Tutorial in Deinem Standardbrowser.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">learnr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/learnr/topics/run_tutorial">run_tutorial</a></span>(<span class="st">"wiederholung"</span>, <span class="dt">package =</span> <span class="st">"rBasics"</span>)</code></pre></div>
 <p>Der interaktive Übungssatz beinhaltet verschiedene Übungen, die das Verständnis des Gelernten prüfen sollen. Dabei kann man sich Hinweise holen, wenn man nicht weiterkommt. Bei Multiple Choice Fragen wird sofort geprüft, ob die Antwort korrekt ist. Um zu erfahren, ob der geschrieben Code richtig ist, kann man mehrmals auf <code>Hints</code> drücken, da der letzte Hinweis immer die Lösung beinhaltet. Der Fortschritt wird automatisch auf Deinem Computer gespeichert, sodass Du zu einem späteren Zeitpunkt die Übungen fortführen kannst. Viel Erfolg und vor allem viel Spaß!</p>
 </div>
@@ -638,7 +638,7 @@
 <li><a href="#einfuhrung">Einführung</a></li>
       <li><a href="#projektorientierter-workflow">Projektorientierter Workflow</a></li>
       <li>
-<a href="#import-export">Import / Export</a><ul class="nav nav-pills nav-stacked">
+<a href="#importexport">Import/Export</a><ul class="nav nav-pills nav-stacked">
 <li><a href="#einlesen-eines-datensatzes">Einlesen eines Datensatzes</a></li>
       <li><a href="#einlesen-multipler-datensatze">Einlesen multipler Datensätze</a></li>
       <li><a href="#speichern">Speichern</a></li>

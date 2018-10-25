@@ -16,7 +16,7 @@ Scree Plot
 Scree Plot als ggplot mit Eigenvalues auf der y-Achse
 }
 \examples{
-NOT RUN:
+\dontrun{
 scree_plot(dataset)
-END NOT RUN:
+}
 }
