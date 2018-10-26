@@ -58,7 +58,7 @@ transform_binary <- function(df, answers){
 
   trueFalse <- df == ma
 
-  answer <- as.tibble(
+  answer <- tibble::as.tibble(
     matrix(ifelse(trueFalse == TRUE, 1, 0), ncol = cols)
   )
 

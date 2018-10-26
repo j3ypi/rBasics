@@ -3,3 +3,4 @@
 export(ggsave_all)
 export(scree_plot)
 export(transform_binary)
+importFrom(magrittr,"%>%")

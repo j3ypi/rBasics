@@ -12,11 +12,12 @@
 #' ggsave_all(plots)
 #' }
 #' @export
+#' @importFrom magrittr %>%
 ggsave_all <- function(list, width = 5, height = 5, dpi = 500) {
   list %>%
-    walk2(.x = .,
+    purrr::walk2(.x = .,
           .y = names(.),
-          ~ ggsave(filename = paste0(.y, ".jpeg"),
+          ~ ggplot2::ggsave(filename = paste0(.y, ".jpeg"),
                    plot = .x,
                    height = height,
                    width = width,
