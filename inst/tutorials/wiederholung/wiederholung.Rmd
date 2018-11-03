@@ -12,265 +12,297 @@ runtime: shiny_prerendered
 ```{r setup, include=FALSE}
 loadNamespace("learnr")
 loadNamespace("tidyverse")
-loadNamespace("ggpubr")
-# library(learnr)
-# library(tidyverse)
-# library(ggpubr)
-knitr::opts_chunk$set(echo = FALSE)
 
+knitr::opts_chunk$set(echo = FALSE)
 data(indonesisch, package = "rBasics")
 ```
 
-## Der Datensatz
+## Abschnitt I
 
-Spätestens jetzt startet Deine Karriere als R Programmierer oder Programmiererin. Zunächst bekommst du die Möglichkeit Dir den Datensatz anzuschauen. Als erste Aufgabe gibt es verschiedene Fragen zu Datentypen. Ein besonderer Fokus wird dabei auf logische Aussagen gelegt, da diesen eine erhebliche Relevanz in der Programmierung zukommt und man erst einmal ein bisschen Zeit braucht um das Prinzip dahinter vollständig zu verstehen. 
-
-```{r q11, exercise=TRUE, exercise.eval=TRUE}
-indo
+Spätestens jetzt startet Deine Karriere als R Programmierer oder Programmiererin. Die Übung ist in zwei Teile gegliedert. Abschnitt I wiederholt die wichtigen Datentypen. Dabei wird ein besonderer Fokus auf logische Operatoren gelegt, da diese zu Beginn nicht unbedingt intuitiv sind. In Abschnitt II werden diverse Funktionen aus dem Bereich der Datenvorbereitung abgefragt. Wir werden ausschließlich den indonesischen Datensatz benutzen, der die verschiedene Dimensionen der Sinnerfüllung erfasst. Schau dir den Datensatz genau an und beantworte die dazu gehörigen Fragen zu den Datentypen der einzelnen Variablen. 
+```{r q0, exercise=TRUE, exercise.eval=TRUE}
+indonesisch
 ```
 
-## Deskriptive Statistik
+```{r q1}
+quiz(
+  question("Welchen Datentyp hat das Alter?",
+    answer("Character"),
+    answer("Numeric", correct = TRUE),
+    answer("Logical"), allow_retry = T
+  ),
+  question("Welchen Datentyp hat das Geschlecht?",
+    answer("Character", correct = TRUE),
+    answer("Numeric"),
+    answer("Logical"), allow_retry = T
+    ) , caption = "Block I"
+)
+quiz(
+  question("Welchen Datentyp hat der Familienstand?",
+    answer("Character", correct = TRUE),
+    answer("Numeric"),
+    answer("Logical"), allow_retry = T
+  ),
+  question("Welchen Datentyp hat Selbsttranszendenz?",
+    answer("Character", correct = TRUE),
+    answer("Numeric"),
+    answer("Logical"), allow_retry = T
+    ) , caption = "Block II"
+)
+```
 
-Du kannst die Fragen herausfinden, in dem du in diesem Code-Chunk die notwendigen Befehle eintippst.
+Nun schauen wir uns logische Operatoren genauer an. 
+```{r q2}
+quiz(
+  question("Was ergibt die Aussage 5 > 4?",
+    answer("TRUE", correct = TRUE),
+    answer("FALSE"), allow_retry = T
+  ),
+  question("Was ergibt die Aussage 3 == 2",
+    answer("TRUE"),
+    answer("FALSE", correct = TRUE), allow_retry = T
+  ) , caption = "Block III"
+)
+quiz(
+  question("Was ergibt die Aussage 10 == 9 & 2 == 2",
+    answer("TRUE"),
+    answer("FALSE", correct = TRUE), allow_retry = T
+  ),
+  question("Was ergibt die Aussage 3 == 2 | 4 > 3?",
+    answer("TRUE", correct = TRUE),
+    answer("FALSE"), allow_retry = T
+  ), caption = "Block IV"
+)
+
+quiz(
+  question("Was ergibt die Aussage 6 < 7 & 7 > 6 & 10 == 10?",
+    answer("TRUE", correct = TRUE),
+    answer("FALSE"), allow_retry = T
+  ),
+  question("Was ergibt die Aussage 3 < 1 | 5 == 5 | 6 > 8",
+    answer("TRUE", correct = TRUE),
+    answer("FALSE"), allow_retry = T
+  ), caption = "Block V"
+)
+```
+
+Sehr gut! Auf zu Abschnitt II. 
+
+## Abschnitt II
+
+Wähle nur die Spalten `Geschlecht`, `Alter` und `Familiestand` aus. Der Name des Datensatzes ist `indonesisch`.
+```{r q3, exercise=TRUE}
+
+```
+
+```{r q3-hint-1}
+indonesisch %>% 
+  select()
+```
+
+```{r q3-solution}
+indonesisch %>% 
+  select(Geschlecht, Alter, Familienstand)
+```
+
+Gib nur die männlichen Probanden aus.
+
+```{r q4, exercise=TRUE}
+
+```
+
+```{r q4-hint}
+indonesisch %>% 
+  filter()
+```
+
+```{r q4-solution}
+indonesisch %>% 
+  filter(Geschlecht == "m")
+```
+
+Gib nur jene Probanden mit einer Selbstwirklichung von über 3.5 aus.
+
+```{r q5, exercise=TRUE}
+
+```
+
+```{r q5-hint}
+indonesisch %>% 
+  filter()
+```
+
+```{r q5-solution}
+indonesisch %>% 
+  filter(Selbstverwirklichung > 3.5)
+```
+
+Gib nur jene Probanden, die älter als 25 und eine Selbstranszendenz von über 4 haben aus. 
+
+```{r q6, exercise=TRUE}
+
+```
+
+```{r q6-hint}
+indonesisch %>% 
+  filter()
+```
+
+```{r q6-solution}
+indonesisch %>% 
+  filter(Alter > 25 & Selbsttranszendenz > 4)
+```
+
+Ermittle das Durchschnittsalter der weiblichen Probanden und nenne das Ergebnis `Mittelwert`.
+
+```{r q7, exercise=TRUE}
+
+```
+
+```{r q7-hint}
+indonesisch %>%
+  filter() %>%
+  summarise()
+```
+
+```{r q7-solution}
+indonesisch %>%
+  filter(Geschlecht == "f") %>%
+  summarise(Mittelwert = mean(Alter))
+```
+
+Ermittle das Standardabweichung beider Geschlechter in einem Befehl mit `group_by()` und nenne das Ergebnis SD
+
+```{r q14, exercise=TRUE}
+
+```
+
+```{r q14-hint}
+indonesisch %>%
+  group_by() %>%
+  summarise()
+```
+
+```{r q14-solution}
+indonesisch %>% 
+  group_by(Geschlecht) %>%
+  summarise(SD = sd(Alter))
+```
+
+Berechne die mittlere Ausprägung der Hauptdimensionen Selbsttranszendenz, Selbstverwirklichung, Ordnung und Wir_Wohlgefuehl pro Person und füge eine neue Spalte mit dem Namen `Mittelwert` hinzu und gebe nur die Variablen `Mittelwert` und `Sinnerfuellung` aus.
+
+```{r q8, exercise=TRUE}
+
+```
+
+```{r q8-hint}
+vars <- indonesisch %>% 
+  select()
+
+indonesisch %>%
+  mutate() %>% 
+  select()
+```
+
+```{r q8-solution}
+vars <- indonesisch %>% 
+  select(Selbsttranszendenz:Wir_Wohlgefuehl)
+
+indonesisch %>%
+  mutate(Mittelwert = rowMeans(vars)) %>% 
+  select(Mittelwert, Sinnerfuellung)
+```
+
+```{r, echo = FALSE}
+vars <- indonesisch %>% 
+  select(Selbsttranszendenz:Wir_Wohlgefuehl)
+
+erg1 <- indonesisch %>%
+  mutate(Mittelwert = rowMeans(vars)) %>% 
+  select(Mittelwert, Sinnerfuellung)
+```
+
+Angenommen, das vorherige Ergebnis ist als Variable namens `erg1` gespeichert. Füge eine neue Spalte namens `Vergleich` hinzu, in der du prüfst, ob der Mittelwert größer ist, als die Werte der Sinnerfüllung. Speicher das Ergebnis wieder in `erg1`.
+
+```{r q9, exercise=TRUE}
+
+```
+
+```{r q9-hint}
+erg1 <- erg1 %>%
+  mutate() 
+```
+
+```{r q9-solution}
+erg1 <- erg1 %>% 
+  mutate(Vergleich = Mittelwert > Sinnerfuellung)
+```
+
+```{r echo=FALSE}
+erg1 <- erg1 %>% 
+  mutate(Vergleich = Mittelwert > Sinnerfuellung)
+```
+
+Ändere nun alle `TRUE`s in der Spalte `Vergleich` zu `Zutreffend` und alle `FALSE`s zu `Falsch`.
+
+```{r q10, exercise=TRUE}
+
+```
+
+```{r q10-hint}
+erg1 %>% 
+  mutate(Vergleich = if_else())
+```
+
+```{r q10-solution}
+erg1 %>% 
+  mutate(Vergleich = if_else(Vergleich == FALSE, "Falsch", "Zutreffend"))
+```
+
+Als letzte Aufgabe im zweiten Abschnitt schauen wir uns noch einmal das Alter im ursprünglichen Datensatz an. Wähle nur das `Alter` aus und erstelle eine neue Spalte namens `Kategorie`, die alle Personen unter 22 als `jung`, alle zwischen 22 und 40 als `mittel` und alle darüber als `alt` bezeichnet. 
+
+```{r q11, exercise=TRUE}
+
+```
+
+```{r q11-hint}
+indonesisch %>% 
+  select() %>% 
+  mutate(Kategorie = case_when())
+```
+
+```{r q11-solution}
+indonesisch %>% 
+  select(Alter) %>% 
+  mutate(Kategorie = case_when(Alter < 22 ~ "jung",
+                               Alter >= 22 & Alter < 40 ~ "mittel",
+                               TRUE ~ "alt"))
+```
+
+```{r, echo=FALSE}
+erg2 <- indonesisch %>% 
+  select(Alter) %>% 
+  mutate(Kategorie = case_when(Alter < 22 ~ "jung",
+                               Alter >= 22 & Alter < 40 ~ "mittel",
+                               TRUE ~ "alt"))
+```
+
+Zähle nun die Anzahl der Personen in den verschiedenen Gruppen. Das vorherige Ergebnis sei erg2 genannt. 
 
 ```{r q12, exercise=TRUE}
 
 ```
 
-```{r q12-hint-1}
-dim(...)
+```{r q12-hint}
+erg2 %>% 
+  group_by() %>% 
+  count()
 ```
 
-```{r q12-hint-2}
-indo$Alter
+```{r q12-solution}
+erg2 %>% 
+  group_by(Kategorie) %>% 
+  count()
 ```
 
-```{r q13}
-quiz(
-  question("Wie viele Beobachtungen sind enthalten?",
-    answer("11"),
-    answer("200", correct = TRUE),
-    answer("10"),
-    answer("159"), allow_retry = T
-  ),
-  question("Wie hoch ist das Durschnittsalter ungefähr?",
-    answer("19"),
-    answer("23"),
-    answer("25"),
-    answer("22", correct = TRUE), allow_retry = T
-  ), caption = ""
-)
-```
-
-## Datentypen
-
-Nun Folgen ein paar Fragen zu Datentypen:
-
-```{r q21}
-quiz(
-  question("Welchen Datentyp hat das Alter?",
-    answer("Character / String"),
-    answer("Numeric / Integer", correct = TRUE),
-    answer("Logic / Boolean"), allow_retry = T
-  ),
-  question("Welchen Datentyp hat 'R ist cool'?",
-    answer("Character / String", correct = TRUE),
-    answer("Numeric / Integer"),
-    answer("Logic / Boolean"), allow_retry = T
-    ) , caption = ""
-)
-
-quiz(
-  question("Was ergibt die Aussage 5 < 4?",
-    answer("TRUE"),
-    answer("FALSE", correct = TRUE), allow_retry = T
-  ),
-  question("Was ergibt die Aussage 3 = 2 | 4 > 3?",
-    answer("TRUE", correct = TRUE),
-    answer("FALSE"), allow_retry = T
-  ) , caption = ""
-)
-
-quiz(
-  question("Was ergibt die Aussage 6 < 7 & 7 > 6?",
-    answer("TRUE", correct = TRUE),
-    answer("FALSE"), allow_retry = T
-  ),
-  question("Was ergibt die Aussage 3 < 1 | 10 = 9 | 6 > 8",
-    answer("TRUE"),
-    answer("FALSE", correct = TRUE), allow_retry = T
-  ), caption = ""
-)
-```
-
-## Dplyr
-
-Wähle nur die Spalten Geschlecht, Alter und Familie aus. Der Name des Datensatzes ist **indo**.
-
-```{r q41, exercise=TRUE}
-
-```
-
-```{r q41-hint}
-select(indo, ...)
-```
-
-```{r q41-solution}
-select(indo, Geschlecht, Alter, Familie)
-```
-
-Gib nur die männlichen Probanden aus.
-
-```{r q43, exercise=TRUE}
-
-```
-
-```{r q43-hint}
-filter(indo, ...)
-```
-
-```{r q43-solution}
-filter(indo, Geschlecht == 2)
-```
-
-Gib nur jene Probanden mit einer Sinnkrise von über 3.5 aus.
-
-```{r q44, exercise=TRUE}
-
-```
-
-```{r q44-hint}
-filter(indo, ...)
-```
-
-```{r q44-solution}
-filter(indo, Sinnkrise > 3.5)
-```
-
-Gib nur jene Probanden, die älter als 25 und eine Selbstranszendenz von über 4 haben aus. 
-
-```{r q45, exercise=TRUE}
-
-```
-
-```{r q45-hint}
-filter(indo, ...)
-```
-
-```{r q45-solution}
-filter(indo, Alter > 25 & Selbsttranszendenz > 4)
-```
-
-Ermittle das Durchschnittsalter der weiblichen Probanden und nenne das Ergebnis **Mittelwert**.
-
-```{r q46, exercise=TRUE}
-
-```
-
-```{r q46-hint}
-indo %>%
-  filter(...) %>%
-  summarise(...)
-```
-
-```{r q46-solution}
-indo %>%
-  filter(Geschlecht == 1) %>%
-  summarise(Mittelwert = mean(Alter))
-```
-
-Ermittle das Durchschnittsalter beider Geschlechter in einem Befehl mit group_by und nenne das Ergebnis Mittelwert.
-
-```{r q47, exercise=TRUE}
-
-```
-
-```{r q47-hint}
-indo %>%
-  group_by(...) %>%
-  summarise(...)
-```
-
-```{r q47-solution}
-indo %>% 
-  group_by(Geschlecht) %>%
-  summarise(Mittelwert = mean(Alter))
-```
-
-Berechne die mittlere Ausprägung der Hauptdimensionen Selbsttranszendenz, Selbstverwirklichung, Ordnung und Wir_Wohlgefuehl pro Person und füge eine neue Spalte mit dem Namen **Mittelwert** hinzu.
-
-```{r q48, exercise=TRUE}
-
-```
-
-```{r q48-hint}
-indo %>%
-  mutate(...)
-```
-
-```{r q48-solution}
-indo %>%
-  mutate(Mittelwert = rowMeans(.[ , c(4, 7, 8, 9)]))
-```
-
-Gib die Spalten Alter, Sinnkrise und Sinnerfuellung von jenen Versuchspersonen aus, die weiblich sind und einen Selbsttranzendenz Wert von unter 3 haben. 
-
-```{r q49, exercise=TRUE}
-
-```
-
-```{r q49-hint}
-indo %>%
-  filter(...) %>%
-  select(...) %>%
-```
-
-```{r q49-solution}
-indo %>%
-  filter(Geschlecht == 1 & Selbsttranszendenz < 3) %>%
-  select(Alter, Sinnkrise, Sinnerfuellung) 
-``` 
-
-Berechne den Mittelwert namens **Esoterik** von Selbsttranzendenz für beide Famileienstanede der männlichen Probanden.
-
-```{r q410, exercise=TRUE}
-
-```
-
-```{r q410-hint}
-indo %>%
-  filter(...) %>%
-  group_by(...) %>%
-  summarise(...)
-```
-
-```{r q410-solution}
-indo %>%
-  filter(Geschlecht == 2) %>%
-  group_by(Familie) %>%
-  summarise(Esoterik = mean(Selbsttranszendenz))
-```
-
-Füge eine neue Spalte mit logischen Werten mit dem Namen Gluecklich, in dem du prüfst, ob die Ausprägung von Sinnverfuellung größer als die der Sinnkrise ist und ersetze TRUE durch Ja und FALSE durch Nein. Gebe als Ergebnis nur das Alter und die Spalte Gluecklich aus. 
-
-```{r q411, exercise=TRUE}
-
-```
-
-```{r q411-hint}
-indo %>%
-  mutate(...) %>%
-  mutate(replace(...), 
-         replace(...)) %>%
-  select(...)
-```
-
-```{r q411-solution}
-indo %>%
-  mutate(Gluecklich = Sinnerfuellung > Sinnkrise) %>%
-  mutate(Gluecklich = replace(Gluecklich, Gluecklich == TRUE, "Ja"),
-         Gluecklich = replace(Gluecklich, Gluecklich == FALSE, "Nein")) %>%
-  select(Alter, Gluecklich) 
-```
-
-
+Super! Nun solltest Du die grundlegenden Konzepte Der Datenvorbereitung verstanden haben. 

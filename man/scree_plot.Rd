@@ -4,10 +4,10 @@
 \alias{scree_plot}
 \title{Scree Plot}
 \usage{
-scree_plot(fa)
+scree_plot(data)
 }
 \arguments{
-\item{fa}{Data.frame oder tibble mit numerischen Spalten.}
+\item{data}{Data.frame oder tibble mit numerischen Spalten.}
 }
 \value{
 Scree Plot

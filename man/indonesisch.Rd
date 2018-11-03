@@ -3,7 +3,7 @@
 \docType{data}
 \name{indonesisch}
 \alias{indonesisch}
-\title{Indonesischer Datensatz ueber Lebenszufriedeneheit}
+\title{Indonesischer Datensatz ueber Sinnerfuellung}
 \format{Ein tibble mit 200 Zeilen and 8 Spalten:
 \describe{
   \item{Geschlecht}{f = weiblich, m = maennlich}
@@ -23,6 +23,6 @@
 indonesisch
 }
 \description{
-Befragung indonesischer Probanden nach Auspraegung von Spiritualitaet in Form von 5 Dimensionen.
+Befragung indonesischer Probanden nach Sinnerfuellung in Form von 4 Dimensionen.
 }
 \keyword{datasets}

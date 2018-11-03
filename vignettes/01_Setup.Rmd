@@ -58,26 +58,45 @@ Bevor wir loslegen können, müssen wir erst einmal alles Notwendige installiere
 
 - Gehe auf [CRAN](https://cran.uni-muenster.de/) und wähle `Download R for Windows` 
 - Klick auf den Link `base` 
-- Dann auf `Download`. 
+- Dann auf `Download`
+- Und folge schließlich den Installationsanweisungen
 
 **macOS**:
 
 - Gehe auf [CRAN](https://cran.uni-muenster.de/) und wähle `Download R for (Mac) OS X`.
-- Klicke anschließend auf das aktuellste `.pkg` (z.B. `R-3.5.1.pkg`).
+- Klicke anschließend auf das aktuellste `.pkg` (z.B. `R-3.5.1.pkg`). 
+- Folge den Installationsanweisungen
+- Drücke `cmd + Leertaste`, tippe `Terminal` ein und drücke auf `Enter`.
+- Kopiere folgenden Befehl in den Terminal und drücke erneut auf `Enter`.
+```{ruby, eval=FALSE}
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/
+Homebrew/install/master/install)" < /dev/null 2> /dev/null
+```
+- Zuletzt kopiere den Befehl in den Terminal
+```{bash, eval=FALSE}
+brew install openssl
+```
 
 **Linux**:
 
-- Füge das entsprechende Repository für deine Linux Variante in `/etc/apt/sources.list` hinzu. Für 16.04 benutze
+- Drücke `ctrl + alt + t` um den Terminal zu öffnen.
+- Führe folgenden Befehl aus, um `sources.list` zu öffnen.
+```{bash, eval=FALSE}
+sudo gedit /etc/apt/sources.list
+```
+- Kopiere nun das Repository in `sources.list`. Für 16.04 benutze
 ```{bash, eval=FALSE}
 deb https://cloud.r-project.org/bin/linux/ubuntu xenial-cran35/
 ```
-Für andere Versionen xenial zu beispielsweise bionic oder trusty ändern.
+(Für andere Versionen `xenial` zu beispielsweise `bionic` oder `trusty` ändern.)
 
-- Führe anschließend die beiden Zeilen im Terminal aus. 
+- Führe anschließend die drei Zeilen im Terminal aus. 
 ```{bash, eval = FALSE}
 sudo apt-get update
-sudo apt-get install r-base r-base-dev
+sudo apt-get install r-base r-base-dev libssl-dev 
+sudo apt-get libgit2-dev libcurl4-openssl-dev libxml2-dev
 ```
+
 
 ## Programmierumgebung RStudio
 R ist die Programmiersprache. Um komfortable mit einer Programmiersprache arbeiten zu können, braucht man allerdings auch eine *Umgebung* (auch IDE = Integrated Development Environment) genannt. Ohne ist programmieren oft mühsam. Eine Programmierumgebung für R heißt RStudio. Wenn R installiert ist, kann man unter folgendem [Link](https://www.rstudio.com/products/rstudio/download/) die Programmierumgebung RStudio herunterladen. Drücke dazu auf den Download Button für RStudio Desktop (Open Source License) und downloade die für dein Betriebssystem richtige Version. 
@@ -107,7 +126,7 @@ Damit man den geschriebenen Code fehlerfrei auf anderen Geräten lesen kann, ist
 R bietet von Beginn an eine Bandbreite von Funktionen. Da es R bereits seit vielen Jahren gibt, haben sich viele fähige Programmierer an die Arbeit gemacht, Funktionen zu schreiben, die die Funktionen von `Base R` erweitern. Packages sind kostenlose Erweiterungen von Dritten, die verschiedenste Aufgaben erheblich erleichtern können. Die Packages werden auf [CRAN](https://cran.r-project.org/web/packages/), auf [Github](https://github.com/) oder auf [Bioconductor](https://www.bioconductor.org/) geteilt. Es gibt mittlerweile mehr als 11 000 Packages alleine auf CRAN. 
 
 ## Packages installieren und laden
-Um ein Package zu installieren, muss man `install.packages("packageName", dependencies = TRUE)` ausführen. Wichtig ist hierbei, dass der Packagename in Anführungszeichen geschrieben ist. Das Argument `dependencies = TRUE` installiert hierbei zusätzlich alle Packages, auf denen das gewünschte Package zugreift. 
+Um ein Package zu installieren, muss man `install.packages()` ausführen. Wichtig ist hierbei, dass der Packagename in Anführungszeichen geschrieben ist. Das Argument `dependencies = TRUE` installiert hierbei zusätzlich alle Packages, auf denen das gewünschte Package zugreift. 
 ```{r eval = FALSE}
 install.packages("packageName", dependencies = TRUE)
 ```
@@ -122,13 +141,16 @@ Zuerst installieren wir mit dem Befehl alle notwendigen Packages auf Deinem Comp
 ```{r, eval = FALSE}
 install.packages(c("tidyverse", "here", "rio", "broom", "car", 
                    "skimr", "ggpubr", "sjstats", "devtools", 
-                   "learnr", "psych"), dependencies = TRUE)
+                   "learnr", "psych", "lmerTest", "pwr", 
+                   "effsize"), dependencies = TRUE)
 ```
 
 Um auf die Übungsdatensätze und das interaktive Tutorial zugreifen zu können, musst Du das Package `rBasics` installieren. Allerdings befindet es sich nicht auf CRAN sondern Github. Der Befehl lautet daher etwas anders.
 ```{r, eval = FALSE}
 devtools::install_github("j3ypi/rBasics")
 ```
+
+Sollten bei der Installation von `rBasics` Fehler auftreten, liegt das bei macOS und Linux aller Wahrscheinlichkeit nach an einer fehlerhaften Installation des `devtools` Packages, welches wiederum auf externe Softwarepakete wie `openssl` zurückgreift. Führe noch einmal kleinschrittig die [Installationsanleitung](Programmiersprache R) für Dein Betriebssystem aus. Falls es nicht funktionieren sollte, schreibe eine [Issue](https://github.com/j3ypi/rBasics/issues) auf Github. 
 
 # Update R zur neuesten Version
 Für Windows und natürlich sowieso für Linux gibt es jeweils eine einfache Möglichkeit die Version von R auf den neuesten Stand zu bringen. Für Windows brauchen wir dafür das Package `installr`. Allerdings ist es empfehlenswert den Updateprozess innerhalb von der RGui (also dem puren R) nicht von RStudio zu starten. Laden wir zuerst das Package.
@@ -154,7 +176,6 @@ Du möchtest das Gelernte sofort selbst anwenden und ausprobieren? Lade die Date
 ```{r, eval=FALSE}
 data(big_five, tipp_wm, tipp_wm_wide, 
      indonesisch, repeated, package = "rBasics")
-
 ```
 
 

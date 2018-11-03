@@ -1,6 +1,6 @@
-#' Indonesischer Datensatz ueber Lebenszufriedeneheit
+#' Indonesischer Datensatz ueber Sinnerfuellung
 #'
-#' Befragung indonesischer Probanden nach Auspraegung von Spiritualitaet in Form von 5 Dimensionen.
+#' Befragung indonesischer Probanden nach Sinnerfuellung in Form von 4 Dimensionen.
 #' @format Ein tibble mit 200 Zeilen and 8 Spalten:
 #' \describe{
 #'   \item{Geschlecht}{f = weiblich, m = maennlich}

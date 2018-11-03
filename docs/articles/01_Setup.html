@@ -175,24 +175,41 @@
 </li>
 <li>Klick auf den Link <code>base</code>
 </li>
-<li>Dann auf <code>Download</code>.</li>
+<li>Dann auf <code>Download</code>
+</li>
+<li>Und folge schließlich den Installationsanweisungen</li>
 </ul>
 <p><strong>macOS</strong>:</p>
 <ul>
 <li>Gehe auf <a href="https://cran.uni-muenster.de/">CRAN</a> und wähle <code>Download R for (Mac) OS X</code>.</li>
 <li>Klicke anschließend auf das aktuellste <code>.pkg</code> (z.B. <code>R-3.5.1.pkg</code>).</li>
+<li>Folge den Installationsanweisungen</li>
+<li>Drücke <code>cmd + Leertaste</code>, tippe <code>Terminal</code> ein und drücke auf <code>Enter</code>.</li>
+<li>Kopiere folgenden Befehl in den Terminal und drücke erneut auf <code>Enter</code>.</li>
 </ul>
+<div class="sourceCode"><pre class="sourceCode ruby"><code class="sourceCode ruby">ruby -e <span class="st">"$(curl -fsSL https://raw.githubusercontent.com/</span>
+<span class="st">Homebrew/install/master/install)"</span> &lt; <span class="ot">/dev/nu</span>ll <span class="dv">2</span>&gt; <span class="ot">/dev/nu</span>ll</code></pre></div>
+<ul>
+<li>Zuletzt kopiere den Befehl in den Terminal</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">brew</span> install openssl</code></pre></div>
 <p><strong>Linux</strong>:</p>
 <ul>
-<li>Füge das entsprechende Repository für deine Linux Variante in <code>/etc/apt/sources.list</code> hinzu. Für 16.04 benutze</li>
+<li>Drücke <code>ctrl + alt + t</code> um den Terminal zu öffnen.</li>
+<li>Führe folgenden Befehl aus, um <code>sources.list</code> zu öffnen.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> gedit /etc/apt/sources.list</code></pre></div>
+<ul>
+<li>Kopiere nun das Repository in <code>sources.list</code>. Für 16.04 benutze</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">deb</span> https://cloud.r-project.org/bin/linux/ubuntu xenial-cran35/</code></pre></div>
-<p>Für andere Versionen xenial zu beispielsweise bionic oder trusty ändern.</p>
+<p>(Für andere Versionen <code>xenial</code> zu beispielsweise <code>bionic</code> oder <code>trusty</code> ändern.)</p>
 <ul>
-<li>Führe anschließend die beiden Zeilen im Terminal aus.</li>
+<li>Führe anschließend die drei Zeilen im Terminal aus.</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get update
-<span class="fu">sudo</span> apt-get install r-base r-base-dev</code></pre></div>
+<span class="fu">sudo</span> apt-get install r-base r-base-dev libssl-dev 
+<span class="fu">sudo</span> apt-get libgit2-dev libcurl4-openssl-dev libxml2-dev</code></pre></div>
 </div>
 <div id="programmierumgebung-rstudio" class="section level2">
 <h2 class="hasAnchor">
@@ -238,7 +255,7 @@
 <div id="packages-installieren-und-laden" class="section level2">
 <h2 class="hasAnchor">
 <a href="#packages-installieren-und-laden" class="anchor"></a>Packages installieren und laden</h2>
-<p>Um ein Package zu installieren, muss man <code>install.packages("packageName", dependencies = TRUE)</code> ausführen. Wichtig ist hierbei, dass der Packagename in Anführungszeichen geschrieben ist. Das Argument <code>dependencies = TRUE</code> installiert hierbei zusätzlich alle Packages, auf denen das gewünschte Package zugreift.</p>
+<p>Um ein Package zu installieren, muss man <code>install.packages()</code> ausführen. Wichtig ist hierbei, dass der Packagename in Anführungszeichen geschrieben ist. Das Argument <code>dependencies = TRUE</code> installiert hierbei zusätzlich alle Packages, auf denen das gewünschte Package zugreift.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"packageName"</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>Damit man auf die Funktionen des Packages zurückgreifen kann, muss das Package jedes mal aus der Bibliothek mithilfe von <code>library()</code> geladen werden. Hierbei sind keine Anführungszeichen notwendig.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(packageName)</code></pre></div>
@@ -249,9 +266,11 @@
 <p>Zuerst installieren wir mit dem Befehl alle notwendigen Packages auf Deinem Computer. Wofür jedes einzelnen davon zuständig ist, wirst du im Verlaufe des Tutorials erfahren. Die Installation kann einige Minuten in Anspruch nehmen.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"here"</span>, <span class="st">"rio"</span>, <span class="st">"broom"</span>, <span class="st">"car"</span>, 
                    <span class="st">"skimr"</span>, <span class="st">"ggpubr"</span>, <span class="st">"sjstats"</span>, <span class="st">"devtools"</span>, 
-                   <span class="st">"learnr"</span>, <span class="st">"psych"</span>), <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</code></pre></div>
+                   <span class="st">"learnr"</span>, <span class="st">"psych"</span>, <span class="st">"lmerTest"</span>, <span class="st">"pwr"</span>, 
+                   <span class="st">"effsize"</span>), <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>Um auf die Übungsdatensätze und das interaktive Tutorial zugreifen zu können, musst Du das Package <code>rBasics</code> installieren. Allerdings befindet es sich nicht auf CRAN sondern Github. Der Befehl lautet daher etwas anders.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"j3ypi/rBasics"</span>)</code></pre></div>
+<p>Sollten bei der Installation von <code>rBasics</code> Fehler auftreten, liegt das bei macOS und Linux aller Wahrscheinlichkeit nach an einer fehlerhaften Installation des <code>devtools</code> Packages, welches wiederum auf externe Softwarepakete wie <code>openssl</code> zurückgreift. Führe noch einmal kleinschrittig die <a href="Programmiersprache%20R">Installationsanleitung</a> für Dein Betriebssystem aus. Falls es nicht funktionieren sollte, schreibe eine <a href="https://github.com/j3ypi/rBasics/issues">Issue</a> auf Github.</p>
 </div>
 </div>
 <div id="update-r-zur-neuesten-version" class="section level1">

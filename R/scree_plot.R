@@ -1,16 +1,16 @@
 #' Scree Plot
 #'
 #' Scree Plot als ggplot mit Eigenvalues auf der y-Achse
-#' @param fa Data.frame oder tibble mit numerischen Spalten.
+#' @param data Data.frame oder tibble mit numerischen Spalten.
 #' @return Scree Plot
 #' @examples
 #' \dontrun{
 #' scree_plot(dataset)
 #' }
 #' @export
-scree_plot <- function(fa) {
+scree_plot <- function(data) {
 
-  eigenvalues <- eigen(cor(fa, use = "pairwise.complete.obs"), symmetric = TRUE)$values
+  eigenvalues <- eigen(cor(data, use = "pairwise.complete.obs"), symmetric = TRUE)$values
 
   helpdf <- data.frame(values = eigenvalues,
                        dimension = seq_along(eigenvalues))
