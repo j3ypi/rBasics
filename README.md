@@ -4,7 +4,7 @@
 
 ``devtools::install_github("j3ypi/rBasics")``
 
-(Detaillierte Installalationsanweisung im [Setup](https://j3ypi.github.io/rBasics/articles/01_Setup.html#set-up-your-lab))
+(Detaillierte Installationsanweisung im [Setup](https://j3ypi.github.io/rBasics/articles/01_Setup.html#set-up-your-lab))
 
 ## Für wen ist dieses Tutorial?
 
