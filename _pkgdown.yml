@@ -1,5 +1,9 @@
 url: https://github.com/j3ypi/rBasics
 
+template:
+  params:
+    bootswatch: flatly
+
 authors:
   Jan Philipp Nolte:
     url: https://github.com/j3ypi
