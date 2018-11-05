@@ -3,7 +3,7 @@ Title: R Tutorial für empirische Wissenschaften
 Version: 1.0.2
 Authors@R: person("Jan Philipp", "Nolte", email = "jan.nolte@umit.at", role = c("aut", "cre"))
 Description: Package zum R Tutorial für empirische Wissenschaften mit verschiedenen Datensätzen und Funktionen.
-Depends: R (>= 3.4.2)
+Depends: R (>= 3.3.3)
 License: GPL-2
 Encoding: UTF-8
 LazyData: false

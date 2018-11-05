@@ -33,14 +33,6 @@ suppressPackageStartupMessages(library(rBasics))
 
 data(big_five, tipp_wm, tipp_wm_wide, indonesisch, repeated, package = "rBasics")
 
-repeated <- tibble(
-  iq = rnorm(90, 100, 15),
-  kreativitaet = rnorm(90, 50, 17),
-  zeitpunkt = rep(c("t1", "t2", "t3"), each = 30),
-  gruppe = rep(c("A", "B", "C", "D", "E", "F"), 15),
-  person_id = rep(seq_len(45), 2)
-)
-
 big_five <- big_five %>% 
   mutate(Offenheit = rowMeans(select(., O1:O10))) %>% 
   select(Alter:Gewissenhaftigkeit, Offenheit)
@@ -245,7 +237,7 @@ indonesisch %>%
 ```
 
 ## Mappen 
-Der Kern von funktionalem Programmieren ist Automatisierung. Erinnern wir uns zurück an die Inferenzstatistik. Genauer gesagt an das Berechnen der Informationskriterien der Modelle der hierarchischen Regression mithilfe von `glance()`. Wir haben dort 3 mal den Befehl ausführen müssen. Für jedes der 3 Modelle einmal. Aber was, wenn wir 10 Prädiktoren sukzessive hinzufügen wollen würden? 10 mal Copy & Paste? Eine fehleranfällige und mühsame Vorgehensweise. Mit `map()` aus dem `purrr` Package (enhalten im `tidyverse`) kann man mit 3 Zeilen Code das selbe erreichen. Zuerst speichern wir dafür die 3 Modelle in einer Liste.
+Der Kern von funktionalem Programmieren ist Automatisierung. Erinnern wir uns zurück an die Inferenzstatistik. Genauer gesagt an das Berechnen der Informationskriterien der Modelle der hierarchischen Regression mithilfe von `glance()`. Wir haben dort 3 mal den Befehl ausführen müssen. Für jedes der 3 Modelle einmal. Aber was, wenn wir 10 Prädiktoren sukzessive hinzufügen wollen würden? 10 mal Copy & Paste? Eine fehleranfällige und mühsame Vorgehensweise. Mit `map()` aus dem `purrr` Package (enthalten im `tidyverse`) kann man mit 3 Zeilen Code das selbe erreichen. Zuerst speichern wir dafür die 3 Modelle in einer Liste.
 ```{r}
 modelle <- list(model1, model2, model3)
 ```

@@ -419,7 +419,7 @@
 <div id="mappen" class="section level2">
 <h2 class="hasAnchor">
 <a href="#mappen" class="anchor"></a>Mappen</h2>
-<p>Der Kern von funktionalem Programmieren ist Automatisierung. Erinnern wir uns zurück an die Inferenzstatistik. Genauer gesagt an das Berechnen der Informationskriterien der Modelle der hierarchischen Regression mithilfe von <code>glance()</code>. Wir haben dort 3 mal den Befehl ausführen müssen. Für jedes der 3 Modelle einmal. Aber was, wenn wir 10 Prädiktoren sukzessive hinzufügen wollen würden? 10 mal Copy &amp; Paste? Eine fehleranfällige und mühsame Vorgehensweise. Mit <code>map()</code> aus dem <code>purrr</code> Package (enhalten im <code>tidyverse</code>) kann man mit 3 Zeilen Code das selbe erreichen. Zuerst speichern wir dafür die 3 Modelle in einer Liste.</p>
+<p>Der Kern von funktionalem Programmieren ist Automatisierung. Erinnern wir uns zurück an die Inferenzstatistik. Genauer gesagt an das Berechnen der Informationskriterien der Modelle der hierarchischen Regression mithilfe von <code>glance()</code>. Wir haben dort 3 mal den Befehl ausführen müssen. Für jedes der 3 Modelle einmal. Aber was, wenn wir 10 Prädiktoren sukzessive hinzufügen wollen würden? 10 mal Copy &amp; Paste? Eine fehleranfällige und mühsame Vorgehensweise. Mit <code>map()</code> aus dem <code>purrr</code> Package (enthalten im <code>tidyverse</code>) kann man mit 3 Zeilen Code das selbe erreichen. Zuerst speichern wir dafür die 3 Modelle in einer Liste.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modelle &lt;-<span class="st"> </span><span class="kw">list</span>(model1, model2, model3)</code></pre></div>
 <p>Nun greifen wir in gewohnter <code>tidyverse</code> Manier auf die Liste zu. Die Funktion <code>map()</code> wendet nun auf jedes Listenelement die Funktion <code>glance()</code> an. Nicht vergessen <code>broom</code> vorher zu laden.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modelle <span class="op">%&gt;%</span><span class="st"> </span>
@@ -474,12 +474,12 @@
 <pre><code>## # A tibble: 6 x 12
 ##   gruppe data  f_tests estimate `num df` `denom df` statistic p.value
 ##   &lt;chr&gt;  &lt;lis&gt; &lt;list&gt;     &lt;dbl&gt;    &lt;int&gt;      &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 A      &lt;tib~ &lt;S3: h~    0.558       14         14     0.558   0.287
-## 2 B      &lt;tib~ &lt;S3: h~    0.652       14         14     0.652   0.434
-## 3 C      &lt;tib~ &lt;S3: h~    1.40        14         14     1.40    0.533
-## 4 D      &lt;tib~ &lt;S3: h~    1.59        14         14     1.59    0.395
-## 5 E      &lt;tib~ &lt;S3: h~    1.65        14         14     1.65    0.362
-## 6 F      &lt;tib~ &lt;S3: h~    0.470       14         14     0.470   0.170
+## 1 A      &lt;tib~ &lt;S3: h~    0.438       14         14     0.438  0.135 
+## 2 B      &lt;tib~ &lt;S3: h~    0.278       14         14     0.278  0.0227
+## 3 C      &lt;tib~ &lt;S3: h~    1.57        14         14     1.57   0.410 
+## 4 D      &lt;tib~ &lt;S3: h~    0.583       14         14     0.583  0.324 
+## 5 E      &lt;tib~ &lt;S3: h~    0.365       14         14     0.365  0.0692
+## 6 F      &lt;tib~ &lt;S3: h~    1.40        14         14     1.40   0.535 
 ## # ... with 4 more variables: conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;,
 ## #   method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
 <p>Auf die selbe Art könnte man auch mehrere hundert Regressionen ohne auch nur eine zusätzliche Zeile Code rechnen.</p>

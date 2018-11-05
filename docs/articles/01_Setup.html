@@ -171,30 +171,31 @@
 <div id="programmiersprache-r" class="section level2">
 <h2 class="hasAnchor">
 <a href="#programmiersprache-r" class="anchor"></a>Programmiersprache R</h2>
+<p>Das Tutorial benötigt mindestens die R Version <code>3.3.3</code>. Falls R bereits auf Deinem Laptop ist, stelle sicher, dass Du keine ältere Version installiert hast.</p>
 <p><strong>Windows</strong>:</p>
 <ul>
 <li>Gehe auf <a href="https://cran.uni-muenster.de/">CRAN</a> und wähle <code>Download R for Windows</code>
 </li>
 <li>Klick auf den Link <code>base</code>
 </li>
-<li>Dann auf <code>Download</code>
+<li>Dann auf <code>Download R for Windows</code>
 </li>
 <li>Und folge schließlich den Installationsanweisungen</li>
 </ul>
 <p><strong>macOS</strong>:</p>
 <ul>
 <li>Gehe auf <a href="https://cran.uni-muenster.de/">CRAN</a> und wähle <code>Download R for (Mac) OS X</code>.</li>
-<li>Klicke anschließend auf das aktuellste <code>.pkg</code> (z.B. <code>R-3.5.1.pkg</code>).</li>
+<li>Klicke anschließend auf das aktuellste <code>.pkg</code> (z.B. <code>R-3.5.1.pkg</code>). Falls Du eine ältere Mac Version als El Capitan (10.11) besitzt, musst Du <code>R-3.3.3.pkg</code> herunterladen. Wenn Du Deine Mac Version nicht kennst, kannst Du erst einmal das neueste ausprobieren. R wird Dir dann mitteilen, ob Dein Betriebssystem zu alt ist.</li>
 <li>Folge den Installationsanweisungen</li>
 <li>Drücke <code>cmd + Leertaste</code>, tippe <code>Terminal</code> ein und drücke auf <code>Enter</code>.</li>
-<li>Kopiere folgenden Befehl in den Terminal und drücke erneut auf <code>Enter</code>.</li>
+<li>Kopiere folgenden Befehl in den Terminal und drücke erneut auf <code>Enter</code> (Der Befehl ist zu lang, um im PDF vollständig angezeigt zu werden. Klicke <a href="https://j3ypi.github.io/rBasics/articles/01_Setup.html#set-up-your-lab">hier</a>, um zur Website zu gelangen).</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode ruby"><code class="sourceCode ruby">ruby -e <span class="st">"$(curl -fsSL https://raw.githubusercontent.com/</span>
-<span class="st">Homebrew/install/master/install)"</span> &lt; <span class="ot">/dev/nu</span>ll <span class="dv">2</span>&gt; <span class="ot">/dev/nu</span>ll</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode ruby"><code class="sourceCode ruby">ruby -e <span class="st">"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</span> &lt; <span class="ot">/dev/nu</span>ll <span class="dv">2</span>&gt; <span class="ot">/dev/nu</span>ll</code></pre></div>
 <ul>
+<li>Folge der Installationsanweisung und gib Dein Passwort ein. Lass Dich nicht davon irritieren, dass im Terminal keine Zeichen bei der Passworteingabe angezeigt werden.</li>
 <li>Zuletzt kopiere den Befehl in den Terminal</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">brew</span> install openssl</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">brew</span> install openssl libgit2</code></pre></div>
 <p><strong>Linux</strong>:</p>
 <ul>
 <li>Drücke <code>ctrl + alt + t</code> um den Terminal zu öffnen.</li>
@@ -211,7 +212,7 @@
 </ul>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get update
 <span class="fu">sudo</span> apt-get install r-base r-base-dev libssl-dev 
-<span class="fu">sudo</span> apt-get libgit2-dev libcurl4-openssl-dev libxml2-dev</code></pre></div>
+<span class="fu">sudo</span> apt-get install libgit2-dev libcurl4-openssl-dev libxml2-dev</code></pre></div>
 </div>
 <div id="programmierumgebung-rstudio" class="section level2">
 <h2 class="hasAnchor">
@@ -272,7 +273,7 @@
                    <span class="st">"effsize"</span>), <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>Um auf die Übungsdatensätze und das interaktive Tutorial zugreifen zu können, musst Du das Package <code>rBasics</code> installieren. Allerdings befindet es sich nicht auf CRAN sondern Github. Der Befehl lautet daher etwas anders.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"j3ypi/rBasics"</span>)</code></pre></div>
-<p>Sollten bei der Installation von <code>rBasics</code> Fehler auftreten, liegt das bei macOS und Linux aller Wahrscheinlichkeit nach an einer fehlerhaften Installation des <code>devtools</code> Packages, welches wiederum auf externe Softwarepakete wie <code>openssl</code> zurückgreift. Führe noch einmal kleinschrittig die <a href="Programmiersprache%20R">Installationsanleitung</a> für Dein Betriebssystem aus. Falls es nicht funktionieren sollte, schreibe eine <a href="https://github.com/j3ypi/rBasics/issues">Issue</a> auf Github.</p>
+<p>Sollten bei der Installation von <code>rBasics</code> Fehler auftreten, liegt das bei macOS und Linux aller Wahrscheinlichkeit nach an einer fehlerhaften Installation des <code>devtools</code> Packages, welches wiederum auf externe Softwarepakete wie <code>openssl</code> zurückgreift. Führe noch einmal kleinschrittig die <a href="https://j3ypi.github.io/rBasics/articles/01_Setup.html#programmiersprache-r">Installationsanleitung</a> für Dein Betriebssystem aus. Falls es nicht funktionieren sollte, schreibe eine <a href="https://github.com/j3ypi/rBasics/issues">Issue</a> auf Github.</p>
 </div>
 </div>
 <div id="update-r-zur-neuesten-version" class="section level1">

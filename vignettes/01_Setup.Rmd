@@ -26,6 +26,7 @@ documentclass: article
 
 ```{r setup, echo = FALSE}
 suppressPackageStartupMessages(library(bookdown))
+options(width = 80)
 ```
 
 \newpage
@@ -54,27 +55,29 @@ Bevor wir loslegen können, müssen wir erst einmal alles Notwendige installiere
 
 ## Programmiersprache R 
 
+Das Tutorial benötigt mindestens die R Version `3.3.3`. Falls R bereits auf Deinem Laptop ist, stelle sicher, dass Du keine ältere Version installiert hast. 
+
 **Windows**:
 
 - Gehe auf [CRAN](https://cran.uni-muenster.de/) und wähle `Download R for Windows` 
 - Klick auf den Link `base` 
-- Dann auf `Download`
+- Dann auf `Download R for Windows`
 - Und folge schließlich den Installationsanweisungen
 
 **macOS**:
 
 - Gehe auf [CRAN](https://cran.uni-muenster.de/) und wähle `Download R for (Mac) OS X`.
-- Klicke anschließend auf das aktuellste `.pkg` (z.B. `R-3.5.1.pkg`). 
+- Klicke anschließend auf das aktuellste `.pkg` (z.B. `R-3.5.1.pkg`). Falls Du eine ältere Mac Version als El Capitan (10.11) besitzt, musst Du `R-3.3.3.pkg` herunterladen. Wenn Du Deine Mac Version nicht kennst, kannst Du erst einmal das neueste ausprobieren. R wird Dir dann mitteilen, ob Dein Betriebssystem zu alt ist. 
 - Folge den Installationsanweisungen
 - Drücke `cmd + Leertaste`, tippe `Terminal` ein und drücke auf `Enter`.
-- Kopiere folgenden Befehl in den Terminal und drücke erneut auf `Enter`.
+- Kopiere folgenden Befehl in den Terminal und drücke erneut auf `Enter` (Der Befehl ist zu lang, um im PDF vollständig angezeigt zu werden. Klicke [hier](https://j3ypi.github.io/rBasics/articles/01_Setup.html#set-up-your-lab), um zur Website zu gelangen). 
 ```{ruby, eval=FALSE}
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/
-Homebrew/install/master/install)" < /dev/null 2> /dev/null
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
 ```
+- Folge der Installationsanweisung und gib Dein Passwort ein. Lass Dich nicht davon irritieren, dass im Terminal keine Zeichen bei der Passworteingabe angezeigt werden.
 - Zuletzt kopiere den Befehl in den Terminal
 ```{bash, eval=FALSE}
-brew install openssl
+brew install openssl libgit2
 ```
 
 **Linux**:
@@ -94,9 +97,8 @@ deb https://cloud.r-project.org/bin/linux/ubuntu xenial-cran35/
 ```{bash, eval = FALSE}
 sudo apt-get update
 sudo apt-get install r-base r-base-dev libssl-dev 
-sudo apt-get libgit2-dev libcurl4-openssl-dev libxml2-dev
+sudo apt-get install libgit2-dev libcurl4-openssl-dev libxml2-dev
 ```
-
 
 ## Programmierumgebung RStudio
 R ist die Programmiersprache. Um komfortable mit einer Programmiersprache arbeiten zu können, braucht man allerdings auch eine *Umgebung* (auch IDE = Integrated Development Environment) genannt. Ohne ist programmieren oft mühsam. Eine Programmierumgebung für R heißt RStudio. Wenn R installiert ist, kann man unter folgendem [Link](https://www.rstudio.com/products/rstudio/download/) die Programmierumgebung RStudio herunterladen. Drücke dazu auf den Download Button für RStudio Desktop (Open Source License) und downloade die für dein Betriebssystem richtige Version. 
@@ -150,7 +152,7 @@ Um auf die Übungsdatensätze und das interaktive Tutorial zugreifen zu können,
 devtools::install_github("j3ypi/rBasics")
 ```
 
-Sollten bei der Installation von `rBasics` Fehler auftreten, liegt das bei macOS und Linux aller Wahrscheinlichkeit nach an einer fehlerhaften Installation des `devtools` Packages, welches wiederum auf externe Softwarepakete wie `openssl` zurückgreift. Führe noch einmal kleinschrittig die [Installationsanleitung](Programmiersprache R) für Dein Betriebssystem aus. Falls es nicht funktionieren sollte, schreibe eine [Issue](https://github.com/j3ypi/rBasics/issues) auf Github. 
+Sollten bei der Installation von `rBasics` Fehler auftreten, liegt das bei macOS und Linux aller Wahrscheinlichkeit nach an einer fehlerhaften Installation des `devtools` Packages, welches wiederum auf externe Softwarepakete wie `openssl` zurückgreift. Führe noch einmal kleinschrittig die [Installationsanleitung](https://j3ypi.github.io/rBasics/articles/01_Setup.html#programmiersprache-r) für Dein Betriebssystem aus. Falls es nicht funktionieren sollte, schreibe eine [Issue](https://github.com/j3ypi/rBasics/issues) auf Github. 
 
 # Update R zur neuesten Version
 Für Windows und natürlich sowieso für Linux gibt es jeweils eine einfache Möglichkeit die Version von R auf den neuesten Stand zu bringen. Für Windows brauchen wir dafür das Package `installr`. Allerdings ist es empfehlenswert den Updateprozess innerhalb von der RGui (also dem puren R) nicht von RStudio zu starten. Laden wir zuerst das Package.
