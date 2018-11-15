@@ -67,20 +67,20 @@ Das Tutorial benötigt mindestens die R Version `3.3.3`. Falls R bereits auf Dei
 **macOS**:
 
 - Gehe auf [CRAN](https://cran.uni-muenster.de/) und wähle `Download R for (Mac) OS X`.
-- Klicke anschließend auf das aktuellste `.pkg` (z.B. `R-3.5.1.pkg`). Falls Du eine ältere Mac Version als El Capitan (10.11) besitzt, musst Du `R-3.3.3.pkg` herunterladen. Wenn Du Deine Mac Version nicht kennst, kannst Du erst einmal das neueste ausprobieren. R wird Dir dann mitteilen, ob Dein Betriebssystem zu alt ist. 
+- Klicke anschließend auf das aktuellste `.pkg` (z.B. `R-3.5.1.pkg`). Falls Du eine ältere macOS Version als El Capitan (10.11) besitzt, musst Du `R-3.3.3.pkg` herunterladen. Wenn Du Deine macOS Version nicht kennst, kannst Du erst einmal das neueste ausprobieren. R wird Dir dann mitteilen, ob Dein Betriebssystem zu alt ist. 
 - Folge den Installationsanweisungen
 - Drücke `cmd + Leertaste`, tippe `Terminal` ein und drücke auf `Enter`.
 - Kopiere folgenden Befehl in den Terminal und drücke erneut auf `Enter` (Der Befehl ist zu lang, um im PDF vollständig angezeigt zu werden. Klicke [hier](https://j3ypi.github.io/rBasics/articles/01_Setup.html#set-up-your-lab), um zur Website zu gelangen). 
 ```{ruby, eval=FALSE}
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
 ```
-- Folge der Installationsanweisung und gib Dein Passwort ein. Lass Dich nicht davon irritieren, dass im Terminal keine Zeichen bei der Passworteingabe angezeigt werden.
-- Zuletzt kopiere den Befehl in den Terminal
+- Gib Dein Passwort ein (das Passwort zum Einloggen in Deinen Mac) und drücke auf `Enter`. Lass Dich nicht davon irritieren, dass im Terminal keine Zeichen bei der Passworteingabe angezeigt werden. Die Installation kann einige Minuten in Anspruch nehmen und ist erst fertig, wenn wieder die Anfangszeile mit Deinem Benutzernamen angezeigt wird (z.B. `mein-Mac:~ alice$`). 
+- Zuletzt kopiere den Befehl in den Terminal. Die Installation wird noch einige Minuten dauern. Also sei geduldig und unterbreche den Vorgang nicht. 
 ```{bash, eval=FALSE}
 brew install openssl libgit2
 ```
 
-**Linux**:
+**Ubuntu**:
 
 - Drücke `ctrl + alt + t` um den Terminal zu öffnen.
 - Führe folgenden Befehl aus, um `sources.list` zu öffnen.
@@ -93,7 +93,7 @@ deb https://cloud.r-project.org/bin/linux/ubuntu xenial-cran35/
 ```
 (Für andere Versionen `xenial` zu beispielsweise `bionic` oder `trusty` ändern.)
 
-- Führe anschließend die drei Zeilen im Terminal aus. 
+- Führe anschließend die drei Zeilen hintereinander im Terminal aus. 
 ```{bash, eval = FALSE}
 sudo apt-get update
 sudo apt-get install r-base r-base-dev libssl-dev 
@@ -147,7 +147,7 @@ install.packages(c("tidyverse", "here", "rio", "broom", "car",
                    "effsize"), dependencies = TRUE)
 ```
 
-Um auf die Übungsdatensätze und das interaktive Tutorial zugreifen zu können, musst Du das Package `rBasics` installieren. Allerdings befindet es sich nicht auf CRAN sondern Github. Der Befehl lautet daher etwas anders.
+Um auf die Übungsdatensätze und das interaktive Tutorial zugreifen zu können, musst Du das Package `rBasics` installieren. Allerdings befindet es sich nicht auf CRAN sondern Github. Der Befehl lautet daher etwas anders. Während der Installation des Packages kann es sein, dass Du gefragt wirst, ob Du bestimmte Packages aktualisieren möchtest. Du musst dies auf jeden Fall verneinen. Wenn ein Package angegeben ist, einfach ohne Eingabe von irgendwas die leere Zeile in der Konsole mit `Enter` bestätigen. Falls mehr als ein Package zur Aktualisierung vorgeschlagen wird, wähle die entsprechende Nummer, die für **none** steht (meistens 5) und bestätige mit `Enter`. 
 ```{r, eval = FALSE}
 devtools::install_github("j3ypi/rBasics")
 ```
@@ -155,7 +155,7 @@ devtools::install_github("j3ypi/rBasics")
 Sollten bei der Installation von `rBasics` Fehler auftreten, liegt das bei macOS und Linux aller Wahrscheinlichkeit nach an einer fehlerhaften Installation des `devtools` Packages, welches wiederum auf externe Softwarepakete wie `openssl` zurückgreift. Führe noch einmal kleinschrittig die [Installationsanleitung](https://j3ypi.github.io/rBasics/articles/01_Setup.html#programmiersprache-r) für Dein Betriebssystem aus. Falls es nicht funktionieren sollte, schreibe eine [Issue](https://github.com/j3ypi/rBasics/issues) auf Github. 
 
 # Update R zur neuesten Version
-Für Windows und natürlich sowieso für Linux gibt es jeweils eine einfache Möglichkeit die Version von R auf den neuesten Stand zu bringen. Für Windows brauchen wir dafür das Package `installr`. Allerdings ist es empfehlenswert den Updateprozess innerhalb von der RGui (also dem puren R) nicht von RStudio zu starten. Laden wir zuerst das Package.
+Für Windows und natürlich sowieso für Linux gibt es jeweils eine einfache Möglichkeit die Version von R auf den neuesten Stand zu bringen. Für Windows brauchen wir dafür das Package `installr` (muss noch installiert werden). Allerdings ist es empfehlenswert den Updateprozess innerhalb der RGui (also dem puren R) und nicht von RStudio zu starten. Laden wir zuerst das Package.
 ```{r, eval=FALSE}
 library(installr)
 ```
@@ -165,7 +165,7 @@ Anschließend updaten wir R mit nur einem Befehl. Während der Installation wird
 updateR()
 ```
 
-In Linux updatest Du R wie jedes andere Programm mit
+Alternativ kann man natürlich auch einfach manuell die neueste Version von [CRAN](https://cran.uni-muenster.de/) herunterladen und installieren. In Linux updatest Du R wie jedes andere Programm mit
 ```{bash, eval=FALSE}
 sudo apt-get update && sudo apt-get upgrade
 ```

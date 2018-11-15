@@ -185,18 +185,18 @@
 <p><strong>macOS</strong>:</p>
 <ul>
 <li>Gehe auf <a href="https://cran.uni-muenster.de/">CRAN</a> und wähle <code>Download R for (Mac) OS X</code>.</li>
-<li>Klicke anschließend auf das aktuellste <code>.pkg</code> (z.B. <code>R-3.5.1.pkg</code>). Falls Du eine ältere Mac Version als El Capitan (10.11) besitzt, musst Du <code>R-3.3.3.pkg</code> herunterladen. Wenn Du Deine Mac Version nicht kennst, kannst Du erst einmal das neueste ausprobieren. R wird Dir dann mitteilen, ob Dein Betriebssystem zu alt ist.</li>
+<li>Klicke anschließend auf das aktuellste <code>.pkg</code> (z.B. <code>R-3.5.1.pkg</code>). Falls Du eine ältere macOS Version als El Capitan (10.11) besitzt, musst Du <code>R-3.3.3.pkg</code> herunterladen. Wenn Du Deine macOS Version nicht kennst, kannst Du erst einmal das neueste ausprobieren. R wird Dir dann mitteilen, ob Dein Betriebssystem zu alt ist.</li>
 <li>Folge den Installationsanweisungen</li>
 <li>Drücke <code>cmd + Leertaste</code>, tippe <code>Terminal</code> ein und drücke auf <code>Enter</code>.</li>
 <li>Kopiere folgenden Befehl in den Terminal und drücke erneut auf <code>Enter</code> (Der Befehl ist zu lang, um im PDF vollständig angezeigt zu werden. Klicke <a href="https://j3ypi.github.io/rBasics/articles/01_Setup.html#set-up-your-lab">hier</a>, um zur Website zu gelangen).</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode ruby"><code class="sourceCode ruby">ruby -e <span class="st">"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</span> &lt; <span class="ot">/dev/nu</span>ll <span class="dv">2</span>&gt; <span class="ot">/dev/nu</span>ll</code></pre></div>
 <ul>
-<li>Folge der Installationsanweisung und gib Dein Passwort ein. Lass Dich nicht davon irritieren, dass im Terminal keine Zeichen bei der Passworteingabe angezeigt werden.</li>
-<li>Zuletzt kopiere den Befehl in den Terminal</li>
+<li>Gib Dein Passwort ein (das Passwort zum Einloggen in Deinen Mac) und drücke auf <code>Enter</code>. Lass Dich nicht davon irritieren, dass im Terminal keine Zeichen bei der Passworteingabe angezeigt werden. Die Installation kann einige Minuten in Anspruch nehmen und ist erst fertig, wenn wieder die Anfangszeile mit Deinem Benutzernamen angezeigt wird (z.B. <code>mein-Mac:~ alice$</code>).</li>
+<li>Zuletzt kopiere den Befehl in den Terminal. Die Installation wird noch einige Minuten dauern. Also sei geduldig und unterbreche den Vorgang nicht.</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">brew</span> install openssl libgit2</code></pre></div>
-<p><strong>Linux</strong>:</p>
+<p><strong>Ubuntu</strong>:</p>
 <ul>
 <li>Drücke <code>ctrl + alt + t</code> um den Terminal zu öffnen.</li>
 <li>Führe folgenden Befehl aus, um <code>sources.list</code> zu öffnen.</li>
@@ -208,7 +208,7 @@
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">deb</span> https://cloud.r-project.org/bin/linux/ubuntu xenial-cran35/</code></pre></div>
 <p>(Für andere Versionen <code>xenial</code> zu beispielsweise <code>bionic</code> oder <code>trusty</code> ändern.)</p>
 <ul>
-<li>Führe anschließend die drei Zeilen im Terminal aus.</li>
+<li>Führe anschließend die drei Zeilen hintereinander im Terminal aus.</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get update
 <span class="fu">sudo</span> apt-get install r-base r-base-dev libssl-dev 
@@ -271,7 +271,7 @@
                    <span class="st">"skimr"</span>, <span class="st">"ggpubr"</span>, <span class="st">"sjstats"</span>, <span class="st">"devtools"</span>, 
                    <span class="st">"learnr"</span>, <span class="st">"psych"</span>, <span class="st">"lmerTest"</span>, <span class="st">"pwr"</span>, 
                    <span class="st">"effsize"</span>), <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p>Um auf die Übungsdatensätze und das interaktive Tutorial zugreifen zu können, musst Du das Package <code>rBasics</code> installieren. Allerdings befindet es sich nicht auf CRAN sondern Github. Der Befehl lautet daher etwas anders.</p>
+<p>Um auf die Übungsdatensätze und das interaktive Tutorial zugreifen zu können, musst Du das Package <code>rBasics</code> installieren. Allerdings befindet es sich nicht auf CRAN sondern Github. Der Befehl lautet daher etwas anders. Während der Installation des Packages kann es sein, dass Du gefragt wirst, ob Du bestimmte Packages aktualisieren möchtest. Du musst dies auf jeden Fall verneinen. Wenn ein Package angegeben ist, einfach ohne Eingabe von irgendwas die leere Zeile in der Konsole mit <code>Enter</code> bestätigen. Falls mehr als ein Package zur Aktualisierung vorgeschlagen wird, wähle die entsprechende Nummer, die für <strong>none</strong> steht (meistens 5) und bestätige mit <code>Enter</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"j3ypi/rBasics"</span>)</code></pre></div>
 <p>Sollten bei der Installation von <code>rBasics</code> Fehler auftreten, liegt das bei macOS und Linux aller Wahrscheinlichkeit nach an einer fehlerhaften Installation des <code>devtools</code> Packages, welches wiederum auf externe Softwarepakete wie <code>openssl</code> zurückgreift. Führe noch einmal kleinschrittig die <a href="https://j3ypi.github.io/rBasics/articles/01_Setup.html#programmiersprache-r">Installationsanleitung</a> für Dein Betriebssystem aus. Falls es nicht funktionieren sollte, schreibe eine <a href="https://github.com/j3ypi/rBasics/issues">Issue</a> auf Github.</p>
 </div>
@@ -279,11 +279,11 @@
 <div id="update-r-zur-neuesten-version" class="section level1">
 <h1 class="hasAnchor">
 <a href="#update-r-zur-neuesten-version" class="anchor"></a>Update R zur neuesten Version</h1>
-<p>Für Windows und natürlich sowieso für Linux gibt es jeweils eine einfache Möglichkeit die Version von R auf den neuesten Stand zu bringen. Für Windows brauchen wir dafür das Package <code>installr</code>. Allerdings ist es empfehlenswert den Updateprozess innerhalb von der RGui (also dem puren R) nicht von RStudio zu starten. Laden wir zuerst das Package.</p>
+<p>Für Windows und natürlich sowieso für Linux gibt es jeweils eine einfache Möglichkeit die Version von R auf den neuesten Stand zu bringen. Für Windows brauchen wir dafür das Package <code>installr</code> (muss noch installiert werden). Allerdings ist es empfehlenswert den Updateprozess innerhalb der RGui (also dem puren R) und nicht von RStudio zu starten. Laden wir zuerst das Package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(installr)</code></pre></div>
 <p>Anschließend updaten wir R mit nur einem Befehl. Während der Installation wird man unter anderem gefragt, ob man seine Packages mit in die neue Version nehmen will - unbedingt zustimmen!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/installr/topics/updateR">updateR</a></span>()</code></pre></div>
-<p>In Linux updatest Du R wie jedes andere Programm mit</p>
+<p>Alternativ kann man natürlich auch einfach manuell die neueste Version von <a href="https://cran.uni-muenster.de/">CRAN</a> herunterladen und installieren. In Linux updatest Du R wie jedes andere Programm mit</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt-get upgrade</code></pre></div>
 </div>
 <div id="wo-bekomme-ich-hilfe" class="section level1">
