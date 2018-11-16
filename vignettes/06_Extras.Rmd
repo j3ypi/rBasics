@@ -195,8 +195,9 @@ Listen sind extrem wichtig beim funktionalen Programmieren und nützlich beim Im
 Datenstrukturen können grundsätzlich nur ineinander umgewandelt werden, wenn sämtliche notwendigen Eigenschaften erfüllt sind. Ein tibble, welcher in 2 Spalten verschiedene Datentypen beinhaltet, kann zum Beispiel **nicht** zu einer Matrix konvertiert werden. Beziehungsweise geht das schon, allerdings werden dann alle Werte zu einem Datentyp konvertiert.
 ```{r eval = FALSE}
 as.matrix()
-as.data_frame()
+as.data.frame()
 as.tibble()
+as.list()
 as.numeric()
 as.character()
 ```
