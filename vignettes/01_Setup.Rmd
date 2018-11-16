@@ -4,17 +4,17 @@ subtitle: "R für empirische Wissenschaften v1.0.2"
 author: "Jan Philipp Nolte"
 date: ''
 output:
-  pdf_document:
-    number_sections: yes
-    toc: yes
-    toc_depth: 3
-  word_document:
-    toc: yes
-    toc_depth: '3'
   html_document:
     df_print: paged
     toc: yes
     toc_depth: '3'
+  word_document:
+    toc: yes
+    toc_depth: '3'
+  pdf_document:
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
 header-includes: 
       - \usepackage[ngerman]{babel}
       - \usepackage{tocloft}
@@ -109,11 +109,11 @@ Die Oberfläche von RStudio ist in vier Teile unterteilt (siehe Abbildung 1). Un
 ![Abbildung 1: Aufbau von RStudio nach frischer Installation](images/rstudio_frisch.jpg)
 \newpage
 
-### Never save your workspace 
+### Never save your workspace
 Um zu gewährleisten, dass Dein Code nicht nur auf Deinem Laptop funktioniert, ist es dringend notwendig das ständige Speichern des Workspaces auszustellen.
 
 1. Gehe zu: `Tools/Global Options.../General`
-2. Entferne den Haken bei: `restore .RData into workspace at startup`
+2. Entferne den Haken bei: `Restore .RData into workspace at startup`
 3. Ändere `Save workspace to .RData on exit` zu `never`
 
 Keine Sorge, auf das Speichern Deines Codes hat das keine Auswirkung.
@@ -123,6 +123,21 @@ Damit man den geschriebenen Code fehlerfrei auf anderen Geräten lesen kann, ist
 
 1. Gehe zu: `Tools/Global Options.../Code/Saving` 
 2. Ändere: `Default text encoding` zu `UTF-8`
+
+### Optionale weitere Anpassungen
+Es empfielt sich, noch weitere Anpassungen vorzunehmen, die einem das Leben mit und das Lernen von R erleichtern. 
+
+1. Gehe zu: `Tools/Global Options.../General`
+2. Mache einen Haken bei: `Restore most recently openend project at startup` und `Restore previously open source documents at startup` (man braucht nur noch auf das RStudio Symbol klicken und nicht jedes mal suchen, wo die Datei auf dem Computer liegt)
+3. Entferne den Haken bei: `Always save history` (History macht nur Sinn, wenn man ausschließlich mit der Konsole arbeitet)
+4. Wechsel zu `Code/Display` und mache einen Haken bei `Highlight R function calls` (zum besseren Verständnis darüber, was Funktionen sind)
+5. Wechsel zu `Code/Diagnostics` und mache einen Haken bei `Provide R style diagnostics` (zum angemessenen Verwenden von Leerzeichen)
+6. Wechsel zu `Code/Completion` und ändere im Abschnitt `Completion Delay` die Zahlen auf 1 (character) und 0 (ms) (für schnellere Vorschläge von Funktionen)
+
+Geschmackssache:
+
+7. Um die Farbe von RStudio zum Beispiel in ein schickes Dunkelblau oder Schwarz zu ändern, gehe zu `Appearance` und wähle ein anderes `Editor theme`.
+8. Ändere die Anordnung von Script, Konsole und dem Rest unter `Pane Layout`.
 
 # Was ist ein Package?
 R bietet von Beginn an eine Bandbreite von Funktionen. Da es R bereits seit vielen Jahren gibt, haben sich viele fähige Programmierer an die Arbeit gemacht, Funktionen zu schreiben, die die Funktionen von `Base R` erweitern. Packages sind kostenlose Erweiterungen von Dritten, die verschiedenste Aufgaben erheblich erleichtern können. Die Packages werden auf [CRAN](https://cran.r-project.org/web/packages/), auf [Github](https://github.com/) oder auf [Bioconductor](https://www.bioconductor.org/) geteilt. Es gibt mittlerweile mehr als 11 000 Packages alleine auf CRAN. 

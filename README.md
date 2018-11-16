@@ -4,7 +4,7 @@
 
 ``devtools::install_github("j3ypi/rBasics")``
 
-Das `devtools` Package hat zur Zeit Probleme dabei, dependencies zu installieren. Deswegen kann der obige Befehl zu Fehlern führen. Um dies zu vermeiden, folge den detaillierten Installationsanweisungen im [Setup](https://j3ypi.github.io/rBasics/articles/01_Setup.html#set-up-your-lab). Das Tutorial benötigt mindestens die R Version `3.3.3`. Falls R bereits auf Deinem Laptop ist, stelle sicher, dass Du keine ältere Version installiert hast. 
+Das `devtools` Package hat zur Zeit Probleme dabei, Dependencies zu installieren. Deswegen kann der obige Befehl zu Fehlern führen. Um dies zu vermeiden, folge den detaillierten Installationsanweisungen im [Setup](https://j3ypi.github.io/rBasics/articles/01_Setup.html#set-up-your-lab). Das Tutorial benötigt mindestens die R Version `3.3.3`. Falls R bereits auf Deinem Laptop ist, stelle sicher, dass Du keine ältere Version installiert hast. 
 
 ## Für wen ist dieses Tutorial?
 
