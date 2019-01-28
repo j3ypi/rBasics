@@ -2,7 +2,7 @@
 title: "Wiederholung"
 output: 
   learnr::tutorial:
-    tutorial_id: 1.0.2
+    tutorial_id: 1.1.0
     progressive: TRUE
     allow_skip: TRUE
     theme: "flatly"
@@ -15,6 +15,22 @@ loadNamespace("tidyverse")
 
 knitr::opts_chunk$set(echo = FALSE)
 data(indonesisch, package = "rBasics")
+
+vars <- indonesisch %>% 
+  select(Selbsttranszendenz:Wir_Wohlgefuehl)
+
+erg1 <- indonesisch %>%
+  mutate(Mittelwert = rowMeans(vars)) %>% 
+  select(Mittelwert, Sinnerfuellung)
+
+erg2 <- erg1 %>% 
+  mutate(Vergleich = Mittelwert > Sinnerfuellung)
+
+erg3 <- indonesisch %>% 
+  select(Alter) %>% 
+  mutate(Kategorie = case_when(Alter < 22 ~ "jung",
+                               Alter >= 22 & Alter < 40 ~ "mittel",
+                               TRUE ~ "alt"))
 ```
 
 ## Abschnitt I
@@ -44,8 +60,8 @@ quiz(
     answer("Logical"), allow_retry = T
   ),
   question("Welchen Datentyp hat Selbsttranszendenz?",
-    answer("Character", correct = TRUE),
-    answer("Numeric"),
+    answer("Character"),
+    answer("Numeric", correct = TRUE),
     answer("Logical"), allow_retry = T
     ) , caption = "Block II"
 )
@@ -121,7 +137,7 @@ indonesisch %>%
   filter(Geschlecht == "m")
 ```
 
-Gib nur jene Probanden mit einer Selbstwirklichung von über 3.5 aus.
+Gib nur jene Probanden mit einer Selbstverwirklichung von über 3.5 aus.
 
 ```{r q5, exercise=TRUE}
 
@@ -137,7 +153,7 @@ indonesisch %>%
   filter(Selbstverwirklichung > 3.5)
 ```
 
-Gib nur jene Probanden, die älter als 25 und eine Selbstranszendenz von über 4 haben aus. 
+Gib nur jene Probanden, die älter als 25 und eine Selbsttranszendenz von über 4 haben aus. 
 
 ```{r q6, exercise=TRUE}
 
@@ -171,7 +187,7 @@ indonesisch %>%
   summarise(Mittelwert = mean(Alter))
 ```
 
-Ermittle das Standardabweichung beider Geschlechter in einem Befehl mit `group_by()` und nenne das Ergebnis SD
+Ermittle die Standardabweichung des Alters beider Geschlechter in einem Befehl mit `group_by()` und nenne das Ergebnis SD.
 
 ```{r q14, exercise=TRUE}
 
@@ -213,33 +229,19 @@ indonesisch %>%
   select(Mittelwert, Sinnerfuellung)
 ```
 
-```{r, echo = FALSE}
-vars <- indonesisch %>% 
-  select(Selbsttranszendenz:Wir_Wohlgefuehl)
-
-erg1 <- indonesisch %>%
-  mutate(Mittelwert = rowMeans(vars)) %>% 
-  select(Mittelwert, Sinnerfuellung)
-```
-
-Angenommen, das vorherige Ergebnis ist als Variable namens `erg1` gespeichert. Füge eine neue Spalte namens `Vergleich` hinzu, in der du prüfst, ob der Mittelwert größer ist, als die Werte der Sinnerfüllung. Speicher das Ergebnis wieder in `erg1`.
+Angenommen, das vorherige Ergebnis ist als Variable namens `erg1` gespeichert. Füge eine neue Spalte namens `Vergleich` hinzu, in der du prüfst, ob der Mittelwert größer ist, als die Werte der Sinnerfüllung. Speicher das Ergebnis wieder in `erg2`.
 
 ```{r q9, exercise=TRUE}
 
 ```
 
 ```{r q9-hint}
-erg1 <- erg1 %>%
+erg2 <- erg1 %>%
   mutate() 
 ```
 
 ```{r q9-solution}
-erg1 <- erg1 %>% 
-  mutate(Vergleich = Mittelwert > Sinnerfuellung)
-```
-
-```{r echo=FALSE}
-erg1 <- erg1 %>% 
+erg2 <- erg1 %>% 
   mutate(Vergleich = Mittelwert > Sinnerfuellung)
 ```
 
@@ -279,28 +281,20 @@ indonesisch %>%
                                TRUE ~ "alt"))
 ```
 
-```{r, echo=FALSE}
-erg2 <- indonesisch %>% 
-  select(Alter) %>% 
-  mutate(Kategorie = case_when(Alter < 22 ~ "jung",
-                               Alter >= 22 & Alter < 40 ~ "mittel",
-                               TRUE ~ "alt"))
-```
-
-Zähle nun die Anzahl der Personen in den verschiedenen Gruppen. Das vorherige Ergebnis sei erg2 genannt. 
+Zähle nun die Anzahl der Personen in den verschiedenen Gruppen. Das vorherige Ergebnis sei `erg3` genannt. 
 
 ```{r q12, exercise=TRUE}
 
 ```
 
 ```{r q12-hint}
-erg2 %>% 
+erg3 %>% 
   group_by() %>% 
   count()
 ```
 
 ```{r q12-solution}
-erg2 %>% 
+erg3 %>% 
   group_by(Kategorie) %>% 
   count()
 ```
