@@ -3,6 +3,7 @@ url: https://github.com/j3ypi/rBasics
 template:
   params:
     bootswatch: flatly
+    ganalytics: UA-142129809-1
 
 authors:
   Jan Philipp Nolte:

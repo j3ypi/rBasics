@@ -6,18 +6,23 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Deskriptive Statistik • rBasics</title>
-<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.1/clipboard.min.js" integrity="sha256-hIvIxeqhGZF+VVeM55k0mJvWpQ6gTkWk3Emc+NmowYA=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Deskriptive Statistik">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://github.com/j3ypi/rBasics/logo.png">
 <meta name="twitter:card" content="summary">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-142129809-1"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-142129809-1');
+</script>
 </head>
 <body>
     <div class="container template-article">
@@ -32,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rBasics</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
       </span>
     </div>
 
@@ -145,30 +150,30 @@
 <div id="deskriptive-statistik" class="section level1">
 <h1 class="hasAnchor">
 <a href="#deskriptive-statistik" class="anchor"></a>Deskriptive Statistik</h1>
-<p>Wir nehmen wieder den Datensatz aus dem letzten Kapitel mit den fünf Persönlichkeitsfaktoren. Das <code>skimr</code> Package enthält die Funktion <code><a href="http://www.rdocumentation.org/packages/skimr/topics/skim">skim()</a></code>, die wir wie gewohnt in einer Pipe ausführen können. Zuerst laden wir das Package.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(skimr)</code></pre></div>
+<p>Wir nehmen wieder den Datensatz aus dem letzten Kapitel mit den fünf Persönlichkeitsfaktoren. Das <code>skimr</code> Package enthält die Funktion <code><a href="https://www.rdocumentation.org/packages/skimr/topics/skim">skim()</a></code>, die wir wie gewohnt in einer Pipe ausführen können. Zuerst laden wir das Package.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(skimr)</a></code></pre></div>
 <p>Der Funktion muss kein weiteres Argument übergeben werden, weil alle Spalten analysiert werden. Es werden Informationen über Zeilen- und Spaltenzahl, Anzahl an fehlenden Werten, übliche deskriptive Maße sowie ein Histogram über die Verteilung der jeweiligen Werte ausgegeben – für einen ersten Überblick optimal. Da der Output im Internet und im PDF nicht richtig abgebildet werden kann, wird der Output hier ausgespart. Aber probiere es selbst einmal.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big_five <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/skimr/topics/skim">skim</a></span>()</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">big_five <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/skimr/topics/skim">skim</a></span>()</a></code></pre></div>
 <p>Natürlich können wir auch hier mit <code>group_by()</code> den Datensatz in die jeweiligen Untergruppen unterteilen.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big_five <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(Geschlecht) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/skimr/topics/skim">skim</a></span>()</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">big_five <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Geschlecht) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/skimr/topics/skim">skim</a></span>()</a></code></pre></div>
 <p>Es gibt selbstververständlich auch eine Funktion aus dem <code>tidyverse</code> für die deskriptive Statistik. Möchten wir die Anzahl der Personen, den Mittelwert des Alters, deren Standardabweichung, den Standardfehler sowie Maximum und Minimum ausgegeben haben, benutzen wir <code>summarise()</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big_five <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N =</span> <span class="kw">n</span>(), 
-            <span class="dt">Mittelwert =</span> <span class="kw">mean</span>(Alter),
-            <span class="dt">SD =</span> <span class="kw">sd</span>(Alter),
-            <span class="dt">SE =</span> SD <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(N), 
-            <span class="dt">Minimum =</span> <span class="kw">min</span>(Alter),
-            <span class="dt">Maximum =</span> <span class="kw">max</span>(Alter))</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">big_five <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N =</span> <span class="kw">n</span>(), </a>
+<a class="sourceLine" id="cb4-3" title="3">            <span class="dt">Mittelwert =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(Alter),</a>
+<a class="sourceLine" id="cb4-4" title="4">            <span class="dt">SD =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd</a></span>(Alter),</a>
+<a class="sourceLine" id="cb4-5" title="5">            <span class="dt">SE =</span> SD <span class="op">/</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">sqrt</a></span>(N), </a>
+<a class="sourceLine" id="cb4-6" title="6">            <span class="dt">Minimum =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">min</a></span>(Alter),</a>
+<a class="sourceLine" id="cb4-7" title="7">            <span class="dt">Maximum =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">max</a></span>(Alter))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 6
 ##       N Mittelwert    SD    SE Minimum Maximum
 ##   &lt;int&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
 ## 1   200       45.9  195.  13.8      13    1995</code></pre>
-<p>mit <code>n()</code> für die Anzahl, <code>mean()</code> für den Mittelwert, <code>sd()</code> für die Standardabweichung, <code>sqrt()</code> für die Quadratwurzel, <code>min()</code> für das Minimum und <code>max()</code> für das Maximum. Schauen wir uns den Output einmal genauer an. Was ist denn da mit dem Alter los? Maximales Alter ist 1995? Da hat wohl jemand sein Geburtsjahr und nicht sein Alter in Jahren angegeben. Schauen wir mal, ob mehrere unrealistische Alter angegeben wurden.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big_five <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(Alter <span class="op">&gt;</span><span class="st"> </span><span class="dv">150</span>) </code></pre></div>
+<p>mit <code>n()</code> für die Anzahl, <code><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean()</a></code> für den Mittelwert, <code><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd()</a></code> für die Standardabweichung, <code><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">sqrt()</a></code> für die Quadratwurzel, <code><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">min()</a></code> für das Minimum und <code><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">max()</a></code> für das Maximum. Schauen wir uns den Output einmal genauer an. Was ist denn da mit dem Alter los? Maximales Alter ist 1995? Da hat wohl jemand sein Geburtsjahr und nicht sein Alter in Jahren angegeben. Schauen wir mal, ob mehrere unrealistische Alter angegeben wurden.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">big_five <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/skimr/topics/reexports">filter</a></span>(Alter <span class="op">&gt;</span><span class="st"> </span><span class="dv">150</span>) </a></code></pre></div>
 <pre><code>## # A tibble: 2 x 8
 ##   Alter Geschlecht Herkunft Extraversion Neurotizismus Vertraeglichkeit
 ##   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
@@ -176,28 +181,28 @@
 ## 2  1995 f          PH                2.5           3.7              3.8
 ## # ... with 2 more variables: Gewissenhaftigkeit &lt;dbl&gt;, Offenheit &lt;dbl&gt;</code></pre>
 <p>Wie man sieht, haben nur zwei Personen das Eintragen falsch verstanden. Ändern wir das mit der bereits gelernten <code>if_else()</code> Funktion kurz ab. Für alle Personen, die ein Alter größer als 150 eingetragen haben, wird 2018 minus das angegebene Geburtsjahr gerechnet und für die Restlichen nur das richtig eingetragene Alter zurückgegeben.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big_five &lt;-<span class="st"> </span>big_five <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Alter =</span> <span class="kw">if_else</span>(Alter <span class="op">&gt;</span><span class="st"> </span><span class="dv">150</span>, <span class="dv">2018</span> <span class="op">-</span><span class="st"> </span>Alter, Alter)) </code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">big_five &lt;-<span class="st"> </span>big_five <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/skimr/topics/reexports">mutate</a></span>(<span class="dt">Alter =</span> <span class="kw">if_else</span>(Alter <span class="op">&gt;</span><span class="st"> </span><span class="dv">150</span>, <span class="dv">2018</span> <span class="op">-</span><span class="st"> </span>Alter, Alter)) </a></code></pre></div>
 <p>Für die selben Statistiken pro Geschlecht benutzen wir wieder <code>group_by()</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big_five <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(Geschlecht) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N =</span> <span class="kw">n</span>(), 
-            <span class="dt">Mittelwert =</span> <span class="kw">mean</span>(Alter),
-            <span class="dt">SD =</span> <span class="kw">sd</span>(Alter),
-            <span class="dt">SE =</span> SD <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(N),
-            <span class="dt">Minimum =</span> <span class="kw">min</span>(Alter),
-            <span class="dt">Maximum =</span> <span class="kw">max</span>(Alter))</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">big_five <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Geschlecht) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N =</span> <span class="kw">n</span>(), </a>
+<a class="sourceLine" id="cb9-4" title="4">            <span class="dt">Mittelwert =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(Alter),</a>
+<a class="sourceLine" id="cb9-5" title="5">            <span class="dt">SD =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd</a></span>(Alter),</a>
+<a class="sourceLine" id="cb9-6" title="6">            <span class="dt">SE =</span> SD <span class="op">/</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">sqrt</a></span>(N),</a>
+<a class="sourceLine" id="cb9-7" title="7">            <span class="dt">Minimum =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">min</a></span>(Alter),</a>
+<a class="sourceLine" id="cb9-8" title="8">            <span class="dt">Maximum =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">max</a></span>(Alter))</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 7
 ##   Geschlecht     N Mittelwert    SD    SE Minimum Maximum
 ##   &lt;chr&gt;      &lt;int&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
 ## 1 f            118       25.9  11.3  1.04      14      60
 ## 2 m             82       27.3  11.3  1.25      13      59</code></pre>
 <p>Wir merken sofort, wie eng die Datenvorbereitung mit der deskriptiven Statistik verknüpft ist. In der Regel merkt man erst beim Erkunden des Datensatzes, was noch alles verändert werden muss, damit man die geplanten Rechnung durchführen kann.</p>
-<p>Nun kommen wir zur alles entscheidenen Frage: Wer hat denn nun die Tipprunde gewonnen? Zur schöneren Ausgabe benutzen wir die bereits kennengelernte <code>arrange()</code> Funktion.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tipp_wm <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(Person) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Gesamtpunktzahl =</span> <span class="kw">sum</span>(Punkte)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(Gesamtpunktzahl))</code></pre></div>
+<p>Nun kommen wir zur alles entscheidenen Frage: Wer hat denn nun die Tipprunde gewonnen? Zur schöneren Ausgabe benutzen wir die bereits kennengelernte <code><a href="https://www.rdocumentation.org/packages/skimr/topics/reexports">arrange()</a></code> Funktion.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">tipp_wm <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Person) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Gesamtpunktzahl =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(Punkte)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/skimr/topics/reexports">arrange</a></span>(<span class="kw">desc</span>(Gesamtpunktzahl))</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 2
 ##   Person       Gesamtpunktzahl
 ##   &lt;chr&gt;                  &lt;dbl&gt;
@@ -212,16 +217,16 @@
 <h2 class="hasAnchor">
 <a href="#umgang-mit-fehlenden-werten" class="anchor"></a>Umgang mit fehlenden Werten</h2>
 <p>Was aber nun, wenn nicht alle Werte vorhanden sind? Im Datensatz zur Tipp WM haben manche Tipper teilweise vergessen, ihren Tipp abzugeben. Solche fehlenden Werte nennt man NAs (not available). NAs können zu Fehlermeldungen führen. Es gibt verschiedene Möglichkeiten, mit NAs umzugehen. Welche man verwendet, hängt stark vom Kontext ab.</p>
-<p>Möchte man zum Beispiel nur den Mittelwert einer Variable berechnen, kann man bei der Funktion <code>mean()</code> das Argument <code>na.rm</code> auf <code>TRUE</code> setzen.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tipp_wm <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Mittelwert =</span> <span class="kw">mean</span>(Punkte, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<p>Möchte man zum Beispiel nur den Mittelwert einer Variable berechnen, kann man bei der Funktion <code><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean()</a></code> das Argument <code>na.rm</code> auf <code>TRUE</code> setzen.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">tipp_wm <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Mittelwert =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(Punkte, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   Mittelwert
 ##        &lt;dbl&gt;
 ## 1      0.698</code></pre>
-<p>Alternativ kann man mit <code>na.omit()</code> auch sämtliche NAs im ganzen Datensatz entfernen. Aber Vorsicht, es werden alle Zeilen entfernt, in denen auch nur ein einziger Wert fehlt. Angenommen man möchte sich zwei untersuchte Variablen genauer anschauen und in den beiden Spalten selbst fehlen kaum Werte. Es kann aber gut sein, dass Du ausserdem eine sozio-demographische Spalte (zum Beispiel Alter) erhoben hast. In dieser Spalte fehlen nun einige Werte. Für die Untersuchung Deiner beiden Variablen spielt diese Spalte aber gar keine Rolle. Die Funktion würde trotzdem alle Variablen entfernen. Im Datensatz <code>tipp_wm_wide</code> würden von 64 Zeilen lediglich 47 übrig bleiben.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tipp_wm_wide <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">na.omit</span>() </code></pre></div>
+<p>Alternativ kann man mit <code><a href="https://www.rdocumentation.org/packages/stats/topics/na.fail">na.omit()</a></code> auch sämtliche NAs im ganzen Datensatz entfernen. Aber Vorsicht, es werden alle Zeilen entfernt, in denen auch nur ein einziger Wert fehlt. Angenommen man möchte sich zwei untersuchte Variablen genauer anschauen und in den beiden Spalten selbst fehlen kaum Werte. Es kann aber gut sein, dass Du ausserdem eine sozio-demographische Spalte (zum Beispiel Alter) erhoben hast. In dieser Spalte fehlen nun einige Werte. Für die Untersuchung Deiner beiden Variablen spielt diese Spalte aber gar keine Rolle. Die Funktion würde trotzdem alle Variablen entfernen. Im Datensatz <code>tipp_wm_wide</code> würden von 64 Zeilen lediglich 47 übrig bleiben.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">tipp_wm_wide <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/na.fail">na.omit</a></span>() </a></code></pre></div>
 <pre><code>## # A tibble: 47 x 7
 ##    Thomas_Bayes Egon_Pearson Jerzy_Neyman Alice Bob   Charlie Ergebnis
 ##    &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   
@@ -241,11 +246,11 @@
 <div id="weitere-funktionen" class="section level2">
 <h2 class="hasAnchor">
 <a href="#weitere-funktionen" class="anchor"></a>Weitere Funktionen</h2>
-<p>Andere nicht explizit besprochene Funktionen können nach dem selben Schema wie beispielsweise <code>mean()</code> und <code>sd()</code> verwendet werden.</p>
+<p>Andere nicht explizit besprochene Funktionen können nach dem selben Schema wie beispielsweise <code><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean()</a></code> und <code><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd()</a></code> verwendet werden.</p>
 <ul>
-<li><code>quantile()</code></li>
-<li><code>var()</code></li>
-<li><code>median()</code></li>
+<li><code><a href="https://www.rdocumentation.org/packages/stats/topics/quantile">quantile()</a></code></li>
+<li><code><a href="https://www.rdocumentation.org/packages/stats/topics/cor">var()</a></code></li>
+<li><code><a href="https://www.rdocumentation.org/packages/stats/topics/median">median()</a></code></li>
 </ul>
 </div>
 </div>
@@ -275,9 +280,8 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
-
       </footer>
 </div>
 

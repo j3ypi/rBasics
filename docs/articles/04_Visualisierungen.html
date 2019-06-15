@@ -6,18 +6,23 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Visualisierungen • rBasics</title>
-<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.1/clipboard.min.js" integrity="sha256-hIvIxeqhGZF+VVeM55k0mJvWpQ6gTkWk3Emc+NmowYA=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Visualisierungen">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://github.com/j3ypi/rBasics/logo.png">
 <meta name="twitter:card" content="summary">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-142129809-1"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-142129809-1');
+</script>
 </head>
 <body>
     <div class="container template-article">
@@ -32,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rBasics</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
       </span>
     </div>
 
@@ -156,77 +161,77 @@
 ## 5 Jerzy_Neyman     40
 ## 6 Egon_Pearson     33</code></pre>
 <p>Einen Graphen zu erstellen, funktioniert intuitiv. Das erste Argument <code>data</code> ist der Name des Datensatzes. Auf der x-Achse möchten wir die verschiedenen Personen abgebildet haben und auf der y-Achse die jeweilige Gesamtpunktzahl.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggbarplot</span>(<span class="dt">data =</span> df,
-          <span class="dt">x =</span> <span class="st">"Person"</span>,
-          <span class="dt">y =</span> <span class="st">"Gesamt"</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">ggbarplot</span>(<span class="dt">data =</span> df,</a>
+<a class="sourceLine" id="cb2-2" title="2">          <span class="dt">x =</span> <span class="st">"Person"</span>,</a>
+<a class="sourceLine" id="cb2-3" title="3">          <span class="dt">y =</span> <span class="st">"Gesamt"</span>)</a></code></pre></div>
 <p><img src="04_Visualisierungen_files/figure-html/unnamed-chunk-2-1.png" width="60%" style="display: block; margin: auto;"></p>
 <p>Das sieht noch nicht sehr schön aus. Die Achsenbeschriftungen sind unklar formuliert, die Namen überlappen sich und die Abstände zwischen den angezeigten Punktezahlen auf der y-Achse sind nicht schön. Damit wir solche Attribute verändern können, müssen wir den Graphen abspeichern. Als Variablennamen benutzen wir willkürlich <code>plot</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot &lt;-<span class="st"> </span><span class="kw">ggbarplot</span>(<span class="dt">data =</span> df,
-                 <span class="dt">x =</span> <span class="st">"Person"</span>,
-                 <span class="dt">y =</span> <span class="st">"Gesamt"</span>)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">plot &lt;-<span class="st"> </span><span class="kw">ggbarplot</span>(<span class="dt">data =</span> df,</a>
+<a class="sourceLine" id="cb3-2" title="2">                 <span class="dt">x =</span> <span class="st">"Person"</span>,</a>
+<a class="sourceLine" id="cb3-3" title="3">                 <span class="dt">y =</span> <span class="st">"Gesamt"</span>)</a></code></pre></div>
 <p>Diesen gespeicherten Graphen können wir nun, wie bereits erwähnt, der Funktion <code>ggpar()</code> übergeben. Die Achsenbeschriftungen passen wir mit <code>xlab</code> respektive <code>ylab</code> an, die Größe der Schrift mit <code>font.x</code> und <code>font.y</code>, den Winkel der Personennamen mit <code>x.text.angle</code> und die Abstände auf der y-Achse mit <code>yticks.by</code>. Im Laufe dieses Kapitels werden wir noch andere Argumente für <code>ggpar()</code> kennenlernen. Für eine vollständige Liste, kannst Du einfach <code>?ggpar</code> ausführen. Gerade das Anpassen der Schriftgröße ist extrem wichtig beim Einfügen in Paper oder Abschlussarbeiten, da die Schriftgröße innerhalb des Graphen in der Regel nicht stark von der des Textes abweichen darf.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggpar</span>(<span class="dt">p =</span> plot, 
-      <span class="dt">xlab =</span> <span class="st">"Personen"</span>, 
-      <span class="dt">ylab =</span> <span class="st">"Anzahl richtiger Tipps"</span>, 
-      <span class="dt">font.x =</span> <span class="dv">12</span>,
-      <span class="dt">font.y =</span> <span class="dv">12</span>,  
-      <span class="dt">x.text.angle =</span> <span class="dv">45</span>, 
-      <span class="dt">yticks.by =</span> <span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">ggpar</span>(<span class="dt">p =</span> plot, </a>
+<a class="sourceLine" id="cb4-2" title="2">      <span class="dt">xlab =</span> <span class="st">"Personen"</span>, </a>
+<a class="sourceLine" id="cb4-3" title="3">      <span class="dt">ylab =</span> <span class="st">"Anzahl richtiger Tipps"</span>, </a>
+<a class="sourceLine" id="cb4-4" title="4">      <span class="dt">font.x =</span> <span class="dv">12</span>,</a>
+<a class="sourceLine" id="cb4-5" title="5">      <span class="dt">font.y =</span> <span class="dv">12</span>,  </a>
+<a class="sourceLine" id="cb4-6" title="6">      <span class="dt">x.text.angle =</span> <span class="dv">45</span>, </a>
+<a class="sourceLine" id="cb4-7" title="7">      <span class="dt">yticks.by =</span> <span class="dv">10</span>)</a></code></pre></div>
 <p><img src="04_Visualisierungen_files/figure-html/unnamed-chunk-4-1.png" width="60%" style="display: block; margin: auto;"></p>
 <p>Das sieht jetzt schon schöner aus. Aber auch in der Funktion <code>ggparplot()</code> selber, können wir einige Anpassungen vornehmen. Wenn man die Reihenfolge verändern möchte, benutzt man <code>order</code> und für das Verändern der Säulenbreite <code>width</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot &lt;-<span class="st"> </span><span class="kw">ggbarplot</span>(<span class="dt">data =</span> df, 
-          <span class="dt">x =</span> <span class="st">"Person"</span>,
-          <span class="dt">y =</span> <span class="st">"Gesamt"</span>, 
-          <span class="dt">order =</span> <span class="kw">c</span>(<span class="st">"Alice"</span>, <span class="st">"Charlie"</span>, <span class="st">"Bob"</span>,
-                    <span class="st">"Thomas_Bayes"</span>, <span class="st">"Jerzy_Neyman"</span>, <span class="st">"Egon_Pearson"</span>),
-          <span class="dt">width =</span> <span class="fl">0.9</span>) 
-
-<span class="kw">ggpar</span>(<span class="dt">p =</span> plot, 
-      <span class="dt">xlab =</span> <span class="st">"Personen"</span>, 
-      <span class="dt">ylab =</span> <span class="st">"Anzahl richtiger Tipps"</span>, 
-      <span class="dt">font.x =</span> <span class="dv">12</span>,
-      <span class="dt">font.y =</span> <span class="dv">12</span>,  
-      <span class="dt">x.text.angle =</span> <span class="dv">45</span>, 
-      <span class="dt">yticks.by =</span> <span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">plot &lt;-<span class="st"> </span><span class="kw">ggbarplot</span>(<span class="dt">data =</span> df, </a>
+<a class="sourceLine" id="cb5-2" title="2">          <span class="dt">x =</span> <span class="st">"Person"</span>,</a>
+<a class="sourceLine" id="cb5-3" title="3">          <span class="dt">y =</span> <span class="st">"Gesamt"</span>, </a>
+<a class="sourceLine" id="cb5-4" title="4">          <span class="dt">order =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Alice"</span>, <span class="st">"Charlie"</span>, <span class="st">"Bob"</span>,</a>
+<a class="sourceLine" id="cb5-5" title="5">                    <span class="st">"Thomas_Bayes"</span>, <span class="st">"Jerzy_Neyman"</span>, <span class="st">"Egon_Pearson"</span>),</a>
+<a class="sourceLine" id="cb5-6" title="6">          <span class="dt">width =</span> <span class="fl">0.9</span>) </a>
+<a class="sourceLine" id="cb5-7" title="7"></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="kw">ggpar</span>(<span class="dt">p =</span> plot, </a>
+<a class="sourceLine" id="cb5-9" title="9">      <span class="dt">xlab =</span> <span class="st">"Personen"</span>, </a>
+<a class="sourceLine" id="cb5-10" title="10">      <span class="dt">ylab =</span> <span class="st">"Anzahl richtiger Tipps"</span>, </a>
+<a class="sourceLine" id="cb5-11" title="11">      <span class="dt">font.x =</span> <span class="dv">12</span>,</a>
+<a class="sourceLine" id="cb5-12" title="12">      <span class="dt">font.y =</span> <span class="dv">12</span>,  </a>
+<a class="sourceLine" id="cb5-13" title="13">      <span class="dt">x.text.angle =</span> <span class="dv">45</span>, </a>
+<a class="sourceLine" id="cb5-14" title="14">      <span class="dt">yticks.by =</span> <span class="dv">10</span>)</a></code></pre></div>
 <p><img src="04_Visualisierungen_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;"></p>
 <p>Häufig muss man gepaarte Säulendiagramme erstellen. Abwechslungshalber schauen wir uns dafür den indonesischen Datensatz an (siehe Übungsaufgabe). Genauer gesagt möchten wir uns anschauen, wie Selbsteinschätzung von Ordnung zwischen den Geschlechtern innerhalb der Familienstände variiert. Im Vergleich zu vorher kommt nun das <code>fill</code> und <code>add.params</code> Argument hinzu. Beide sind genau in der Form zwingend notwendig. Darüber hinaus fügen wir mit <code>add</code> den Standardfehler hinzu, wählen mit <code>palette</code> eine publikationsreife graue Farbpalette und stellen den Abstand zwischen den gepaarten Säulen auf 0.8.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggbarplot</span>(<span class="dt">data =</span> indonesisch,
-          <span class="dt">x =</span> <span class="st">"Geschlecht"</span>,
-          <span class="dt">y =</span> <span class="st">"Ordnung"</span>, 
-          <span class="dt">fill =</span> <span class="st">"Familienstand"</span>,
-          <span class="dt">add.params =</span> <span class="kw">list</span>(<span class="dt">group =</span> <span class="st">"Familienstand"</span>),
-          <span class="dt">add =</span> <span class="st">"mean_se"</span>,
-          <span class="dt">palette =</span> <span class="st">"grey"</span>,
-          <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="fl">0.8</span>))</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">ggbarplot</span>(<span class="dt">data =</span> indonesisch,</a>
+<a class="sourceLine" id="cb6-2" title="2">          <span class="dt">x =</span> <span class="st">"Geschlecht"</span>,</a>
+<a class="sourceLine" id="cb6-3" title="3">          <span class="dt">y =</span> <span class="st">"Ordnung"</span>, </a>
+<a class="sourceLine" id="cb6-4" title="4">          <span class="dt">fill =</span> <span class="st">"Familienstand"</span>,</a>
+<a class="sourceLine" id="cb6-5" title="5">          <span class="dt">add.params =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">group =</span> <span class="st">"Familienstand"</span>),</a>
+<a class="sourceLine" id="cb6-6" title="6">          <span class="dt">add =</span> <span class="st">"mean_se"</span>,</a>
+<a class="sourceLine" id="cb6-7" title="7">          <span class="dt">palette =</span> <span class="st">"grey"</span>,</a>
+<a class="sourceLine" id="cb6-8" title="8">          <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="fl">0.8</span>))</a></code></pre></div>
 <p><img src="04_Visualisierungen_files/figure-html/unnamed-chunk-6-1.png" width="60%" style="display: block; margin: auto;"></p>
-<p>Bis auf die Legende schon wunderschön. Zum Anpassen mit <code>ggpar()</code> speichern wir den Graphen als <code>paired</code> ab. Das Argument <code>ylim()</code> definiert die y-Achse von 0 bis 5, <code>legend</code> die Position (erster Wert für Höhe auf x-Achse, zweiter für y-Achse), <code>legend.title</code> für den Titel der Legende und schließlich <code>font.legend</code> für die so wichtige Schriftgröße.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggpar</span>(<span class="dt">p =</span> paired,
-      <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">5</span>),
-      <span class="dt">legend =</span> <span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.9</span>),
-      <span class="dt">legend.title =</span> <span class="st">""</span>,
-      <span class="dt">font.legend =</span> <span class="dv">12</span>)</code></pre></div>
+<p>Bis auf die Legende schon wunderschön. Zum Anpassen mit <code>ggpar()</code> speichern wir den Graphen als <code>paired</code> ab. Das Argument <code><a href="https://www.rdocumentation.org/packages/graphics/topics/plot.window">ylim()</a></code> definiert die y-Achse von 0 bis 5, <code>legend</code> die Position (erster Wert für Höhe auf x-Achse, zweiter für y-Achse), <code>legend.title</code> für den Titel der Legende und schließlich <code>font.legend</code> für die so wichtige Schriftgröße.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">ggpar</span>(<span class="dt">p =</span> paired,</a>
+<a class="sourceLine" id="cb7-2" title="2">      <span class="dt">ylim =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb7-3" title="3">      <span class="dt">legend =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.2</span>, <span class="fl">0.9</span>),</a>
+<a class="sourceLine" id="cb7-4" title="4">      <span class="dt">legend.title =</span> <span class="st">""</span>,</a>
+<a class="sourceLine" id="cb7-5" title="5">      <span class="dt">font.legend =</span> <span class="dv">12</span>)</a></code></pre></div>
 <p><img src="04_Visualisierungen_files/figure-html/unnamed-chunk-8-1.png" width="60%" style="display: block; margin: auto;"></p>
 </div>
 <div id="streudiagramm" class="section level1">
 <h1 class="hasAnchor">
 <a href="#streudiagramm" class="anchor"></a>Streudiagramm</h1>
 <p>Nun gehen wir weiter zum <code>big_five</code> Datensatz. Wir möchten den Zusammenhang von Extraversion und Neurotizismus durch <code>ggscatter()</code> mit einem Streudiagramm darstellen.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggscatter</span>(<span class="dt">data =</span> big_five, 
-          <span class="dt">x =</span> <span class="st">"Extraversion"</span>, 
-          <span class="dt">y =</span> <span class="st">"Neurotizismus"</span>)</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">ggscatter</span>(<span class="dt">data =</span> big_five, </a>
+<a class="sourceLine" id="cb8-2" title="2">          <span class="dt">x =</span> <span class="st">"Extraversion"</span>, </a>
+<a class="sourceLine" id="cb8-3" title="3">          <span class="dt">y =</span> <span class="st">"Neurotizismus"</span>)</a></code></pre></div>
 <p><img src="04_Visualisierungen_files/figure-html/unnamed-chunk-9-1.png" width="60%" style="display: block; margin: auto;"></p>
-<p>Man kann auf einfache Art und Weise zusätzliche Informationen wie eine Regressiongerade, das Konfidenzintervall oder einen Korrelationskoeffezienten hinzufügen. Das Argument <code>cor.method</code> für die Art der Korrelation, <code>conf.int</code> für das Konfidenzintervall, <code>add</code> für die Regressionsgerade, <code>add.params</code> zum Anpassen der Regressionsgerade (auch hier müssen die Argumente genau in dieser Form innerhalb von <code>list()</code> stehen), <code>size</code> für die Größe der Punkte, <code>shape</code> für die Form und schließlich <code>color</code> für die Farbe.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggscatter</span>(<span class="dt">data =</span> big_five, 
-          <span class="dt">x =</span> <span class="st">"Extraversion"</span>, 
-          <span class="dt">y =</span> <span class="st">"Neurotizismus"</span>, 
-          <span class="dt">cor.method =</span> <span class="st">"pearson"</span>, 
-          <span class="dt">conf.int =</span> <span class="ot">TRUE</span>, 
-          <span class="dt">add =</span> <span class="st">"reg.line"</span>, 
-          <span class="dt">add.params =</span>  <span class="kw">list</span>(<span class="dt">color =</span> <span class="st">"black"</span>, 
-                             <span class="dt">fill =</span> <span class="st">"gray"</span>), 
-          <span class="dt">size =</span> <span class="dv">3</span>, 
-          <span class="dt">shape =</span> <span class="dv">21</span>, 
-          <span class="dt">color =</span> <span class="st">"black"</span>)</code></pre></div>
+<p>Man kann auf einfache Art und Weise zusätzliche Informationen wie eine Regressiongerade, das Konfidenzintervall oder einen Korrelationskoeffezienten hinzufügen. Das Argument <code>cor.method</code> für die Art der Korrelation, <code>conf.int</code> für das Konfidenzintervall, <code>add</code> für die Regressionsgerade, <code>add.params</code> zum Anpassen der Regressionsgerade (auch hier müssen die Argumente genau in dieser Form innerhalb von <code><a href="https://www.rdocumentation.org/packages/base/topics/list">list()</a></code> stehen), <code>size</code> für die Größe der Punkte, <code>shape</code> für die Form und schließlich <code>color</code> für die Farbe.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">ggscatter</span>(<span class="dt">data =</span> big_five, </a>
+<a class="sourceLine" id="cb9-2" title="2">          <span class="dt">x =</span> <span class="st">"Extraversion"</span>, </a>
+<a class="sourceLine" id="cb9-3" title="3">          <span class="dt">y =</span> <span class="st">"Neurotizismus"</span>, </a>
+<a class="sourceLine" id="cb9-4" title="4">          <span class="dt">cor.method =</span> <span class="st">"pearson"</span>, </a>
+<a class="sourceLine" id="cb9-5" title="5">          <span class="dt">conf.int =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb9-6" title="6">          <span class="dt">add =</span> <span class="st">"reg.line"</span>, </a>
+<a class="sourceLine" id="cb9-7" title="7">          <span class="dt">add.params =</span>  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">color =</span> <span class="st">"black"</span>, </a>
+<a class="sourceLine" id="cb9-8" title="8">                             <span class="dt">fill =</span> <span class="st">"gray"</span>), </a>
+<a class="sourceLine" id="cb9-9" title="9">          <span class="dt">size =</span> <span class="dv">3</span>, </a>
+<a class="sourceLine" id="cb9-10" title="10">          <span class="dt">shape =</span> <span class="dv">21</span>, </a>
+<a class="sourceLine" id="cb9-11" title="11">          <span class="dt">color =</span> <span class="st">"black"</span>)</a></code></pre></div>
 <p><img src="04_Visualisierungen_files/figure-html/unnamed-chunk-10-1.png" width="60%" style="display: block; margin: auto;"></p>
 <p>Das Anpassen mit <code>ggpar()</code> sparen wir uns an dieser Stelle.</p>
 </div>
@@ -234,64 +239,64 @@
 <h1 class="hasAnchor">
 <a href="#boxplot" class="anchor"></a>Boxplot</h1>
 <p>Auch Boxplots funktionieren nach dem selben Schema wie Säulen- und Streudiagramme.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggboxplot</span>(<span class="dt">data =</span> big_five, 
-          <span class="dt">x =</span> <span class="st">"Geschlecht"</span>, 
-          <span class="dt">y =</span> <span class="st">"Neurotizismus"</span>)</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">ggboxplot</span>(<span class="dt">data =</span> big_five, </a>
+<a class="sourceLine" id="cb10-2" title="2">          <span class="dt">x =</span> <span class="st">"Geschlecht"</span>, </a>
+<a class="sourceLine" id="cb10-3" title="3">          <span class="dt">y =</span> <span class="st">"Neurotizismus"</span>)</a></code></pre></div>
 <p><img src="04_Visualisierungen_files/figure-html/unnamed-chunk-11-1.png" width="60%" style="display: block; margin: auto;"></p>
 <p>Zum Ausblenden der Ausreißer setzen wir <code>outlier.shape</code> auf <code>NA</code> und zum Hinzufügen der Errobar setzen wir <code>bxp.errorbar</code> auf <code>TRUE</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggboxplot</span>(<span class="dt">data =</span> big_five, 
-          <span class="dt">x =</span> <span class="st">"Geschlecht"</span>, 
-          <span class="dt">y =</span> <span class="st">"Neurotizismus"</span>, 
-          <span class="dt">outlier.shape =</span> <span class="ot">NA</span>,
-          <span class="dt">bxp.errorbar =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">ggboxplot</span>(<span class="dt">data =</span> big_five, </a>
+<a class="sourceLine" id="cb11-2" title="2">          <span class="dt">x =</span> <span class="st">"Geschlecht"</span>, </a>
+<a class="sourceLine" id="cb11-3" title="3">          <span class="dt">y =</span> <span class="st">"Neurotizismus"</span>, </a>
+<a class="sourceLine" id="cb11-4" title="4">          <span class="dt">outlier.shape =</span> <span class="ot">NA</span>,</a>
+<a class="sourceLine" id="cb11-5" title="5">          <span class="dt">bxp.errorbar =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="04_Visualisierungen_files/figure-html/unnamed-chunk-12-1.png" width="60%" style="display: block; margin: auto;"></p>
 </div>
 <div id="histogramm" class="section level1">
 <h1 class="hasAnchor">
 <a href="#histogramm" class="anchor"></a>Histogramm</h1>
 <p>Histogramme benötigen kein <code>y</code> Argument, da dort die Häufigkeiten abgebildet sind. Das Argument <code>bins</code> ist besonders wichtig, da die dargestellten Informationen über die Häufigkeiten in Abhängigkeit der Anzahl der bins (Säulen) stark variieren können.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gghistogram</span>(<span class="dt">data =</span> big_five, 
-            <span class="dt">x =</span> <span class="st">"Neurotizismus"</span>,
-            <span class="dt">bins =</span> <span class="dv">20</span>)</code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">gghistogram</span>(<span class="dt">data =</span> big_five, </a>
+<a class="sourceLine" id="cb12-2" title="2">            <span class="dt">x =</span> <span class="st">"Neurotizismus"</span>,</a>
+<a class="sourceLine" id="cb12-3" title="3">            <span class="dt">bins =</span> <span class="dv">20</span>)</a></code></pre></div>
 <p><img src="04_Visualisierungen_files/figure-html/unnamed-chunk-13-1.png" width="60%" style="display: block; margin: auto;"></p>
 </div>
 <div id="liniendiagramm" class="section level1">
 <h1 class="hasAnchor">
 <a href="#liniendiagramm" class="anchor"></a>Liniendiagramm</h1>
 <p>Auch Liniendiagramme sind einfach und schnell nach den selben Prinzipien erstellt. Greifen wir hierfür wieder auf die Gesamtpunktzahlen der Tipper zu.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggline</span>(<span class="dt">data =</span> df, 
-       <span class="dt">x =</span> <span class="st">"Person"</span>, 
-       <span class="dt">y =</span> <span class="st">"Gesamt"</span>)</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">ggline</span>(<span class="dt">data =</span> df, </a>
+<a class="sourceLine" id="cb13-2" title="2">       <span class="dt">x =</span> <span class="st">"Person"</span>, </a>
+<a class="sourceLine" id="cb13-3" title="3">       <span class="dt">y =</span> <span class="st">"Gesamt"</span>)</a></code></pre></div>
 <p><img src="04_Visualisierungen_files/figure-html/unnamed-chunk-14-1.png" width="60%" style="display: block; margin: auto;"></p>
 <div id="anova-plot" class="section level2">
 <h2 class="hasAnchor">
 <a href="#anova-plot" class="anchor"></a>ANOVA Plot</h2>
 <p>Eine Besonderheit stellt hierbei der <em>ANOVA Plot</em> dar, was nichts anderes als ein einfacher Mittelwertsvergleich ist. Exemplarisch sei dies an der unterschiedlichen Ausprägung von Selbsttranszendenz zwischen den Geschlechtern innerhalb der Familienstände gezeigt. Das Argument <code>linetype</code> ändert wenig überraschend die Art der Linie. Entscheidend ist das Argument <code>add</code>, weil uns nur die Mittelwerte interessieren. Das Argument <code>size</code> verändert optional die Dicke der Linien.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggline</span>(<span class="dt">data =</span> indonesisch,
-       <span class="dt">x =</span> <span class="st">"Geschlecht"</span>,
-       <span class="dt">y =</span> <span class="st">"Selbsttranszendenz"</span>,
-       <span class="dt">linetype =</span> <span class="st">"Familienstand"</span>,
-       <span class="dt">add =</span> <span class="st">"mean"</span>, 
-       <span class="dt">size =</span> <span class="fl">0.7</span>)</code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">ggline</span>(<span class="dt">data =</span> indonesisch,</a>
+<a class="sourceLine" id="cb14-2" title="2">       <span class="dt">x =</span> <span class="st">"Geschlecht"</span>,</a>
+<a class="sourceLine" id="cb14-3" title="3">       <span class="dt">y =</span> <span class="st">"Selbsttranszendenz"</span>,</a>
+<a class="sourceLine" id="cb14-4" title="4">       <span class="dt">linetype =</span> <span class="st">"Familienstand"</span>,</a>
+<a class="sourceLine" id="cb14-5" title="5">       <span class="dt">add =</span> <span class="st">"mean"</span>, </a>
+<a class="sourceLine" id="cb14-6" title="6">       <span class="dt">size =</span> <span class="fl">0.7</span>)</a></code></pre></div>
 <p><img src="04_Visualisierungen_files/figure-html/unnamed-chunk-15-1.png" width="60%" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div id="speichern" class="section level1">
 <h1 class="hasAnchor">
 <a href="#speichern" class="anchor"></a>Speichern</h1>
-<p>Mit <code>ggsave()</code> kann man den Graphen einfach im derzeitigen Projektverzeichnis speichern. Wir erinnern uns, dass das Projektverzeichnis immer dort ist, wo unsere Projektdatei liegt. Wenn man sich nicht mehr sicher sein sollte, kann man dies mit <code>getwd()</code> herausfinden. Das erste Argument ist der Dateiname mit der gewünschten Dateiendung. Das zweite ist der zu speichernde Graph. Die Argumente danach sind optional, allerdings möchte man häufig die Breite und Höhe sowie die Auflösung (DPI) anpassen.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggsave</span>(<span class="dt">filename =</span> <span class="st">"plotName.jpeg"</span>, 
-       <span class="dt">plot =</span> plotName, 
-       <span class="dt">width =</span> <span class="dv">5</span>, 
-       <span class="dt">height =</span> <span class="dv">5</span>,
-       <span class="dt">dpi =</span> <span class="dv">500</span>)</code></pre></div>
+<p>Mit <code>ggsave()</code> kann man den Graphen einfach im derzeitigen Projektverzeichnis speichern. Wir erinnern uns, dass das Projektverzeichnis immer dort ist, wo unsere Projektdatei liegt. Wenn man sich nicht mehr sicher sein sollte, kann man dies mit <code><a href="https://www.rdocumentation.org/packages/base/topics/getwd">getwd()</a></code> herausfinden. Das erste Argument ist der Dateiname mit der gewünschten Dateiendung. Das zweite ist der zu speichernde Graph. Die Argumente danach sind optional, allerdings möchte man häufig die Breite und Höhe sowie die Auflösung (DPI) anpassen.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">ggsave</span>(<span class="dt">filename =</span> <span class="st">"plotName.jpeg"</span>, </a>
+<a class="sourceLine" id="cb15-2" title="2">       <span class="dt">plot =</span> plotName, </a>
+<a class="sourceLine" id="cb15-3" title="3">       <span class="dt">width =</span> <span class="dv">5</span>, </a>
+<a class="sourceLine" id="cb15-4" title="4">       <span class="dt">height =</span> <span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb15-5" title="5">       <span class="dt">dpi =</span> <span class="dv">500</span>)</a></code></pre></div>
 <p>Mehrere Graphen auf einmal kann man mit einer Funktion aus dem <code>rBasics</code> Package speichern. Dafür muss man eine Liste (siehe Extras) aus den Graphen machen. Diese Liste übergibt man dann als erstes Argument der Funktion <code><a href="../reference/ggsave_all.html">ggsave_all()</a></code>. Des weiteren können Höhe, Breite und DPI Anzahl angepasst werden. Es werden automatisch jpegs erstellt und die Namen setzen sich aus den Namen in der Liste zusammen.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plots &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">Name1 =</span> a, <span class="dt">Name2 =</span> b)
-
-<span class="kw"><a href="../reference/ggsave_all.html">ggsave_all</a></span>(plots,
-           <span class="dt">width =</span> <span class="dv">5</span>,
-           <span class="dt">height =</span> <span class="dv">5</span>,
-           <span class="dt">dpi =</span> <span class="dv">500</span>)</code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">plots &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">Name1 =</span> a, <span class="dt">Name2 =</span> b)</a>
+<a class="sourceLine" id="cb16-2" title="2"></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="kw"><a href="../reference/ggsave_all.html">ggsave_all</a></span>(plots,</a>
+<a class="sourceLine" id="cb16-4" title="4">           <span class="dt">width =</span> <span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb16-5" title="5">           <span class="dt">height =</span> <span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb16-6" title="6">           <span class="dt">dpi =</span> <span class="dv">500</span>)</a></code></pre></div>
 </div>
   </div>
 
@@ -323,9 +328,8 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
-
       </footer>
 </div>
 

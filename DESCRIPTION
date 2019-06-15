@@ -15,6 +15,6 @@ Imports:
     magrittr,
     dplyr,
     tidyr
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 URL: https://github.com/j3ypi/rBasics
 BugReports: https://github.com/j3ypi/rBasics/issues
