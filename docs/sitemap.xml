@@ -1,31 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://github.com/j3ypi/rBasics/index.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/j3ypi/rBasics/reference/big_five.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/j3ypi/rBasics/reference/ggsave_all.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/j3ypi/rBasics/reference/indonesisch.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/j3ypi/rBasics/reference/repeated.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/j3ypi/rBasics/reference/scree_plot.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/j3ypi/rBasics/reference/tipp_wm.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/j3ypi/rBasics/reference/tipp_wm_wide.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/j3ypi/rBasics/reference/transform_binary.html</loc>
+    <loc>https://github.com/j3ypi/rBasics/404.html</loc>
   </url>
   <url>
     <loc>https://github.com/j3ypi/rBasics/articles/01_Setup.html</loc>
@@ -44,5 +20,47 @@
   </url>
   <url>
     <loc>https://github.com/j3ypi/rBasics/articles/06_Extras.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/j3ypi/rBasics/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/j3ypi/rBasics/authors.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/j3ypi/rBasics/index.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/j3ypi/rBasics/news/index.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/j3ypi/rBasics/pdfs/index.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/j3ypi/rBasics/reference/big_five.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/j3ypi/rBasics/reference/ggsave_all.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/j3ypi/rBasics/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/j3ypi/rBasics/reference/indonesisch.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/j3ypi/rBasics/reference/repeated.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/j3ypi/rBasics/reference/scree_plot.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/j3ypi/rBasics/reference/tipp_wm.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/j3ypi/rBasics/reference/tipp_wm_wide.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/j3ypi/rBasics/reference/transform_binary.html</loc>
   </url>
 </urlset>

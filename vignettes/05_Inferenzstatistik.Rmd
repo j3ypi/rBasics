@@ -67,6 +67,8 @@ scree_plot <- function(fa) {
 
 \newpage
 
+<div class="info"> Die neue Version befindet sich als Buch unter <a href="https://r-empirische-wissenschaften.de"> https://r-empirische-wissenschaften.de </a> </div>
+
 # Einführung
 Viele inferenzstatistische Verfahren sind direkt in R integriert. Ein paar Verfahren müssen wir jedoch mit externen Packages rechnen. Leider ist weder in `Base R` noch in den Packages eine wirklich konsistente, Pipe-freundliche Syntax gegeben. Außerdem sind die Outputs unbearbeitet nicht übersichtlich lesbar. Im Folgenden schauen wir uns diverse statistische Verfahren an und lassen uns die Ergebnisse in schöner Form mit Funktionen des `broom` (engl. für Besen) Packages wiedergeben. Aber dazu später mehr. Das Ziel dieses Kapitel ist das Vorstellen der Funktionen mit ihren Argumenten. Es dient mehr als Komprehendium zum Nachschlagen, allerdings sollte man den grundlegenden Workflow verstanden und sich vor allem den Exkurs zu [Dollar-Operatoren][Exkurs: Dollar-Operator] angeschaut haben. Bevor wir in die Inferenzstatistik eintauchen, schauen wir uns zuerst die Stichprobenplanung und Power-Berechnung an.
 
@@ -382,12 +384,6 @@ Der Befehl zum Erstellen des Modells ändert sich zu `lmer()`. Ansonsten ist der
 lmer(iq ~ zeitpunkt + gruppe + (1|person_id), data = repeated) %>% 
   Anova(type = 3) %>% 
   tidy()
-```
-
-Für die Effektstärke greifen wir erneut auf das `sjstats` Package zurück. Diesmal rufen wir die Funktion `r2()` auf.
-```{r}
-lmer(iq ~ zeitpunkt + gruppe + (1|person_id), data = repeated) %>% 
-  r2()
 ```
 
 ### MANOVA

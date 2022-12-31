@@ -56,6 +56,8 @@ ggsave_all <- function(list, width = 5, height = 5, dpi = 500){
 
 \newpage
 
+<div class="info"> Die neue Version befindet sich als Buch unter <a href="https://r-empirische-wissenschaften.de"> https://r-empirische-wissenschaften.de </a> </div>
+
 # Einführung
 In diesem Kapitel werden wir uns das Package `ggpubr` genauer anschauen (basiert vollständig auf `ggplot2`). Die Funktionen aus dem Package sind darauf ausgelegt, schnell publikationsreife Graphen zu erstellen. Dabei verwendet man immer den selben Workflow. Zuerst bringt man die Daten ins Lange Format. Anschließend erstellt man den Graphen mit der jeweiligen Funktion mit einem vorangestellten `gg`. Das `gg` in `ggpubr` und allen enthaltenen Funktionen wie `ggbarplot()` steht für Grammar of Graphics. Den gespeichterten Graphen passt man dann mit `ggpar()` entsprechend an. Zum Schluss speichert man mit `ggsave()`. Schauen wir uns zuerst Säulendiagramme an.
 

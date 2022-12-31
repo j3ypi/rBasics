@@ -1,4 +1,11 @@
+<!-- badges: start -->
+[![Lifecycle: superseded](https://img.shields.io/badge/lifecycle-superseded-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#superseded)
+<!-- badges: end -->
+
 # rBasics: R für empirische Wissenschaften <img src="man/figures/logo.png" align="right" alt="" height="42" width="42"/>
+
+<div class="info"> Die neue Version befindet sich als Buch unter <a href="https://r-empirische-wissenschaften.de"> https://r-empirische-wissenschaften.de </a> </div>
+
 
 [rBasics](https://j3ypi.github.io/rBasics/) ist ein R Package unterstützend zu den Tutorials von **R für empirische Wissenschaften**. Es beinhaltet fünf Datensätze, drei Funktionen und einen interaktiven Übungssatz. Installiert wird das Package durch:
 
@@ -11,6 +18,7 @@ Das `devtools` Package hat zur Zeit Probleme dabei, Dependencies zu installieren
 Dieses Tutorial setzt keine Vorkenntnisse in R voraus. Somit ist es für jeden geeignet, der R lernen möchte. Aber auch jene, die bereits Vorkenntnisse mit Base R haben und in die Weiten des `tidyverse` aufbrechen wollen, kommen auf ihre Kosten. Dabei wird ein besonderer Fokus auf Probleme gelegt, mit denen empirische Wissenschaftler konfrontiert werden.
 
 ## Aufbau
+
 Das Tutorial ist in 6 Teile gegliedert, die sich in ihrem Umfang unterscheiden.
 
 1. **Setup** (Installieren von R und RStudio, wichtige Anpassungen von RStudio, Packages, R updaten, wo bekomme ich Hilfe?, Datensätze laden)

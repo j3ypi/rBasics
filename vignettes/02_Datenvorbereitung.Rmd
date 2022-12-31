@@ -35,7 +35,10 @@ data(big_five, tipp_wm, tipp_wm_wide, indonesisch, repeated, package = "rBasics"
 
 \newpage
 
+<div class="info"> Die neue Version befindet sich als Buch unter <a href="https://r-empirische-wissenschaften.de"> https://r-empirische-wissenschaften.de </a> </div>
+
 # Einführung
+
 Die Methoden zur Datenvorbereitung zu lernen, ist der mit Abstand wichtigste und schwierigste Schritt auf dem Weg, R in der Praxis anwenden zu können. Deswegen ist dieser Teil auch der umfangreichste und mit einer interaktiven Übung am Ende versehen, an der Du Dein Wissen festigen kannst. Allerdings liegt in der Datenvorbereitung auch die größte Stärke im Vergleich zu Programmen wie SPSS. Bevor wir mit der [Datenvorbereitung][Datenvorbereitung] beginnen, müssen wir uns jedoch noch verschiedene Themen aneignen.
 
 # Projektorientierter Workflow

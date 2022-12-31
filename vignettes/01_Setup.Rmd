@@ -31,6 +31,8 @@ options(width = 80)
 
 \newpage
 
+<div class="info"> Die neue Version befindet sich als Buch unter <a href="https://r-empirische-wissenschaften.de"> https://r-empirische-wissenschaften.de </a> </div>
+
 # Für wen ist dieses Tutorial? 
 Dieses Tutorial setzt keine Vorkenntnisse in R voraus. Somit ist es für jeden geeignet, der R lernen möchte. Aber auch jene, die bereits Vorkenntnisse mit Base R haben und in die Weiten des `tidyverse` aufbrechen wollen, kommen auf ihre Kosten. Dabei wird ein besonderer Fokus auf Probleme gelegt, mit denen empirische Wissenschaftler konfrontiert werden. 
 

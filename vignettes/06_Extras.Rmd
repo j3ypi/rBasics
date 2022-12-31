@@ -49,6 +49,8 @@ model3 <- big_five %>%
 
 \newpage
 
+<div class="info"> Die neue Version befindet sich als Buch unter <a href="https://r-empirische-wissenschaften.de"> https://r-empirische-wissenschaften.de </a> </div>
+
 # Einführung
 In den letzten fünf Kapiteln hast Du bereits alles dringend Nötige zum Verarbeiten von Daten kennengelernt. Allerdings wurden einige Konzepte bisher aus didaktischen Gründen ohne Erklärung verwendet. Hier werden diese Konzepte sowie andere für das Verständnis von R wichtigen Dinge genauer betrachtet. Außerdem werden mit [funktionalem Programmieren][Funktionales Programmieren] forgeschrittene Konzepte vorgestellt. Zum Schluss wird noch eine Funktion erklärt, die eine Ergenismatrix zu einer binären Antwortmatrix formatiert. Also wenn man zum Beispiel in einem Online Fragebogen Aufgaben abfragt, die eine richtige Lösung haben, sind diese im rohen Datensatz in einem unbrauchbaren Format. Wenn in Aufgabe 1 die Zahl 42 herauskommt und 3 Personen den Fragebogen beantwortet haben, mit 42, 34 und 5, enthält der Rohdatensatz keinerlei Information darüber, dass nur die erste Person richtig geantwortet hat. Die Funktion zur Transformation würde daraus 1, 0, 0 machen. Ein Beispiel wird später gegeben. 
 

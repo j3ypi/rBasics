@@ -45,6 +45,8 @@ big_five <- big_five %>%
 
 \newpage
 
+<div class="info"> Die neue Version befindet sich als Buch unter <a href="https://r-empirische-wissenschaften.de"> https://r-empirische-wissenschaften.de </a> </div>
+
 # Einführung
 Deskriptive Statistiken sind wichtig für einen ersten Überblick über die Daten und werden fast immer in Papern oder in Abschlussarbeiten verlangt. Auch wird der Umgang mit fehlenden Werten in diesem Kapitel beschrieben. 
 
